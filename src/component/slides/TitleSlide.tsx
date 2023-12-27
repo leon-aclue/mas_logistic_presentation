@@ -1,15 +1,17 @@
-import {ReactNode} from "react";
 import FullCenterContainer from "../container/FullCenterContainer";
+import {Typography} from "@mui/material";
 
 interface IProps {
-    children: ReactNode | ReactNode[] | string;
+    title: string;
 }
 
 function TitleSlide(props: IProps) {
-    const {children} = props;
+    const {title} = props;
     return(
         <FullCenterContainer>
-            {children}
+            <Typography variant='h1'>
+                {title}
+            </Typography>
         </FullCenterContainer>
     )
 }

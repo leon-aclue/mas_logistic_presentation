@@ -2,9 +2,7 @@ import TitleSlide from "../component/slides/TitleSlide";
 
 function TitlePage() {
     return(
-        <TitleSlide>
-            Titel
-        </TitleSlide>
+        <TitleSlide title="MAS in der Logistik" />
     )
 }
 
