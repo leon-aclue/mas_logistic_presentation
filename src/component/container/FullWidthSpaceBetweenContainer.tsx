@@ -1,12 +1,11 @@
 import {Box, styled} from "@mui/material";
 
-const FullCenterContainer = styled(Box)(() => ({
+const FullSpaceBetweenContainer = styled(Box)(() => ({
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
-    height: '100%',
+    justifyContent: 'space-between',
     width: '100%',
     boxSizing: 'border-box',
 }));
 
-export default FullCenterContainer;
+export default FullSpaceBetweenContainer;
