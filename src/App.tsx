@@ -1,17 +1,20 @@
 import React from 'react';
 import './App.css';
-import TitlePage from "./pages/TitlePage";
 import BaseLayout from "./component/layout/BaseLayout";
-import {Typography} from "@mui/material";
+import {ThemeProvider, Typography} from "@mui/material";
+import theme from "./config/theme";
+import PageSelector from "./pages/PageSelector";
 
 function App() {
   return (
-      <BaseLayout
-          header={<Typography>Header</Typography>}
-          bottom={<Typography>Bottom</Typography>}
-      >
-        <TitlePage />
-      </BaseLayout>
+      <ThemeProvider theme={theme}>
+          <BaseLayout
+              header={<Typography>Header</Typography>}
+              bottom={<Typography>Bottom</Typography>}
+          >
+            <PageSelector/>
+          </BaseLayout>
+      </ThemeProvider>
   );
 }
 
