@@ -1,11 +1,11 @@
 import {Box, styled} from "@mui/material";
 
-const FullWidthCenterContainer = styled(Box)(() => ({
+const FullWidthStartContainer = styled(Box)(() => ({
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'start',
     width: '100%',
     boxSizing: 'border-box',
 }));
 
-export default FullWidthCenterContainer;
+export default FullWidthStartContainer;

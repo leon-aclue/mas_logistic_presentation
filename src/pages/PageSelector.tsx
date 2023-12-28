@@ -12,7 +12,7 @@ function PageSelector() {
         if(page >= pages.length) {
             dispatch(setPage(0));
         }
-    })
+    }, [page])
 
     if(page >= pages.length) {
         return null;

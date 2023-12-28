@@ -8,6 +8,7 @@ function MainHeader() {
     return (
        <FullWidthSpaceBetweenContainer
            flexDirection='row'
+           alignItems='center'
            paddingY='10px'
            paddingX='40px'
            bgcolor={theme.palette.primary.main}

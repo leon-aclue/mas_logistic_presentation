@@ -5,24 +5,25 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import {useDispatch, useSelector} from "react-redux";
 import {IRootState} from "../../store/store";
-import {decreasePage, increasePage, setPage} from "../../store/slice/pageSlice";
+import {decreaseStep, increaseStep, setPage, setStep} from "../../store/slice/pageSlice";
 import FullWidthCenterContainer from "../container/FullWidthCenterContainer";
 
 function MainBottom() {
     const theme = useTheme();
     const dispatch = useDispatch();
-    const {page} = useSelector((state: IRootState) => state.pageStateSlice);
+    const {page, step} = useSelector((state: IRootState) => state.pageStateSlice);
 
     const handleClickHome = () => {
         dispatch(setPage(0));
+        dispatch(setStep(0));
     }
 
     const handleClickNext = () => {
-        dispatch(increasePage());
+        dispatch(increaseStep());
     }
 
     const handleClickPrevious = () => {
-        dispatch(decreasePage());
+        dispatch(decreaseStep());
     }
 
     return (
@@ -40,7 +41,7 @@ function MainBottom() {
                 <ArrowBackIosNewIcon />
             </IconButton>
             <Typography variant='subtitle1'>
-                {page}
+                {`${page}:${step}`}
             </Typography>
             <IconButton onClick={handleClickNext}>
                 <ArrowForwardIosIcon />

@@ -1,5 +1,6 @@
 import {ReactNode} from "react";
 import TitlePage from "../pages/TitlePage";
+import IntroductionPage from "../pages/IntroductionPage";
 
 export interface IPage {
     content: ReactNode;
@@ -8,5 +9,8 @@ export interface IPage {
 export const pages: IPage[] = [
     {
         content : <TitlePage />,
+    },
+    {
+        content : <IntroductionPage />,
     },
 ];
