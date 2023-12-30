@@ -19,8 +19,8 @@ function BulletList(props: IProps) {
         <VerticalContainer {...containerProps}>
             {items
                 .slice(0, Math.min(numberToShow ?? items.length, items.length))
-                .map((item) => (
-                <Box display="flex" flexDirection="row" alignItems='center' gap='10px' paddingY='10px'>
+                .map((item, index) => (
+                <Box key={index} component='div' display="flex" flexDirection="row" alignItems='center' gap='10px' paddingY='10px'>
                     <CircleIcon sx={{fontSize: bulletFontSize}}/>
                     <Typography variant={fontVariant}>{item}</Typography>
                 </Box>
