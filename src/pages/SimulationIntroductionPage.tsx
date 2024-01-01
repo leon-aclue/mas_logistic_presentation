@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import StepHandler from "../component/control/StepHandler";
 import SplitContentSlide from "../component/slides/SplitContentSlide";
 import SimulationWorld from "../simulation/SimulationWorld";
@@ -115,6 +115,16 @@ const listItems: ListItem[] = [
 
 function SimulationIntroductionPage() {
     const {step} = StepHandler({maxSteps: listItems.length + 1});
+    const boxRef = useRef();
+
+    // on next step scroll to bottom
+    useEffect(() => {
+        if(boxRef.current) {
+            // @ts-ignore
+            boxRef.current.scrollTop = boxRef.current.scrollHeight;
+        }
+    }, [step])
+
     return (
         <SplitContentSlide>
             <VerticalContainer
@@ -128,6 +138,7 @@ function SimulationIntroductionPage() {
                     items={listItems}
                     fontVariant='subtitle1'
                     numberToShow={step}
+                    containerProps={{ref: boxRef}}
                 />
                 <Typography variant='subtitle2' paddingTop='20px'>[1]
                     https://ek-robotics.com/de/technologie/fts-fahrerlose-transportsysteme</Typography>
