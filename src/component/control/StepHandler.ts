@@ -1,7 +1,6 @@
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {IRootState} from "../../store/store";
-import {decreasePage, increasePage, setStep} from "../../store/slice/pageSlice";
+import {decreasePage, increasePage, pageSliceSelector, setStep} from "../../store/slice/pageSlice";
 
 interface IProps {
     maxSteps: number;
@@ -11,7 +10,7 @@ function StepHandler(props: IProps) {
     const {maxSteps} = props;
 
     const dispatch = useDispatch();
-    const {step} = useSelector((state: IRootState) => state.pageStateSlice);
+    const {step} = useSelector(pageSliceSelector);
 
     useEffect(() => {
         if(step >= maxSteps) {

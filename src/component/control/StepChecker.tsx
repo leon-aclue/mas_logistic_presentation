@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react';
 import {useSelector} from "react-redux";
-import {IRootState} from "../../store/store";
+import {pageSliceSelector} from "../../store/slice/pageSlice";
 
 interface IProps {
     minStep?: number,
@@ -10,7 +10,7 @@ interface IProps {
 
 function StepChecker(props: IProps) {
     const {minStep, maxStep, children} = props;
-    const {step} = useSelector((state: IRootState) => state.pageStateSlice);
+    const {step} = useSelector(pageSliceSelector);
 
     if(!((!minStep || step >= minStep) && (!maxStep || step <= maxStep))) {
         return null;

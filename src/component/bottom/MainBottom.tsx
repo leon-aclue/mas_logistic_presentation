@@ -6,14 +6,21 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import {useDispatch, useSelector} from "react-redux";
-import {IRootState} from "../../store/store";
-import {decreasePage, decreaseStep, increasePage, increaseStep, setPage, setStep} from "../../store/slice/pageSlice";
+import {
+    decreasePage,
+    decreaseStep,
+    increasePage,
+    increaseStep,
+    pageSliceSelector,
+    setPage,
+    setStep
+} from "../../store/slice/pageSlice";
 import FullWidthCenterContainer from "../container/FullWidthCenterContainer";
 
 function MainBottom() {
     const theme = useTheme();
     const dispatch = useDispatch();
-    const {page, step} = useSelector((state: IRootState) => state.pageStateSlice);
+    const {page, step} = useSelector(pageSliceSelector);
 
     const handleClickHome = () => {
         dispatch(setPage(0));

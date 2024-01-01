@@ -1,12 +1,11 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {IRootState} from "../store/store";
 import {pages} from "../config/pages";
-import {setPage} from "../store/slice/pageSlice";
+import {pageSliceSelector, setPage} from "../store/slice/pageSlice";
 
 function PageSelector() {
     const dispatch = useDispatch();
-    const {page} = useSelector((state: IRootState) => state.pageStateSlice);
+    const {page} = useSelector(pageSliceSelector);
 
     useEffect(() => {
         if(page >= pages.length) {

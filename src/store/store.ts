@@ -1,9 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit';
-import pageReducer from "./slice/pageSlice";
+import {configureStore} from '@reduxjs/toolkit';
+import {pageSliceReducer} from "./slice/pageSlice";
+import {baseSliceReducer} from "../simulation/store/slice/baseSlice";
 
 export const store = configureStore({
   reducer: {
-    pageStateSlice: pageReducer,
+    pageReducer: pageSliceReducer,
+    simuBaseReducer: baseSliceReducer,
   },
 });
 
