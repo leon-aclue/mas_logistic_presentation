@@ -3,9 +3,11 @@ import {IconButton, Typography, useTheme} from "@mui/material";
 import HomeIcon from '@mui/icons-material/Home';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import {useDispatch, useSelector} from "react-redux";
 import {IRootState} from "../../store/store";
-import {decreaseStep, increaseStep, setPage, setStep} from "../../store/slice/pageSlice";
+import {decreasePage, decreaseStep, increasePage, increaseStep, setPage, setStep} from "../../store/slice/pageSlice";
 import FullWidthCenterContainer from "../container/FullWidthCenterContainer";
 
 function MainBottom() {
@@ -18,12 +20,22 @@ function MainBottom() {
         dispatch(setStep(0));
     }
 
-    const handleClickNext = () => {
+    const handleClickNextStep = () => {
         dispatch(increaseStep());
     }
 
-    const handleClickPrevious = () => {
+    const handleClickNext = () => {
+        dispatch(increasePage());
+        dispatch(setStep(0));
+    }
+
+    const handleClickPreviousStep = () => {
         dispatch(decreaseStep());
+    }
+
+    const handleClickPrevious = () => {
+        dispatch(decreasePage());
+        dispatch(setStep(0));
     }
 
     return (
@@ -35,16 +47,22 @@ function MainBottom() {
             color={theme.palette.primary.contrastText}
         >
             <IconButton onClick={handleClickHome}>
-                <HomeIcon />
+                <HomeIcon/>
             </IconButton>
             <IconButton onClick={handleClickPrevious}>
-                <ArrowBackIosNewIcon />
+                <KeyboardDoubleArrowLeftIcon/>
+            </IconButton>
+            <IconButton onClick={handleClickPreviousStep}>
+                <ArrowBackIosNewIcon/>
             </IconButton>
             <Typography variant='subtitle1'>
                 {`${page}:${step}`}
             </Typography>
+            <IconButton onClick={handleClickNextStep}>
+                <ArrowForwardIosIcon/>
+            </IconButton>
             <IconButton onClick={handleClickNext}>
-                <ArrowForwardIosIcon />
+                <KeyboardDoubleArrowRightIcon/>
             </IconButton>
         </FullWidthCenterContainer>
     );
