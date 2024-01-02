@@ -5,24 +5,24 @@ export interface Station {
     posX: number,
     posY: number,
     width: number,
-    height: number,
+    length: number,
 }
 
-interface IBaseState {
+export interface ISimulationBaseState {
     width: number | undefined,
-    height: number | undefined,
+    length: number | undefined,
     productionStations: Station[],
     storageStations: Station[],
 }
 
-const initialState: IBaseState = {
+const initialState: ISimulationBaseState = {
     width: undefined,
-    height: undefined,
+    length: undefined,
     productionStations: [],
     storageStations: [],
 };
 
-const handleSetupBase = (state: IBaseState, action: PayloadAction<IBaseState>): IBaseState => {
+const handleSetupBase = (state: ISimulationBaseState, action: PayloadAction<ISimulationBaseState>): ISimulationBaseState => {
     return {
         ...state,
         ...action.payload
