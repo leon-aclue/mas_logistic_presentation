@@ -7,6 +7,8 @@ import StorageStation from "./component/base/StorageStation";
 import {PerspectiveCamera} from "@react-three/drei";
 import {CAMERA_CONFIG, SIM_BASE_LENGTH, SIM_BASE_WIDTH} from "./config";
 import DrivingAreaSegment from "./component/base/DrivingAreaSegment";
+import MagneticLine from "./component/base/MagneticLine";
+import ReflectorStation from "./component/base/ReflectorStation";
 
 interface IProps {
     showBase?: boolean,
@@ -14,6 +16,8 @@ interface IProps {
     showStorageStations?: boolean,
     showStorageAreas?: boolean,
     showDrivingArea?: boolean,
+    showMagneticLines?: boolean,
+    showReflectorStations?: boolean,
 }
 
 
@@ -24,6 +28,8 @@ function SimulationWorld(props: IProps) {
         showStorageStations,
         showStorageAreas,
         showDrivingArea,
+        showMagneticLines,
+        showReflectorStations,
     } = props;
     const baseState = useSelector(baseSliceSelector);
 
@@ -50,12 +56,22 @@ function SimulationWorld(props: IProps) {
             )}
             {showStorageStations && (
                 baseState.storageStations.map((storageStation) => (
-                    <StorageStation station={storageStation} showStorageAreas={showStorageAreas} />
+                    <StorageStation station={storageStation} showStorageAreas={showStorageAreas}/>
                 ))
             )}
             {showDrivingArea && (
                 baseState.drivingAreaSegments.map((segment) => (
                     <DrivingAreaSegment {...segment} />
+                ))
+            )}
+            {showMagneticLines && (
+                baseState.magneticLines.map((line) => (
+                    <MagneticLine {...line} />
+                ))
+            )}
+            {showReflectorStations && (
+                baseState.reflectorStations.map((station) => (
+                    <ReflectorStation {...station} />
                 ))
             )}
         </Canvas>

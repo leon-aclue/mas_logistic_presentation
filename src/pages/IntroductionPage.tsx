@@ -1,19 +1,11 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import BulletList, {ListItem, ListItemType} from "../component/slideElement/BulletList";
 import StepHandler from "../component/control/StepHandler";
 import VerticalContainer from "../component/container/VerticalContainer";
 import {Typography} from "@mui/material";
 import SimulationWorld from "../simulation/SimulationWorld";
 import SplitContentSlide from "../component/slides/SplitContentSlide";
-import {useDispatch} from "react-redux";
-import {ISimulationBaseState, setupSimulationBase} from "../simulation/store/slice/baseSlice";
-import {
-    DRIVING_AREA_SEGMENTS,
-    PRODUCTION_STATIONS,
-    SIM_BASE_LENGTH,
-    SIM_BASE_WIDTH,
-    STORAGE_STATIONS
-} from "../simulation/config";
+import {PRODUCTION_STATIONS, SIM_BASE_LENGTH, SIM_BASE_WIDTH} from "../simulation/config";
 
 
 const listItems: ListItem[] = [
@@ -38,21 +30,8 @@ const listItems: ListItem[] = [
     },
 ];
 
-const simulationBaseState: ISimulationBaseState = {
-    width: SIM_BASE_WIDTH,
-    length: SIM_BASE_LENGTH,
-    productionStations: PRODUCTION_STATIONS,
-    storageStations: STORAGE_STATIONS,
-    drivingAreaSegments: DRIVING_AREA_SEGMENTS,
-}
-
 function IntroductionPage() {
-    const dispatch = useDispatch();
     const {step} = StepHandler({maxSteps: listItems.length + 1});
-
-    useEffect(() => {
-        dispatch(setupSimulationBase(simulationBaseState));
-    });
 
     const showBase = step >= 2;
     const showProductionStations = step >= 3;

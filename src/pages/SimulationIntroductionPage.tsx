@@ -119,7 +119,7 @@ function SimulationIntroductionPage() {
 
     // on next step scroll to bottom
     useEffect(() => {
-        if(boxRef.current) {
+        if (boxRef.current) {
             // @ts-ignore
             boxRef.current.scrollTop = boxRef.current.scrollHeight;
         }
@@ -127,6 +127,8 @@ function SimulationIntroductionPage() {
 
     const showStorageAreas = step >= 2;
     const showDrivingArea = step >= 6;
+    const showMagneticLines = step >= 12;
+    const showReflectorStations = step >= 12;
 
     return (
         <SplitContentSlide>
@@ -152,6 +154,8 @@ function SimulationIntroductionPage() {
                 showStorageStations
                 showStorageAreas={showStorageAreas}
                 showDrivingArea={showDrivingArea}
+                showMagneticLines={showMagneticLines}
+                showReflectorStations={showReflectorStations}
             />
         </SplitContentSlide>
     );

@@ -1,5 +1,6 @@
 import {ILineSegment, IStation} from "./store/slice/baseSlice";
 import {PerspectiveCameraProps} from "@react-three/fiber";
+import {ThreeArr2} from "./component/BaseComponents";
 
 // help functions
 const createStationRow = (width: number, length: number, posX: number, startPosY: number, steps: number, stepWidth: number, storageAreaPosX: number) => {
@@ -12,10 +13,9 @@ const createStationRow = (width: number, length: number, posX: number, startPosY
             length,
             posX,
             posY,
-            storageAreas: [{
-                posX: storageAreaPosX,
-                posY,
-            }]
+            storageAreas: [
+                [storageAreaPosX, posY,],
+            ],
         })
     }
 
@@ -66,12 +66,11 @@ export const STORAGE_STATIONS: IStation[] = [
         posX: 50,
         posY: 10,
         storageAreas: [
-            {posX: 30, posY: 19,},
-            {posX: 35, posY: 19,},
-            {posX: 40, posY: 19,},
-            {posX: 45, posY: 19,},
-            {posX: 50, posY: 19,},
-            {posX: 55, posY: 19,},
+            [30, 19],
+            [35, 19],
+            [40, 19],
+            [45, 19],
+            [50, 19],
         ],
     }
 ];
@@ -79,38 +78,81 @@ export const STORAGE_STATIONS: IStation[] = [
 export const DRIVING_AREA_SEGMENT_COLOR = 'yellow';
 export const DRIVING_AREA_SEGMENTS: ILineSegment[] = [
     // vertical
-    {start: [19,22], end: [19,122]},
+    {start: [19, 22], end: [19, 122]},
 
-    {start: [21,45], end: [21,83]},
-    {start: [21,85], end: [21,120]},
+    {start: [21, 45], end: [21, 83]},
+    {start: [21, 85], end: [21, 120]},
 
-    {start: [49,45], end: [49,83]},
-    {start: [49,85], end: [49,120]},
+    {start: [49, 45], end: [49, 83]},
+    {start: [49, 85], end: [49, 120]},
 
-    {start: [51,45], end: [51,83]},
-    {start: [51,85], end: [51,122]},
+    {start: [51, 45], end: [51, 83]},
+    {start: [51, 85], end: [51, 122]},
 
-    {start: [79,45], end: [79,83]},
+    {start: [79, 45], end: [79, 83]},
 
-    {start: [81,22], end: [81,85]},
+    {start: [81, 22], end: [81, 85]},
 
     // horizontal
-    {start: [19,22], end: [81,22]},
+    {start: [19, 22], end: [81, 22]},
 
-    {start: [21,45], end: [49,45]},
-    {start: [21,83], end: [49,83]},
-    {start: [21,85], end: [49,85]},
-    {start: [21,120], end: [49,120]},
-    {start: [19,122], end: [51,122]},
+    {start: [21, 45], end: [49, 45]},
+    {start: [21, 83], end: [49, 83]},
+    {start: [21, 85], end: [49, 85]},
+    {start: [21, 120], end: [49, 120]},
+    {start: [19, 122], end: [51, 122]},
 
-    {start: [51,45], end: [79,45]},
-    {start: [51,83], end: [79,83]},
-    {start: [51,85], end: [81,85]},
-]
+    {start: [51, 45], end: [79, 45]},
+    {start: [51, 83], end: [79, 83]},
+    {start: [51, 85], end: [81, 85]},
+];
+
+export const MAGNETIC_LINE_COLOR = '#a33';
+export const MAGNETIC_LINES: ILineSegment[] = [
+    // vertical
+    {start: [20, 23], end: [20, 121]},
+    {start: [50, 23], end: [50, 121]},
+    {start: [80, 23], end: [80, 84]},
+
+    // horizontal
+    {start: [20, 23], end: [80, 23]},
+    {start: [20, 27], end: [80, 27]},
+    {start: [20, 84], end: [80, 84]},
+    {start: [20, 121], end: [50, 121]},
+];
+
+export const REFLECTOR_STATION_WIDTH = 0.2;
+export const REFLECTOR_STATION_LENGTH = 0.2;
+export const REFLECTOR_STATION_HEIGHT = 4;
+export const REFLECTOR_STATION_COLOR = '#333'
+export const REFLECTOR_STATIONS: ThreeArr2[] = [
+    [18, 25],
+    [18, 55],
+    [18, 85],
+    [18, 115],
+
+    [48, 35],
+    [48, 45],
+    [48, 65],
+    [48, 95],
+    [48, 115],
+
+    [78, 35],
+    [78, 55],
+    [78, 65],
+
+    [30, 31],
+    [60, 31],
+    [70, 31],
+
+    [35, 80],
+    [58, 80],
+    [70, 80],
+];
 
 
 // lines
-export const LINE_POS_Y = 0.05;
+export const LINE_POS_Y = 0.04;
 export const LINE_WIDTH = 3;
 
 
