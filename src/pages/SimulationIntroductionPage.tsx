@@ -46,7 +46,7 @@ const listItems: ListItem[] = [
         itemProps: itemProps,
     },
     {
-        title: 'Fahrwege von 1,5m breite',
+        title: 'Fahrwege von 2m breite',
         type: ListItemType.ANSWER,
         tab: 1,
         itemProps: answerItemProps,
@@ -125,6 +125,9 @@ function SimulationIntroductionPage() {
         }
     }, [step])
 
+    const showStorageAreas = step >= 2;
+    const showDrivingArea = step >= 6;
+
     return (
         <SplitContentSlide>
             <VerticalContainer
@@ -143,7 +146,13 @@ function SimulationIntroductionPage() {
                 <Typography variant='subtitle2' paddingTop='20px'>[1]
                     https://ek-robotics.com/de/technologie/fts-fahrerlose-transportsysteme</Typography>
             </VerticalContainer>
-            <SimulationWorld/>
+            <SimulationWorld
+                showBase
+                showProductionStations
+                showStorageStations
+                showStorageAreas={showStorageAreas}
+                showDrivingArea={showDrivingArea}
+            />
         </SplitContentSlide>
     );
 }

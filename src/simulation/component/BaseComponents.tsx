@@ -2,6 +2,7 @@ import {Box, Cylinder, Sphere} from "@react-three/drei/core/shapes";
 import { Line } from '@react-three/drei'
 import * as THREE from "three";
 
+export type ThreeArr2 = [number, number];
 export type ThreeArr3 = [number, number, number];
 
 export interface BaseComponentProps {

@@ -6,11 +6,14 @@ import ProductionStation from "./component/base/ProductionStation";
 import StorageStation from "./component/base/StorageStation";
 import {PerspectiveCamera} from "@react-three/drei";
 import {CAMERA_CONFIG, SIM_BASE_LENGTH, SIM_BASE_WIDTH} from "./config";
+import DrivingAreaSegment from "./component/base/DrivingAreaSegment";
 
 interface IProps {
     showBase?: boolean,
     showProductionStations?: boolean,
     showStorageStations?: boolean,
+    showStorageAreas?: boolean,
+    showDrivingArea?: boolean,
 }
 
 
@@ -19,6 +22,8 @@ function SimulationWorld(props: IProps) {
         showBase,
         showProductionStations,
         showStorageStations,
+        showStorageAreas,
+        showDrivingArea,
     } = props;
     const baseState = useSelector(baseSliceSelector);
 
@@ -40,12 +45,17 @@ function SimulationWorld(props: IProps) {
             )}
             {showProductionStations && (
                 baseState.productionStations.map((productionStation) => (
-                    <ProductionStation {...productionStation} />
+                    <ProductionStation station={productionStation} showStorageAreas={showStorageAreas}/>
                 ))
             )}
             {showStorageStations && (
                 baseState.storageStations.map((storageStation) => (
-                    <StorageStation {...storageStation} />
+                    <StorageStation station={storageStation} showStorageAreas={showStorageAreas} />
+                ))
+            )}
+            {showDrivingArea && (
+                baseState.drivingAreaSegments.map((segment) => (
+                    <DrivingAreaSegment {...segment} />
                 ))
             )}
         </Canvas>

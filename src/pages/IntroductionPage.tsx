@@ -7,7 +7,13 @@ import SimulationWorld from "../simulation/SimulationWorld";
 import SplitContentSlide from "../component/slides/SplitContentSlide";
 import {useDispatch} from "react-redux";
 import {ISimulationBaseState, setupSimulationBase} from "../simulation/store/slice/baseSlice";
-import {PRODUCTION_STATIONS, SIM_BASE_LENGTH, SIM_BASE_WIDTH, STORAGE_STATIONS} from "../simulation/config";
+import {
+    DRIVING_AREA_SEGMENTS,
+    PRODUCTION_STATIONS,
+    SIM_BASE_LENGTH,
+    SIM_BASE_WIDTH,
+    STORAGE_STATIONS
+} from "../simulation/config";
 
 
 const listItems: ListItem[] = [
@@ -37,6 +43,7 @@ const simulationBaseState: ISimulationBaseState = {
     length: SIM_BASE_LENGTH,
     productionStations: PRODUCTION_STATIONS,
     storageStations: STORAGE_STATIONS,
+    drivingAreaSegments: DRIVING_AREA_SEGMENTS,
 }
 
 function IntroductionPage() {
