@@ -29,7 +29,7 @@ interface IProps {
 function BulletList(props: IProps) {
     const {header, items, numberToShow, containerProps, fontVariant} = props;
     const theme = useTheme();
-    const bulletFontSize = (theme.typography[fontVariant ?? 'subtitle1'].fontSize as unknown as number) / 1.5;
+    const bulletFontSize = (theme.typography[fontVariant ?? 'subtitle1'].fontSize as unknown as number);
 
     return (
         <VerticalContainer
@@ -43,11 +43,11 @@ function BulletList(props: IProps) {
             {items
                 .slice(0, Math.min(numberToShow ?? items.length, items.length))
                 .map((item, index) => {
-                    const paddingLeft = (item.tab ?? 0) * 2;
+                    const paddingLeft = (item.tab ?? 0) * 4;
                     let icon;
                     switch (item.type) {
                         case ListItemType.ITEM:
-                            icon = <CircleIcon sx={{fontSize: bulletFontSize}}/>;
+                            icon = <CircleIcon sx={{fontSize: bulletFontSize / 1.5}}/>;
                             break;
                         case ListItemType.ANSWER:
                             icon = <ArrowForward sx={{fontSize: bulletFontSize}}/>;
