@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import StepHandler from "../component/control/StepHandler";
 import SplitContentSlide from "../component/slides/SplitContentSlide";
 import SimulationWorld from "../simulation/SimulationWorld";
@@ -154,11 +154,21 @@ function SimulationIntroductionPage() {
     const totalLength = listItemsList.flat().length;
 
     const {step} = StepHandler({maxSteps: totalLength + 1});
+    const boxRef = useRef();
+
+    // on next step scroll to bottom
+    useEffect(() => {
+        if (boxRef.current) {
+            // @ts-ignore
+            boxRef.current.scrollTop = boxRef.current.scrollHeight;
+        }
+    }, [step])
 
     const showStorageAreas = step >= 2;
     const showDrivingArea = step >= 6;
     const showMagneticLines = step >= 12;
     const showReflectorStations = step >= 15;
+    const showChargingAreas = step >= 19;
 
     return (
         <SplitContentSlide>
@@ -179,6 +189,7 @@ function SimulationIntroductionPage() {
                                 items={listItems}
                                 fontVariant='subtitle1'
                                 numberToShow={step - startIndex}
+                                containerProps={{ref: boxRef}}
                             />
                         </StepChecker>
                     )
@@ -194,6 +205,7 @@ function SimulationIntroductionPage() {
                 showDrivingArea={showDrivingArea}
                 showMagneticLines={showMagneticLines}
                 showReflectorStations={showReflectorStations}
+                showChargingAreas={showChargingAreas}
             />
         </SplitContentSlide>
     );

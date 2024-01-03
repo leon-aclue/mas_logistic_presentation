@@ -44,7 +44,7 @@ export const STORAGE_STATION_COLOR = '#555';
 
 export const STORAGE_AREA_WIDTH = 1.5;
 export const STORAGE_AREA_LENGTH = 1;
-export const STORAGE_AREA_COLOR = 'orange';
+export const STORAGE_AREA_COLOR = 'green';
 
 // production stations
 export const PRODUCTION_STATIONS: IStation[] = [
@@ -148,6 +148,17 @@ export const REFLECTOR_STATIONS: ThreeArr2[] = [
     [35, 80],
     [58, 80],
     [70, 80],
+];
+
+export const CHARGING_AREA_WIDTH = 1;
+export const CHARGING_AREA_LENGTH = 1.5;
+export const CHARGING_AREA_COLOR = 'blue'
+export const CHARGING_AREAS: ThreeArr2[] = [
+    [60, 19],
+    [65, 19],
+    [70, 19],
+    [75, 19],
+    [80, 19],
 ];
 
 

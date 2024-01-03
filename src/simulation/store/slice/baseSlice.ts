@@ -2,6 +2,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IRootState} from "../../../store/store";
 import {ThreeArr2} from "../../component/BaseComponents";
 import {
+    CHARGING_AREAS,
     DRIVING_AREA_SEGMENTS,
     MAGNETIC_LINES,
     PRODUCTION_STATIONS,
@@ -32,6 +33,7 @@ export interface ISimulationBaseState {
     drivingAreaSegments: ILineSegment[],
     magneticLines: ILineSegment[],
     reflectorStations: ThreeArr2[],
+    chargingAreas: ThreeArr2[],
 }
 
 const initialState: ISimulationBaseState = {
@@ -42,6 +44,7 @@ const initialState: ISimulationBaseState = {
     drivingAreaSegments: DRIVING_AREA_SEGMENTS,
     magneticLines: MAGNETIC_LINES,
     reflectorStations: REFLECTOR_STATIONS,
+    chargingAreas: CHARGING_AREAS,
 };
 
 const handleSetupBase = (state: ISimulationBaseState, action: PayloadAction<ISimulationBaseState>): ISimulationBaseState => {

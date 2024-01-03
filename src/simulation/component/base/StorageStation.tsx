@@ -19,8 +19,8 @@ function StorageStation(props: IProps) {
         <>
             <ThreeBox position={[posX, posZ, posY]} rotation={[0, 0, 0]}
                       size={[width ?? 1, STORAGE_STATION_HEIGHT, length ?? 1]} color={STORAGE_STATION_COLOR}/>
-            {showStorageAreas && storageAreas.map((storageArea) => (
-                <StorageArea {...storageArea} />
+            {showStorageAreas && storageAreas.map((storageArea, index) => (
+                <StorageArea key={index} {...storageArea} />
             ))}
         </>
 

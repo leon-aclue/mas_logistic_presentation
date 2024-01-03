@@ -9,6 +9,7 @@ import {CAMERA_CONFIG, SIM_BASE_LENGTH, SIM_BASE_WIDTH} from "./config";
 import DrivingAreaSegment from "./component/base/DrivingAreaSegment";
 import MagneticLine from "./component/base/MagneticLine";
 import ReflectorStation from "./component/base/ReflectorStation";
+import ChargingArea from "./component/base/ChargingArea";
 
 interface IProps {
     showBase?: boolean,
@@ -18,6 +19,7 @@ interface IProps {
     showDrivingArea?: boolean,
     showMagneticLines?: boolean,
     showReflectorStations?: boolean,
+    showChargingAreas?: boolean,
 }
 
 
@@ -30,6 +32,7 @@ function SimulationWorld(props: IProps) {
         showDrivingArea,
         showMagneticLines,
         showReflectorStations,
+        showChargingAreas,
     } = props;
     const baseState = useSelector(baseSliceSelector);
 
@@ -50,28 +53,33 @@ function SimulationWorld(props: IProps) {
                 <Base width={baseState.width} length={baseState.length}/>
             )}
             {showProductionStations && (
-                baseState.productionStations.map((productionStation) => (
-                    <ProductionStation station={productionStation} showStorageAreas={showStorageAreas}/>
+                baseState.productionStations.map((productionStation, index) => (
+                    <ProductionStation key={index} station={productionStation} showStorageAreas={showStorageAreas}/>
                 ))
             )}
             {showStorageStations && (
-                baseState.storageStations.map((storageStation) => (
-                    <StorageStation station={storageStation} showStorageAreas={showStorageAreas}/>
+                baseState.storageStations.map((storageStation, index) => (
+                    <StorageStation key={index} station={storageStation} showStorageAreas={showStorageAreas}/>
                 ))
             )}
             {showDrivingArea && (
-                baseState.drivingAreaSegments.map((segment) => (
-                    <DrivingAreaSegment {...segment} />
+                baseState.drivingAreaSegments.map((segment, index) => (
+                    <DrivingAreaSegment key={index} {...segment} />
                 ))
             )}
             {showMagneticLines && (
-                baseState.magneticLines.map((line) => (
-                    <MagneticLine {...line} />
+                baseState.magneticLines.map((line, index) => (
+                    <MagneticLine key={index} {...line} />
                 ))
             )}
             {showReflectorStations && (
-                baseState.reflectorStations.map((station) => (
-                    <ReflectorStation {...station} />
+                baseState.reflectorStations.map((station, index) => (
+                    <ReflectorStation key={index} {...station} />
+                ))
+            )}
+            {showChargingAreas && (
+                baseState.chargingAreas.map((area, index) => (
+                    <ChargingArea key={index} {...area} />
                 ))
             )}
         </Canvas>
