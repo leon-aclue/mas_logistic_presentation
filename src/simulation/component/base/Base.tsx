@@ -1,5 +1,5 @@
 import React from 'react';
-import {ThreeBox} from "../BaseComponents";
+import {ThreeBox} from "../ThreeBaseComponents";
 import {SIM_BASE_COLOR, SIM_BASE_HEIGHT, SIM_BASE_POS_X, SIM_BASE_POS_Y} from "../../config";
 
 interface IProps {

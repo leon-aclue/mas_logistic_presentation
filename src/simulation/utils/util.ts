@@ -1,4 +1,4 @@
-import {ThreeArr2} from "../component/BaseComponents";
+import {ThreeArr2} from "../component/ThreeBaseComponents";
 
 export const rotateAround2D = (fixedPoint: ThreeArr2, rotationPoint: ThreeArr2, rand: number): ThreeArr2 => {
     const offset = dif2D(fixedPoint, rotationPoint);

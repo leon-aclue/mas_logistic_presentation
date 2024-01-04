@@ -1,5 +1,5 @@
 import React from 'react';
-import {ThreeArr2} from "../BaseComponents";
+import {ThreeArr2} from "../ThreeBaseComponents";
 import AgvBase from "./AgvBase";
 import AgvFork from "./AgvFork";
 import AgvLaserSensor from "./AgvLaserSensor";

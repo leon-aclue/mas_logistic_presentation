@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IRootState} from "../../../store/store";
 import {SIM_BASE_LENGTH, SIM_BASE_WIDTH} from "../../config";
-import {ThreeArr3} from "../../component/BaseComponents";
+import {ThreeArr3} from "../../component/ThreeBaseComponents";
 
 
 export const defaultCameraPosition: ThreeArr3 = [-150, 200, SIM_BASE_LENGTH + 120];

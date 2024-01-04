@@ -10,7 +10,7 @@ import {
     AGV_FORK_OFFSET_Z,
     AGV_FORK_WIDTH
 } from "../../config";
-import {ThreeBox} from "../BaseComponents";
+import {ThreeBox} from "../ThreeBaseComponents";
 
 
 function AgvFork(props: IAgv) {

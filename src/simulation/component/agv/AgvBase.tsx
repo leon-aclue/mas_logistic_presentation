@@ -10,7 +10,7 @@ import {
     AGV_BASE_OFFSET_Z,
     AGV_BASE_WIDTH
 } from "../../config";
-import {ThreeBox} from "../BaseComponents";
+import {ThreeBox} from "../ThreeBaseComponents";
 
 
 function AgvBase(props: IAgv) {

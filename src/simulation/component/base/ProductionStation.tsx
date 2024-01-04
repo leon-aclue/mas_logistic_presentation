@@ -1,5 +1,5 @@
 import React from 'react';
-import {ThreeBox} from "../BaseComponents";
+import {ThreeBox} from "../ThreeBaseComponents";
 import {PRODUCTION_STATION_COLOR, PRODUCTION_STATION_HEIGHT, SIM_BASE_HEIGHT} from "../../config";
 import {IStation} from "../../store/slice/baseSlice";
 import StorageArea from "./StorageArea";

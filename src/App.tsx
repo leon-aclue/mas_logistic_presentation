@@ -7,7 +7,8 @@ import MainHeader from "./component/header/MainHeader";
 import {Provider} from "react-redux";
 import {store} from "./store/store";
 import MainFooter from "./component/footer/MainFooter";
-import PageController from "./page/PageController";
+import BaseSimulationPage from "./page/BaseSimulationPage";
+import {listItemsList} from "./config/listItemsList";
 
 function App() {
     return (
@@ -17,7 +18,7 @@ function App() {
                     header={<MainHeader/>}
                     bottom={<MainFooter/>}
                 >
-                    <PageController/>
+                    <BaseSimulationPage listItemsList={listItemsList}/>
                 </BaseLayout>
             </Provider>
         </ThemeProvider>

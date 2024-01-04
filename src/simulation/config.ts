@@ -1,6 +1,6 @@
 import {ILineSegment, IStation} from "./store/slice/baseSlice";
 import {PerspectiveCameraProps} from "@react-three/fiber";
-import {ThreeArr2} from "./component/BaseComponents";
+import {ThreeArr2} from "./component/ThreeBaseComponents";
 
 // help functions
 const createStationRow = (width: number, length: number, posX: number, startPosY: number, steps: number, stepWidth: number, storageAreaPosX: number) => {

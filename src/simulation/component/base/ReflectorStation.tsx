@@ -1,5 +1,5 @@
 import React from 'react';
-import {ThreeArr2, ThreeBox} from "../BaseComponents";
+import {ThreeArr2, ThreeBox} from "../ThreeBaseComponents";
 import {
     REFLECTOR_STATION_COLOR,
     REFLECTOR_STATION_HEIGHT,

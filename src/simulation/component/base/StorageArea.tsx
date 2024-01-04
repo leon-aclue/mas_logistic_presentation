@@ -1,5 +1,5 @@
 import React from 'react';
-import {ThreeArr2, ThreeArr3, ThreeLine} from "../BaseComponents";
+import {ThreeArr2, ThreeArr3, ThreeLine} from "../ThreeBaseComponents";
 import {LINE_POS_Y, LINE_WIDTH, STORAGE_AREA_COLOR, STORAGE_AREA_LENGTH, STORAGE_AREA_WIDTH} from "../../config";
 
 

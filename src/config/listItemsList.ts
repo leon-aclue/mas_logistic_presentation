@@ -1,14 +1,11 @@
-import React from 'react';
-import {ListItemType} from "../component/slideElement/BulletList";
-import {PRODUCTION_STATIONS, SIM_BASE_LENGTH, SIM_BASE_WIDTH} from "../simulation/config";
 import {emptyStartListItem, MultiListItem} from "../component/slideElement/MultiList";
-import BaseSimulationPage from "./BaseSimulationPage";
 import {ekQuestionHeader, introductionHeader, navigationVariantsHeader} from "../component/header/ListHeaders";
+import {PRODUCTION_STATIONS, SIM_BASE_LENGTH, SIM_BASE_WIDTH} from "../simulation/config";
+import {ListItemType} from "../component/slideElement/BulletList";
 import {ekQuestionFooter, navigationVariantsFooter} from "../component/footer/ListFooters";
-import {ekQuestionsItemProps, navigationVariantsCameraConfig} from "../config/listProps";
+import {ekQuestionsItemProps, navigationVariantsCameraConfig} from "./listProps";
 
-
-const listItemsList: MultiListItem[] = [
+export const listItemsList: MultiListItem[] = [
     {
         header: introductionHeader,
         footer: undefined,
@@ -286,12 +283,3 @@ const listItemsList: MultiListItem[] = [
             ],
     },
 ];
-
-function PageController() {
-
-    return (
-        <BaseSimulationPage listItemsList={listItemsList}/>
-    );
-}
-
-export default PageController;

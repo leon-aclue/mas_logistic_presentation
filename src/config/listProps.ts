@@ -8,5 +8,5 @@ export const ekQuestionsItemProps = {
 export const navigationVariantsCameraConfig: ICameraConfig = {
     position: [0, 60, 60],
     lookAt: [30, 0, 30],
-    fov: 45,
+    fov: 40,
 };

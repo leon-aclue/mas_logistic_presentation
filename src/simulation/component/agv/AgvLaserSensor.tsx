@@ -9,7 +9,7 @@ import {
     AGV_LASER_SENSOR_OFFSET_Z,
     AGV_LASER_SENSOR_RADIUS
 } from "../../config";
-import {ThreeCylinder} from "../BaseComponents";
+import {ThreeCylinder} from "../ThreeBaseComponents";
 
 
 function AgvLaserSensor(props: IAgv) {

@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IRootState} from "../../../store/store";
-import {ThreeArr2} from "../../component/BaseComponents";
+import {ThreeArr2} from "../../component/ThreeBaseComponents";
 import {
     CHARGING_AREAS,
     DRIVING_AREA_SEGMENTS,

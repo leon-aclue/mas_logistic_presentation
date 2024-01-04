@@ -1,5 +1,5 @@
 import React from 'react';
-import {ThreeArr3, ThreeLine} from "../BaseComponents";
+import {ThreeArr3, ThreeLine} from "../ThreeBaseComponents";
 import {LINE_POS_Y, LINE_WIDTH, MAGNETIC_LINE_COLOR} from "../../config";
 import {ILineSegment} from "../../store/slice/baseSlice";
 
