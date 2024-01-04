@@ -23,13 +23,13 @@ function AgvBase(props: IAgv) {
         <>
             <ThreeBox
                 position={[rotatedPosition[0], AGV_BASE_OFFSET_Z, rotatedPosition[1]]}
-                rotation={[0,rotation,0]}
+                rotation={[0, rotation, 0]}
                 size={[AGV_BASE_LENGTH, AGV_BASE_HEIGHT, AGV_BASE_WIDTH]}
                 color={AGV_BASE_COLOR}
             />
             <ThreeBox
                 position={[rotatedPosition2[0], AGV_BASE_OFFSET_Z / 2, rotatedPosition2[1]]}
-                rotation={[0,rotation,0]}
+                rotation={[0, rotation, 0]}
                 size={[AGV_BASE_LENGTH, AGV_BASE_HEIGHT / 2, AGV_BASE_WIDTH]}
                 color={AGV_BASE_COLOR}
             />

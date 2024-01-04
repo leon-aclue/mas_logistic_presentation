@@ -7,7 +7,7 @@ interface IProps {
 
 function TitleSlide(props: IProps) {
     const {title} = props;
-    return(
+    return (
         <FullCenterContainer>
             <Typography variant='h1'>
                 {title}

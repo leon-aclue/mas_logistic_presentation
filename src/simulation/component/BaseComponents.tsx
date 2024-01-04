@@ -1,5 +1,5 @@
 import {Box, Cylinder, Sphere} from "@react-three/drei/core/shapes";
-import { Line } from '@react-three/drei'
+import {Line} from '@react-three/drei'
 import * as THREE from "three";
 
 export type ThreeArr2 = [number, number];
@@ -11,6 +11,7 @@ export interface BaseComponentProps {
     size: ThreeArr3,
     color: string,
 }
+
 export interface LineProps {
     points: ThreeArr3[],
     width?: number,
@@ -18,7 +19,7 @@ export interface LineProps {
 }
 
 export function ThreeBox({position, rotation, size, color}: BaseComponentProps) {
-    const material = new THREE.MeshLambertMaterial({color, });
+    const material = new THREE.MeshLambertMaterial({color,});
 
     return (
         <Box position={position} rotation={rotation} args={size} material={material}/>

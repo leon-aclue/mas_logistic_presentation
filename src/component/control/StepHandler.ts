@@ -13,10 +13,10 @@ function StepHandler(props: IProps) {
     const {step} = useSelector(pageSliceSelector);
 
     useEffect(() => {
-        if(step >= maxSteps) {
+        if (step >= maxSteps) {
             dispatch(setStep(0));
             dispatch(increasePage());
-        } else if(step < 0) {
+        } else if (step < 0) {
             dispatch(setStep(0));
             dispatch(decreasePage());
         }

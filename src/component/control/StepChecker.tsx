@@ -12,7 +12,7 @@ function StepChecker(props: IProps) {
     const {minStep, maxStep, children} = props;
     const {step} = useSelector(pageSliceSelector);
 
-    if(!((!minStep || step >= minStep) && (!maxStep || step <= maxStep))) {
+    if (!((!minStep || step >= minStep) && (!maxStep || step <= maxStep))) {
         return null;
     }
 

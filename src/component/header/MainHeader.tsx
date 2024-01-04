@@ -6,32 +6,32 @@ import VerticalContainer from "../container/VerticalContainer";
 function MainHeader() {
     const theme = useTheme();
     return (
-       <FullWidthSpaceBetweenContainer
-           flexDirection='row'
-           alignItems='center'
-           paddingY='10px'
-           paddingX='40px'
-           bgcolor={theme.palette.primary.main}
-           color={theme.palette.primary.contrastText}
-       >
-           <img src='/HAW_logo.svg' alt="HAW_Logo" height='50px'/>
-           <VerticalContainer>
-               <Typography variant='subtitle1'>
-                   BA Seminar
-               </Typography>
-               <Typography variant='subtitle1'>
-                   Agenten und Multiagentensysteme
-               </Typography>
-           </VerticalContainer>
-           <VerticalContainer>
-               <Typography variant='subtitle1'>
+        <FullWidthSpaceBetweenContainer
+            flexDirection='row'
+            alignItems='center'
+            paddingY='10px'
+            paddingX='40px'
+            bgcolor={theme.palette.primary.main}
+            color={theme.palette.primary.contrastText}
+        >
+            <img src='/HAW_logo.svg' alt="HAW_Logo" height='50px'/>
+            <VerticalContainer>
+                <Typography variant='subtitle1'>
+                    BA Seminar
+                </Typography>
+                <Typography variant='subtitle1'>
+                    Agenten und Multiagentensysteme
+                </Typography>
+            </VerticalContainer>
+            <VerticalContainer>
+                <Typography variant='subtitle1'>
                     Leon
-               </Typography>
-               <Typography variant='subtitle1'>
+                </Typography>
+                <Typography variant='subtitle1'>
                     Schwarzenberger
-               </Typography>
-           </VerticalContainer>
-       </FullWidthSpaceBetweenContainer>
+                </Typography>
+            </VerticalContainer>
+        </FullWidthSpaceBetweenContainer>
     );
 }
 

@@ -1,7 +1,7 @@
 import React, {ReactNode} from 'react';
 import FullSpaceBetweenContainer from "../container/FullSpaceBetweenContainer";
 
-interface IProps{
+interface IProps {
     header?: ReactNode | ReactNode[];
     bottom?: ReactNode | ReactNode[];
     children: ReactNode | ReactNode[];

@@ -6,7 +6,7 @@ export const rotateAround2D = (fixedPoint: ThreeArr2, rotationPoint: ThreeArr2, 
     return rotateOffset2D(fixedPoint, offset, rand);
 };
 
-export const rotateOffset2D = (fixedPoint: ThreeArr2, offset:ThreeArr2, rand: number): ThreeArr2 => {
+export const rotateOffset2D = (fixedPoint: ThreeArr2, offset: ThreeArr2, rand: number): ThreeArr2 => {
     const [difX, difY] = offset;
 
     const c = Math.cos(-rand);

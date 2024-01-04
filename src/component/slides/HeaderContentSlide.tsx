@@ -11,7 +11,7 @@ interface IProps {
 
 function HeaderContentSlide(props: IProps) {
     const {title, children} = props;
-    return(
+    return (
         <FullSpaceBetweenContainer flexDirection='column'>
             <FullWidthStartContainer
                 paddingY='20px'
