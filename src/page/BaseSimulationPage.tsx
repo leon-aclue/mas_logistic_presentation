@@ -1,10 +1,12 @@
 import React from 'react';
-import MultiList, {getTotalLength, MultiListItem} from "../component/slideElement/MultiList";
+import MultiList, {MultiListItem} from "../component/slideElement/MultiList";
 import StepHandler from "../component/control/StepHandler";
 import SimulationItemsHandler from "../simulation/component/control/SimulationItemsHandler";
-import SplitContentSlide from "../component/slides/SplitContentSlide";
+import SplitContentSlide from "../component/slide/SplitContentSlide";
 import VerticalContainer from "../component/container/VerticalContainer";
 import SimulationWorld from "../simulation/SimulationWorld";
+import FullCenterContainer from "../component/container/FullCenterContainer";
+import {Typography} from "@mui/material";
 
 interface IProps {
     listItemsList: MultiListItem[],
@@ -12,9 +14,17 @@ interface IProps {
 
 function BaseSimulationPage(props: IProps) {
     const {listItemsList} = props;
-    const totalLength = getTotalLength(listItemsList);
-    const {step} = StepHandler({maxSteps: totalLength});
-    const simulationWorldItems = SimulationItemsHandler({listItemsList, step})
+    const {page, step} = StepHandler({listItemsList});
+
+    if (page >= listItemsList.length) {
+        return (
+            <FullCenterContainer>
+                <Typography variant='h1'>Danke!</Typography>
+            </FullCenterContainer>
+        )
+    }
+
+    const simulationWorldItems = SimulationItemsHandler({listItemsList, page, step})
 
     return (
         <SplitContentSlide>
@@ -26,6 +36,7 @@ function BaseSimulationPage(props: IProps) {
             >
                 <MultiList
                     listItemsList={listItemsList}
+                    page={page}
                     step={step}
                 />
             </VerticalContainer>

@@ -1,16 +1,25 @@
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {decreasePage, increasePage, pageSliceSelector, setStep} from "../../store/slice/pageSlice";
+import {decreasePage, increasePage, pageSliceSelector, setPage, setStep} from "../../store/slice/pageSlice";
+import {MultiListItem} from "../slideElement/MultiList";
 
 interface IProps {
-    maxSteps: number;
+    listItemsList: MultiListItem[],
 }
 
 function StepHandler(props: IProps) {
-    const {maxSteps} = props;
+    const {listItemsList} = props;
 
     const dispatch = useDispatch();
-    const {step} = useSelector(pageSliceSelector);
+    const {page, step} = useSelector(pageSliceSelector);
+    const maxPages = listItemsList.length;
+    const maxSteps = listItemsList[page]?.items.length ?? 1;
+
+    useEffect(() => {
+        if(page > maxPages) {
+            dispatch(setPage(maxPages));
+        }
+    }, [page]);
 
     useEffect(() => {
         if (step >= maxSteps) {
@@ -22,7 +31,7 @@ function StepHandler(props: IProps) {
         }
     }, [step]);
 
-    return {step}
+    return {page, step}
 }
 
 export default StepHandler;

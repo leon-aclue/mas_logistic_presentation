@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 import VerticalContainer from "../container/VerticalContainer";
-import {BoxProps, Typography, useTheme} from "@mui/material";
+import {BoxProps, Typography, TypographyVariant, useTheme} from "@mui/material";
 import CircleIcon from '@mui/icons-material/Circle';
 import MuiBox from "../container/MuiBox";
 import {ArrowForward} from "@mui/icons-material";
@@ -17,22 +17,22 @@ export interface ListItem {
     type?: ListItemType,
     tab?: number,
     itemProps?: BoxProps,
+    fontVariant?: TypographyVariant,
     activateSimulationItems?: SimulationWorldItem[],
     deactivateSimulationItems?: SimulationWorldItem[],
 }
 
 interface IProps {
-    header?: string;
     items: ListItem[];
+    fontVariant?: TypographyVariant;
     numberToShow?: number;
     containerProps?: BoxProps;
-    fontVariant?: 'h1' | 'h2' | 'h3' | 'h4' | 'subtitle1' | 'subtitle2' | 'body1';
 }
 
 function BulletList(props: IProps) {
-    const {header, items, numberToShow, containerProps, fontVariant} = props;
+    const {items, fontVariant, numberToShow, containerProps} = props;
+    const listFontVariant = fontVariant ?? 'subtitle1';
     const theme = useTheme();
-    const bulletFontSize = (theme.typography[fontVariant ?? 'subtitle1'].fontSize as unknown as number);
     const boxRef = useRef();
 
     // on next step scroll to bottom
@@ -50,17 +50,18 @@ function BulletList(props: IProps) {
             overflow='auto'
             {...containerProps}
         >
-            {header && (
-                <Typography variant={fontVariant}>{header}</Typography>
-            )}
             {items
                 .slice(0, Math.min(numberToShow ?? items.length, items.length))
                 .map((item, index) => {
                     const paddingLeft = (item.tab ?? 0) * 4;
+
+                    const itemFontVariant = item.fontVariant ?? listFontVariant;
+                    const bulletFontSize = (theme.typography[itemFontVariant].fontSize as unknown as number);
+
                     let icon;
                     switch (item.type) {
                         case ListItemType.ITEM:
-                            icon = <CircleIcon sx={{fontSize: bulletFontSize / 1.5}}/>;
+                            icon = <CircleIcon sx={{fontSize: bulletFontSize / 2}}/>;
                             break;
                         case ListItemType.ANSWER:
                             icon = <ArrowForward sx={{fontSize: bulletFontSize}}/>;
@@ -73,7 +74,7 @@ function BulletList(props: IProps) {
                         <MuiBox key={index} display="flex" flexDirection="row" paddingLeft={paddingLeft}
                                 alignItems='center' gap='10px' {...item.itemProps}>
                             {icon}
-                            <Typography variant={fontVariant}>{item.title}</Typography>
+                            <Typography variant={itemFontVariant}>{item.title}</Typography>
                         </MuiBox>
                     )
                 })}

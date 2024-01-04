@@ -6,8 +6,8 @@ import theme from "./config/theme";
 import MainHeader from "./component/header/MainHeader";
 import {Provider} from "react-redux";
 import {store} from "./store/store";
-import MainBottom from "./component/bottom/MainBottom";
-import SimulationConfig from "./pages/SimulationConfig";
+import MainFooter from "./component/footer/MainFooter";
+import PageController from "./page/PageController";
 
 function App() {
     return (
@@ -15,9 +15,9 @@ function App() {
             <Provider store={store}>
                 <BaseLayout
                     header={<MainHeader/>}
-                    bottom={<MainBottom/>}
+                    bottom={<MainFooter/>}
                 >
-                    <SimulationConfig/>
+                    <PageController/>
                 </BaseLayout>
             </Provider>
         </ThemeProvider>

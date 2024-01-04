@@ -17,7 +17,7 @@ import {
 } from "../../store/slice/pageSlice";
 import FullWidthCenterContainer from "../container/FullWidthCenterContainer";
 
-function MainBottom() {
+function MainFooter() {
     const theme = useTheme();
     const dispatch = useDispatch();
     const {page, step} = useSelector(pageSliceSelector);
@@ -75,4 +75,4 @@ function MainBottom() {
     );
 }
 
-export default MainBottom;
+export default MainFooter;

@@ -1,39 +1,12 @@
 import React from 'react';
 import {ListItemType} from "../component/slideElement/BulletList";
-import {Typography} from "@mui/material";
 import {PRODUCTION_STATIONS, SIM_BASE_LENGTH, SIM_BASE_WIDTH} from "../simulation/config";
 import {emptyStartListItem, MultiListItem} from "../component/slideElement/MultiList";
 import BaseSimulationPage from "./BaseSimulationPage";
-import {ICameraConfig} from "../simulation/store/slice/cameraSlice";
+import {ekQuestionHeader, introductionHeader, navigationVariantsHeader} from "../component/header/ListHeaders";
+import {ekQuestionFooter, navigationVariantsFooter} from "../component/footer/ListFooters";
+import {ekQuestionsItemProps, navigationVariantsCameraConfig} from "../config/listProps";
 
-const introductionHeader = (
-    <Typography variant='h4' paddingBottom='20px'>Multiagentensysteme in der Logistik</Typography>
-);
-const itemProps = {
-    paddingTop: '20px',
-};
-const answerItemProps = {};
-
-const ekHeader = (
-    <Typography variant='h4' paddingBottom='20px'>Kernfragen von EK-Robotics [1]</Typography>
-);
-const ekFooter = (
-    <Typography variant='subtitle2' paddingTop='20px'>[1]
-        https://ek-robotics.com/de/technologie/fts-fahrerlose-transportsysteme</Typography>
-);
-
-const navHeader = (
-    <Typography variant='h4' paddingBottom='20px'>Navigationsvarianten [2]</Typography>
-);
-const navFooter = (
-    <Typography variant='subtitle2' paddingTop='20px'>[1]
-        https://TODO.com</Typography>
-);
-const navCameraConfig: ICameraConfig = {
-    position: [0, 60, 60],
-    lookAt: [30, 0, 30],
-    fov: 45,
-};
 
 const listItemsList: MultiListItem[] = [
     {
@@ -67,8 +40,8 @@ const listItemsList: MultiListItem[] = [
         ]
     },
     {
-        header: ekHeader,
-        footer: ekFooter,
+        header: ekQuestionHeader,
+        footer: ekQuestionFooter,
         items:
             [
                 emptyStartListItem(['Base', 'ProductionStations', 'StorageStations']),
@@ -76,90 +49,90 @@ const listItemsList: MultiListItem[] = [
                     title: 'Welche Last soll wie transportiert und übergeben werden?',
                     type: ListItemType.ITEM,
                     tab: 0,
-                    itemProps: itemProps,
+                    itemProps: ekQuestionsItemProps,
                 },
                 {
                     title: 'Produkte werden auf Paletten bereitgestellt und auf definierte Abholstationen gestellt',
                     type: ListItemType.ANSWER,
                     tab: 1,
-                    itemProps: answerItemProps,
+
                     activateSimulationItems: ['StorageAreas'],
                 },
                 {
                     title: 'Welche Maße haben die zu transportierenden Lasten?',
                     type: ListItemType.ITEM,
                     tab: 0,
-                    itemProps: itemProps,
+                    itemProps: ekQuestionsItemProps,
                 },
                 {
                     title: 'Europaletten',
                     type: ListItemType.ANSWER,
                     tab: 1,
-                    itemProps: answerItemProps,
+
                 },
             ],
     },
     {
-        header: ekHeader,
-        footer: ekFooter,
+        header: ekQuestionHeader,
+        footer: ekQuestionFooter,
         items:
             [
                 {
                     title: 'Wie beweglich muss das Fahrzeug sein bzw. wie viel Platz steht zur Verfügung?',
                     type: ListItemType.ITEM,
                     tab: 0,
-                    itemProps: itemProps,
+                    itemProps: ekQuestionsItemProps,
                 },
                 {
                     title: 'Fahrwege von 2m Breite',
                     type: ListItemType.ANSWER,
                     tab: 1,
-                    itemProps: answerItemProps,
+
                     activateSimulationItems: ['DrivingArea'],
                 },
                 {
                     title: 'Wie lang sind die Wegstrecken?',
                     type: ListItemType.ITEM,
                     tab: 0,
-                    itemProps: itemProps,
+                    itemProps: ekQuestionsItemProps,
                 },
                 {
                     title: 'maximal 200m zwischen Lager und Abholstation',
                     type: ListItemType.ANSWER,
                     tab: 1,
-                    itemProps: answerItemProps,
+
                 },
                 {
                     title: 'Wie viele Transporte werden pro Stunde getätigt?',
                     type: ListItemType.ITEM,
                     tab: 0,
-                    itemProps: itemProps,
+                    itemProps: ekQuestionsItemProps,
                 },
                 {
                     title: 'ca 20',
                     type: ListItemType.ANSWER,
                     tab: 1,
-                    itemProps: answerItemProps,
+
                 },
             ],
     },
     {
-        header: ekHeader,
-        footer: ekFooter,
+        header: ekQuestionHeader,
+        footer: ekQuestionFooter,
         items:
             [
                 {
                     title: 'Welche Spurführung oder Navigation ist am besten geeignet?',
                     type: ListItemType.ITEM,
                     tab: 0,
-                    itemProps: itemProps,
+                    itemProps: ekQuestionsItemProps,
                 },
             ],
     },
     {
-        header: navHeader,
-        footer: navFooter,
-        cameraConfig: navCameraConfig,
+        header: navigationVariantsHeader,
+        footer: navigationVariantsFooter,
+        cameraConfig: navigationVariantsCameraConfig,
         items:
             [
                 emptyStartListItem(),
@@ -167,158 +140,158 @@ const listItemsList: MultiListItem[] = [
                     title: 'Natural Navigation',
                     type: ListItemType.NONE,
                     tab: 0,
-                    itemProps: itemProps,
+                    itemProps: ekQuestionsItemProps,
                     activateSimulationItems: ['MagneticLines'],
                 },
             ],
     },
     {
-        header: navHeader,
-        footer: navFooter,
-        cameraConfig: navCameraConfig,
+        header: navigationVariantsHeader,
+        footer: navigationVariantsFooter,
+        cameraConfig: navigationVariantsCameraConfig,
         items:
             [
                 {
                     title: 'Laser Guided Navigation',
                     type: ListItemType.NONE,
                     tab: 0,
-                    itemProps: itemProps,
+                    itemProps: ekQuestionsItemProps,
                     deactivateSimulationItems: ['MagneticLines'],
                 },
             ],
     },
     {
-        header: navHeader,
-        footer: navFooter,
-        cameraConfig: navCameraConfig,
+        header: navigationVariantsHeader,
+        footer: navigationVariantsFooter,
+        cameraConfig: navigationVariantsCameraConfig,
         items:
             [
                 {
                     title: 'Magnetic Tape Navigation',
                     type: ListItemType.NONE,
                     tab: 0,
-                    itemProps: itemProps,
+                    itemProps: ekQuestionsItemProps,
                 },
             ],
     },
     {
-        header: navHeader,
-        footer: navFooter,
-        cameraConfig: navCameraConfig,
+        header: navigationVariantsHeader,
+        footer: navigationVariantsFooter,
+        cameraConfig: navigationVariantsCameraConfig,
         items:
             [
                 {
                     title: 'Magnetic Spots Navigation',
                     type: ListItemType.NONE,
                     tab: 0,
-                    itemProps: itemProps,
+                    itemProps: ekQuestionsItemProps,
                 },
             ],
     },
     {
-        header: navHeader,
-        footer: navFooter,
-        cameraConfig: navCameraConfig,
+        header: navigationVariantsHeader,
+        footer: navigationVariantsFooter,
+        cameraConfig: navigationVariantsCameraConfig,
         items:
             [
                 {
                     title: 'Inductive Wire',
                     type: ListItemType.NONE,
                     tab: 0,
-                    itemProps: itemProps,
+                    itemProps: ekQuestionsItemProps,
                 },
             ],
     },
     {
-        header: ekHeader,
-        footer: ekFooter,
+        header: ekQuestionHeader,
+        footer: ekQuestionFooter,
         items:
             [
                 {
                     title: 'Welche Spurführung oder Navigation ist am besten geeignet?',
                     type: ListItemType.ITEM,
                     tab: 0,
-                    itemProps: itemProps,
+                    itemProps: ekQuestionsItemProps,
                 },
                 {
                     title: 'Magnetschienen im Boden',
                     type: ListItemType.ANSWER,
                     tab: 1,
-                    itemProps: answerItemProps,
+
                     activateSimulationItems: ['MagneticLines'],
                 },
                 {
                     title: 'sorgt für genaue Spureinhaltung',
                     type: ListItemType.ITEM,
                     tab: 2,
-                    itemProps: answerItemProps,
+
                 },
                 {
                     title: 'liefert allerdings keine Informationen über Position in Halle',
                     type: ListItemType.ITEM,
                     tab: 2,
-                    itemProps: answerItemProps,
+
                 },
                 {
                     title: 'Laser SLAM [TODO!!!]',
                     type: ListItemType.ANSWER,
                     tab: 1,
-                    itemProps: answerItemProps,
+
                     activateSimulationItems: ['ReflectorStations'],
                 },
                 {
                     title: 'nicht ganz genau',
                     type: ListItemType.ITEM,
                     tab: 2,
-                    itemProps: answerItemProps,
+
                 },
                 {
                     title: 'kann aber die grobe Position bestimmen',
                     type: ListItemType.ITEM,
                     tab: 2,
-                    itemProps: answerItemProps,
+
                 },
             ],
     },
     {
-        header: ekHeader,
-        footer: ekFooter,
+        header: ekQuestionHeader,
+        footer: ekQuestionFooter,
         items:
             [
                 {
                     title: 'Wie sieht das Energiekonzept in Abhängigkeit von der Einsatzdauer aus?',
                     type: ListItemType.ITEM,
                     tab: 0,
-                    itemProps: itemProps,
+                    itemProps: ekQuestionsItemProps,
                 },
                 {
                     title: 'Neben dem Lager kann eine Ladestation gebaut werden, sodass die AGVs bei Leerlauf oder Bedarf schnell laden können',
                     type: ListItemType.ANSWER,
                     tab: 1,
-                    itemProps: answerItemProps,
+
                     activateSimulationItems: ['ChargingAreas'],
                 },
                 {
                     title: 'Gibt es besondere Sicherheitsaspekte oder schwierige Umweltbedingungen?',
                     type: ListItemType.ITEM,
                     tab: 0,
-                    itemProps: itemProps,
+                    itemProps: ekQuestionsItemProps,
                 },
                 {
                     title: 'Keine Umweltaspekte, da indoor, aber müssen auf Mitarbeiter Rücksicht nehmen',
                     type: ListItemType.ANSWER,
                     tab: 1,
-                    itemProps: answerItemProps,
+
                 },
             ],
     },
 ];
 
-function SimulationConfig() {
+function PageController() {
 
     return (
         <BaseSimulationPage listItemsList={listItemsList}/>
     );
 }
 
-export default SimulationConfig;
+export default PageController;
