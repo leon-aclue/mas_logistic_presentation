@@ -141,7 +141,7 @@ export const REFLECTOR_STATIONS: ThreeArr2[] = [
     [78, 55],
     [78, 65],
 
-    [30, 31],
+    [30, 30],
     [60, 31],
     [70, 31],
 
@@ -161,10 +161,33 @@ export const CHARGING_AREAS: ThreeArr2[] = [
     [80, 19],
 ];
 
-
 // lines
-export const LINE_POS_Y = 0.04;
+export const LINE_POS_Y = 0.01;
 export const LINE_WIDTH = 3;
+
+// AGV
+export const AGV_BASE_WIDTH = 0.8;
+export const AGV_BASE_LENGTH = 0.5;
+export const AGV_BASE_HEIGHT = 2;
+export const AGV_BASE_OFFSET_X = 1.55;
+export const AGV_BASE_OFFSET_Y = 0;
+export const AGV_BASE_OFFSET_Z = AGV_BASE_HEIGHT / 2;
+export const AGV_BASE_COLOR = '#e60'
+
+export const AGV_FORK_WIDTH = 0.2;
+export const AGV_FORK_LENGTH = 1.5;
+export const AGV_FORK_HEIGHT = 0.1;
+export const AGV_FORK_OFFSET_X = 0.55;
+export const AGV_FORK_OFFSET_Y = 0.3;
+export const AGV_FORK_OFFSET_Z = AGV_FORK_HEIGHT / 2;
+export const AGV_FORK_COLOR = '#333'
+
+export const AGV_LASER_SENSOR_RADIUS = 0.07;
+export const AGV_LASER_SENSOR_HEIGHT = 0.5;
+export const AGV_LASER_SENSOR_OFFSET_X = 1.40;
+export const AGV_LASER_SENSOR_OFFSET_Y = 0;
+export const AGV_LASER_SENSOR_OFFSET_Z = AGV_LASER_SENSOR_HEIGHT / 2 + AGV_BASE_HEIGHT;
+export const AGV_LASER_SENSOR_COLOR = '#333'
 
 
 
