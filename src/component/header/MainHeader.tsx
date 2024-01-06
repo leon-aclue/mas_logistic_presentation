@@ -1,7 +1,6 @@
 import React from 'react';
 import {Typography, useTheme} from "@mui/material";
 import FullWidthSpaceBetweenContainer from "../container/FullWidthSpaceBetweenContainer";
-import VerticalContainer from "../container/VerticalContainer";
 
 function MainHeader() {
     const theme = useTheme();
@@ -14,23 +13,13 @@ function MainHeader() {
             bgcolor={theme.palette.primary.main}
             color={theme.palette.primary.contrastText}
         >
-            <img src='/HAW_logo.svg' alt="HAW_Logo" height='50px'/>
-            <VerticalContainer>
-                <Typography variant='subtitle1'>
-                    BA Seminar
+            <img src='/HAW_logo.svg' alt="HAW_Logo" height='20px'/>
+                <Typography variant='subtitle2'>
+                    BA Seminar: Agenten und Multiagentensysteme
                 </Typography>
-                <Typography variant='subtitle1'>
-                    Agenten und Multiagentensysteme
+                <Typography variant='subtitle2'>
+                    Leon Schwarzenberger
                 </Typography>
-            </VerticalContainer>
-            <VerticalContainer>
-                <Typography variant='subtitle1'>
-                    Leon
-                </Typography>
-                <Typography variant='subtitle1'>
-                    Schwarzenberger
-                </Typography>
-            </VerticalContainer>
         </FullWidthSpaceBetweenContainer>
     );
 }

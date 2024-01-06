@@ -49,7 +49,6 @@ function MainFooter() {
         <FullWidthCenterContainer
             flexDirection='row'
             gap='20px'
-            paddingY='10px'
             bgcolor={theme.palette.background.default}
             color={theme.palette.primary.contrastText}
         >
