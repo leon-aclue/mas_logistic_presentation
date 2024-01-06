@@ -1,12 +1,18 @@
 import {emptyStartListItem, MultiListItem} from "../component/slideElement/MultiList";
-import {ekQuestionHeader, introductionHeader, navigationVariantsHeader} from "../component/header/ListHeaders";
+import {
+    agvTypeHeader,
+    ekQuestionHeader,
+    introductionHeader,
+    navigationVariantsHeader
+} from "../component/header/ListHeaders";
 import {PRODUCTION_STATIONS, SIM_BASE_LENGTH, SIM_BASE_WIDTH} from "../simulation/config";
 import {ListItemType} from "../component/slideElement/BulletList";
-import {ekQuestionFooter, navigationVariantsFooter} from "../component/footer/ListFooters";
-import {ekQuestionsItemProps, navigationVariantsCameraConfig} from "./listProps";
+import {agvTypeFooter, ekQuestionFooter, navigationVariantsFooter} from "../component/footer/ListFooters";
+import {baseItemProps, navigationVariantsCameraConfig, SimulationCategory} from "./listProps";
 
 export const listItemsList: MultiListItem[] = [
     {
+        simulationCategory: SimulationCategory.BASE,
         header: introductionHeader,
         footer: undefined,
         containerProps: {gap: '20px'},
@@ -37,16 +43,17 @@ export const listItemsList: MultiListItem[] = [
         ]
     },
     {
+        simulationCategory: SimulationCategory.BASE,
         header: ekQuestionHeader,
         footer: ekQuestionFooter,
         items:
             [
-                emptyStartListItem(['Base', 'ProductionStations', 'StorageStations']),
+                emptyStartListItem(),
                 {
                     title: 'Welche Last soll wie transportiert und übergeben werden?',
                     type: ListItemType.ITEM,
                     tab: 0,
-                    itemProps: ekQuestionsItemProps,
+                    itemProps: baseItemProps,
                 },
                 {
                     title: 'Produkte werden auf Paletten bereitgestellt und auf definierte Abholstationen gestellt',
@@ -59,7 +66,7 @@ export const listItemsList: MultiListItem[] = [
                     title: 'Welche Maße haben die zu transportierenden Lasten?',
                     type: ListItemType.ITEM,
                     tab: 0,
-                    itemProps: ekQuestionsItemProps,
+                    itemProps: baseItemProps,
                 },
                 {
                     title: 'Europaletten',
@@ -70,6 +77,7 @@ export const listItemsList: MultiListItem[] = [
             ],
     },
     {
+        simulationCategory: SimulationCategory.BASE,
         header: ekQuestionHeader,
         footer: ekQuestionFooter,
         items:
@@ -78,7 +86,7 @@ export const listItemsList: MultiListItem[] = [
                     title: 'Wie beweglich muss das Fahrzeug sein bzw. wie viel Platz steht zur Verfügung?',
                     type: ListItemType.ITEM,
                     tab: 0,
-                    itemProps: ekQuestionsItemProps,
+                    itemProps: baseItemProps,
                 },
                 {
                     title: 'Fahrwege von 2m Breite',
@@ -91,7 +99,7 @@ export const listItemsList: MultiListItem[] = [
                     title: 'Wie lang sind die Wegstrecken?',
                     type: ListItemType.ITEM,
                     tab: 0,
-                    itemProps: ekQuestionsItemProps,
+                    itemProps: baseItemProps,
                 },
                 {
                     title: 'maximal 200m zwischen Lager und Abholstation',
@@ -103,7 +111,7 @@ export const listItemsList: MultiListItem[] = [
                     title: 'Wie viele Transporte werden pro Stunde getätigt?',
                     type: ListItemType.ITEM,
                     tab: 0,
-                    itemProps: ekQuestionsItemProps,
+                    itemProps: baseItemProps,
                 },
                 {
                     title: 'ca 20',
@@ -114,6 +122,7 @@ export const listItemsList: MultiListItem[] = [
             ],
     },
     {
+        simulationCategory: SimulationCategory.BASE,
         header: ekQuestionHeader,
         footer: ekQuestionFooter,
         items:
@@ -122,11 +131,59 @@ export const listItemsList: MultiListItem[] = [
                     title: 'Welche Spurführung oder Navigation ist am besten geeignet?',
                     type: ListItemType.ITEM,
                     tab: 0,
-                    itemProps: ekQuestionsItemProps,
+                    itemProps: baseItemProps,
                 },
             ],
     },
     {
+        simulationCategory: SimulationCategory.NAVIGATION,
+        header: agvTypeHeader,
+        footer: agvTypeFooter,
+        cameraConfig: navigationVariantsCameraConfig,
+        items:
+            [
+                emptyStartListItem(),
+                {
+                    title: 'AGV - Automated guided vehicle',
+                    type: ListItemType.NONE,
+                    tab: 0,
+                    itemProps: baseItemProps,
+                },
+                {
+                    title: 'folgt definiertem (virtuellen) Pfad',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'z.B. Laser-Navigation oder Magnetband-Navigation',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'AMR - Autonomous Mobile Robot',
+                    type: ListItemType.NONE,
+                    tab: 0,
+                    itemProps: baseItemProps,
+                },
+                {
+                    title: 'können sich frei im Raum bewegen',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'scannen die Umgebung (Wände, Durchgänge etc.)',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'z.B. Staubsaugroboter',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+            ],
+    },
+    {
+        simulationCategory: SimulationCategory.NAVIGATION,
         header: navigationVariantsHeader,
         footer: navigationVariantsFooter,
         cameraConfig: navigationVariantsCameraConfig,
@@ -137,12 +194,13 @@ export const listItemsList: MultiListItem[] = [
                     title: 'Natural Navigation',
                     type: ListItemType.NONE,
                     tab: 0,
-                    itemProps: ekQuestionsItemProps,
+                    itemProps: baseItemProps,
                     activateSimulationItems: ['MagneticLines'],
                 },
             ],
     },
     {
+        simulationCategory: SimulationCategory.NAVIGATION,
         header: navigationVariantsHeader,
         footer: navigationVariantsFooter,
         cameraConfig: navigationVariantsCameraConfig,
@@ -152,12 +210,13 @@ export const listItemsList: MultiListItem[] = [
                     title: 'Laser Guided Navigation',
                     type: ListItemType.NONE,
                     tab: 0,
-                    itemProps: ekQuestionsItemProps,
+                    itemProps: baseItemProps,
                     deactivateSimulationItems: ['MagneticLines'],
                 },
             ],
     },
     {
+        simulationCategory: SimulationCategory.NAVIGATION,
         header: navigationVariantsHeader,
         footer: navigationVariantsFooter,
         cameraConfig: navigationVariantsCameraConfig,
@@ -167,11 +226,12 @@ export const listItemsList: MultiListItem[] = [
                     title: 'Magnetic Tape Navigation',
                     type: ListItemType.NONE,
                     tab: 0,
-                    itemProps: ekQuestionsItemProps,
+                    itemProps: baseItemProps,
                 },
             ],
     },
     {
+        simulationCategory: SimulationCategory.NAVIGATION,
         header: navigationVariantsHeader,
         footer: navigationVariantsFooter,
         cameraConfig: navigationVariantsCameraConfig,
@@ -181,11 +241,12 @@ export const listItemsList: MultiListItem[] = [
                     title: 'Magnetic Spots Navigation',
                     type: ListItemType.NONE,
                     tab: 0,
-                    itemProps: ekQuestionsItemProps,
+                    itemProps: baseItemProps,
                 },
             ],
     },
     {
+        simulationCategory: SimulationCategory.NAVIGATION,
         header: navigationVariantsHeader,
         footer: navigationVariantsFooter,
         cameraConfig: navigationVariantsCameraConfig,
@@ -195,11 +256,12 @@ export const listItemsList: MultiListItem[] = [
                     title: 'Inductive Wire',
                     type: ListItemType.NONE,
                     tab: 0,
-                    itemProps: ekQuestionsItemProps,
+                    itemProps: baseItemProps,
                 },
             ],
     },
     {
+        simulationCategory: SimulationCategory.BASE,
         header: ekQuestionHeader,
         footer: ekQuestionFooter,
         items:
@@ -208,7 +270,7 @@ export const listItemsList: MultiListItem[] = [
                     title: 'Welche Spurführung oder Navigation ist am besten geeignet?',
                     type: ListItemType.ITEM,
                     tab: 0,
-                    itemProps: ekQuestionsItemProps,
+                    itemProps: baseItemProps,
                 },
                 {
                     title: 'Magnetschienen im Boden',
@@ -251,6 +313,7 @@ export const listItemsList: MultiListItem[] = [
             ],
     },
     {
+        simulationCategory: SimulationCategory.BASE,
         header: ekQuestionHeader,
         footer: ekQuestionFooter,
         items:
@@ -259,7 +322,7 @@ export const listItemsList: MultiListItem[] = [
                     title: 'Wie sieht das Energiekonzept in Abhängigkeit von der Einsatzdauer aus?',
                     type: ListItemType.ITEM,
                     tab: 0,
-                    itemProps: ekQuestionsItemProps,
+                    itemProps: baseItemProps,
                 },
                 {
                     title: 'Neben dem Lager kann eine Ladestation gebaut werden, sodass die AGVs bei Leerlauf oder Bedarf schnell laden können',
@@ -272,7 +335,7 @@ export const listItemsList: MultiListItem[] = [
                     title: 'Gibt es besondere Sicherheitsaspekte oder schwierige Umweltbedingungen?',
                     type: ListItemType.ITEM,
                     tab: 0,
-                    itemProps: ekQuestionsItemProps,
+                    itemProps: baseItemProps,
                 },
                 {
                     title: 'Keine Umweltaspekte, da indoor, aber müssen auf Mitarbeiter Rücksicht nehmen',

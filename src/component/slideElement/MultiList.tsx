@@ -4,6 +4,7 @@ import {BoxProps, TypographyVariant} from "@mui/material";
 import {ICameraConfig} from "../../simulation/store/slice/cameraSlice";
 import CameraHandler from "../../simulation/component/control/CameraHandler";
 import {SimulationWorldItem} from "../../simulation/SimulationWorld";
+import {SimulationCategory} from "../../config/listProps";
 
 export const emptyStartListItem = (activateItems?: SimulationWorldItem[], deactivateItems?: SimulationWorldItem[]): ListItem => {
     return {
@@ -16,11 +17,12 @@ export const emptyStartListItem = (activateItems?: SimulationWorldItem[], deacti
 
 export interface MultiListItem {
     items: ListItem[];
-    fontVariant?: TypographyVariant;
     header?: ReactNode;
     footer?: ReactNode;
+    fontVariant?: TypographyVariant;
     containerProps?: BoxProps;
     cameraConfig?: ICameraConfig;
+    simulationCategory: SimulationCategory;
 }
 
 interface IProps {

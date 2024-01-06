@@ -16,7 +16,7 @@ function StepHandler(props: IProps) {
     const maxSteps = listItemsList[page]?.items.length ?? 1;
 
     useEffect(() => {
-        if(page > maxPages) {
+        if (page > maxPages) {
             dispatch(setPage(maxPages));
         }
     }, [page]);
@@ -26,7 +26,11 @@ function StepHandler(props: IProps) {
             dispatch(setStep(0));
             dispatch(increasePage());
         } else if (step < 0) {
-            dispatch(setStep(0));
+            let newStep = 0;
+            if (page >= 1) {
+                newStep = listItemsList[page - 1].items.length - 1
+            }
+            dispatch(setStep(newStep));
             dispatch(decreasePage());
         }
     }, [step]);
