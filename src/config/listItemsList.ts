@@ -1,23 +1,31 @@
 import {emptyStartListItem, MultiListItem} from "../component/slideElement/MultiList";
 import {
-    agvTypeHeader,
+    navigationCategoryHeader,
     ekQuestionHeader,
     introductionHeader,
-    navigationVariantsHeader
+    navigationSystemsHeader
 } from "../component/header/ListHeaders";
 import {PRODUCTION_STATIONS, SIM_BASE_LENGTH, SIM_BASE_WIDTH} from "../simulation/config";
 import {ListItemType} from "../component/slideElement/BulletList";
-import {agvTypeFooter, ekQuestionFooter, navigationVariantsFooter} from "../component/footer/ListFooters";
-import {baseItemProps, navigationVariantsCameraConfig, SimulationCategory} from "./listProps";
+import {navigationCategoryFooter, ekQuestionFooter, navigationSystemsFooter} from "../component/footer/ListFooters";
+import {baseItemProps, navigationVariantsCameraConfig} from "./listProps";
+import { SimulationCategory } from "../simulation/SimulationWorld";
 
 export const listItemsList: MultiListItem[] = [
+    {
+        simulationCategory: SimulationCategory.NONE,
+        header: introductionHeader,
+        footer: undefined,
+        items: [
+            emptyStartListItem(),
+        ]
+    },
     {
         simulationCategory: SimulationCategory.BASE,
         header: introductionHeader,
         footer: undefined,
         containerProps: {gap: '20px'},
         items: [
-            emptyStartListItem(),
             {
                 title: 'Konkretes Beispiel anhand einer Simulation',
             },
@@ -43,12 +51,20 @@ export const listItemsList: MultiListItem[] = [
         ]
     },
     {
-        simulationCategory: SimulationCategory.BASE,
+        simulationCategory: SimulationCategory.NONE,
         header: ekQuestionHeader,
         footer: ekQuestionFooter,
         items:
             [
                 emptyStartListItem(),
+            ],
+    },
+    {
+        simulationCategory: SimulationCategory.BASE,
+        header: ekQuestionHeader,
+        footer: ekQuestionFooter,
+        items:
+            [
                 {
                     title: 'Welche Last soll wie transportiert und übergeben werden?',
                     type: ListItemType.ITEM,
@@ -136,13 +152,22 @@ export const listItemsList: MultiListItem[] = [
             ],
     },
     {
-        simulationCategory: SimulationCategory.NAVIGATION,
-        header: agvTypeHeader,
-        footer: agvTypeFooter,
+        simulationCategory: SimulationCategory.NONE,
+        header: navigationCategoryHeader,
+        footer: navigationCategoryFooter,
         cameraConfig: navigationVariantsCameraConfig,
         items:
             [
                 emptyStartListItem(),
+            ],
+    },
+    {
+        simulationCategory: SimulationCategory.NAVIGATION,
+        header: navigationCategoryHeader,
+        footer: navigationCategoryFooter,
+        cameraConfig: navigationVariantsCameraConfig,
+        items:
+            [
                 {
                     title: 'AGV - Automated guided vehicle',
                     type: ListItemType.NONE,
@@ -183,57 +208,84 @@ export const listItemsList: MultiListItem[] = [
             ],
     },
     {
-        simulationCategory: SimulationCategory.NAVIGATION,
-        header: navigationVariantsHeader,
-        footer: navigationVariantsFooter,
+        simulationCategory: SimulationCategory.NONE,
+        header: navigationSystemsHeader,
+        footer: navigationSystemsFooter,
         cameraConfig: navigationVariantsCameraConfig,
         items:
             [
                 emptyStartListItem(),
+            ],
+    },
+    {
+        simulationCategory: SimulationCategory.NAVIGATION,
+        header: navigationSystemsHeader,
+        footer: navigationSystemsFooter,
+        cameraConfig: navigationVariantsCameraConfig,
+        items:
+            [
                 {
                     title: 'Natural Navigation',
                     type: ListItemType.NONE,
                     tab: 0,
                     itemProps: baseItemProps,
-                    activateSimulationItems: ['MagneticLines'],
                 },
-            ],
-    },
-    {
-        simulationCategory: SimulationCategory.NAVIGATION,
-        header: navigationVariantsHeader,
-        footer: navigationVariantsFooter,
-        cameraConfig: navigationVariantsCameraConfig,
-        items:
-            [
                 {
-                    title: 'Laser Guided Navigation',
-                    type: ListItemType.NONE,
-                    tab: 0,
-                    itemProps: baseItemProps,
-                    deactivateSimulationItems: ['MagneticLines'],
+                    title: 'häufig durch SLAM Algorithmen',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
                 },
-            ],
-    },
-    {
-        simulationCategory: SimulationCategory.NAVIGATION,
-        header: navigationVariantsHeader,
-        footer: navigationVariantsFooter,
-        cameraConfig: navigationVariantsCameraConfig,
-        items:
-            [
                 {
-                    title: 'Magnetic Tape Navigation',
-                    type: ListItemType.NONE,
-                    tab: 0,
-                    itemProps: baseItemProps,
+                    title: 'Sensoren: Kamera, LiDAR...',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'globale Routenplanung um Ziel zu erreichen',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'lokale Routenplanung um Hindernissen auszuweichen',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'einfache Installation',
+                    type: ListItemType.PLUS,
+                    tab: 1,
+                },
+                {
+                    title: 'keine externen Hilfsmittel nötig',
+                    type: ListItemType.ANSWER,
+                    tab: 2,
+                },
+                {
+                    title: 'einfach zu verändern',
+                    type: ListItemType.PLUS,
+                    tab: 1,
+                },
+                {
+                    title: 'evtl. Orientierungsprobleme',
+                    type: ListItemType.MINUS,
+                    tab: 1,
+                },
+                {
+                    title: 'falls Umgebung keine eindeutigen Merkmale aufweist',
+                    type: ListItemType.ANSWER,
+                    tab: 2,
+                },
+                {
+                    title: 'nicht so genau',
+                    type: ListItemType.MINUS,
+                    tab: 1,
                 },
             ],
     },
     {
         simulationCategory: SimulationCategory.NAVIGATION,
-        header: navigationVariantsHeader,
-        footer: navigationVariantsFooter,
+        header: navigationSystemsHeader,
+        footer: navigationSystemsFooter,
         cameraConfig: navigationVariantsCameraConfig,
         items:
             [
@@ -243,20 +295,245 @@ export const listItemsList: MultiListItem[] = [
                     tab: 0,
                     itemProps: baseItemProps,
                 },
+                {
+                    title: 'alle 25 - 50 cm kleine Magnete im Boden, die so Fahrlinien bilden',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'Sensoren: Hall-Effect (Magnetfelddichte), Gyro...',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'folgen Pfad anhand der Magneten',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'bis auf 2,5mm genau',
+                    type: ListItemType.PLUS,
+                    tab: 1,
+                },
+                {
+                    title: 'keine Spur auf dem Boden, da versiegelt',
+                    type: ListItemType.PLUS,
+                    tab: 1,
+                },
+                {
+                    title: 'es müssen Löcher gebohrt werden',
+                    type: ListItemType.MINUS,
+                    tab: 1,
+                },
+                {
+                    title: 'nicht besonders flexibel',
+                    type: ListItemType.MINUS,
+                    tab: 1,
+                },
             ],
     },
     {
         simulationCategory: SimulationCategory.NAVIGATION,
-        header: navigationVariantsHeader,
-        footer: navigationVariantsFooter,
+        header: navigationSystemsHeader,
+        footer: navigationSystemsFooter,
         cameraConfig: navigationVariantsCameraConfig,
         items:
             [
                 {
-                    title: 'Inductive Wire',
+                    title: 'Magnetic Tape Navigation',
                     type: ListItemType.NONE,
                     tab: 0,
                     itemProps: baseItemProps,
+                },
+                {
+                    title: 'anstatt einzelnen Magneten wird ein Magnetband (ca. 5cm x 1mm) auf den Boden geklebt',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'zusätzlich werden Tags auf dem boden Plaziert',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'bis auf 2mm genau',
+                    type: ListItemType.PLUS,
+                    tab: 1,
+                },
+                {
+                    title: 'einfach zu installieren und modifizieren',
+                    type: ListItemType.PLUS,
+                    tab: 1,
+                },
+                {
+                    title: 'zuverlässig und nicht durch Umgebung beinflussbar',
+                    type: ListItemType.PLUS,
+                    tab: 1,
+                },
+                {
+                    title: 'Kosten',
+                    type: ListItemType.MINUS,
+                    tab: 1,
+                },
+                {
+                    title: 'Magnetband muss ggf. erneuert werden',
+                    type: ListItemType.MINUS,
+                    tab: 1,
+                },
+                {
+                    title: 'kann abgerieben und beschädigt werden',
+                    type: ListItemType.ANSWER,
+                    tab: 2,
+                },
+            ],
+    },
+    {
+        simulationCategory: SimulationCategory.NAVIGATION,
+        header: navigationSystemsHeader,
+        footer: navigationSystemsFooter,
+        cameraConfig: navigationVariantsCameraConfig,
+        items:
+            [
+                {
+                    title: 'Inductive Wire Navigation',
+                    type: ListItemType.NONE,
+                    tab: 0,
+                    itemProps: baseItemProps,
+                },
+                {
+                    title: 'ähnliche Funktionsweise wie Magnetic Tape',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'Kabel im Boden',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'langlebig',
+                    type: ListItemType.PLUS,
+                    tab: 1,
+                },
+                {
+                    title: 'genauer als Magnetic Tape',
+                    type: ListItemType.PLUS,
+                    tab: 1,
+                },
+                {
+                    title: 'aufwändige Installation',
+                    type: ListItemType.MINUS,
+                    tab: 1,
+                },
+                {
+                    title: 'sehr unflexibel',
+                    type: ListItemType.MINUS,
+                    tab: 1,
+                },
+                {
+                    title: 'Kosten',
+                    type: ListItemType.MINUS,
+                    tab: 1,
+                },
+            ],
+    },
+    {
+        simulationCategory: SimulationCategory.NAVIGATION,
+        header: navigationSystemsHeader,
+        footer: navigationSystemsFooter,
+        cameraConfig: navigationVariantsCameraConfig,
+        items:
+            [
+                {
+                    title: 'Laser Guided Navigation',
+                    type: ListItemType.NONE,
+                    tab: 0,
+                    itemProps: baseItemProps,
+                },
+                {
+                    title: 'Navigation Laser oben auf dem AGV',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'Viele Reflektoren auf Höhe des Lasers',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'durch 360° Laser werden Positionen der Reflektoren relativ zum AGV ermittelt und auf absolute Karte gemapped',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'bis auf 5mm genau',
+                    type: ListItemType.PLUS,
+                    tab: 1,
+                },
+                {
+                    title: 'kein großer Störfaktor, da Reflektoren auf ca. 2.5 m Höhe installiert werden',
+                    type: ListItemType.PLUS,
+                    tab: 1,
+                },
+                {
+                    title: 'mehrere virtuelle Routen an gleichem physischen Platz möglich',
+                    type: ListItemType.PLUS,
+                    tab: 1,
+                },
+                {
+                    title: 'Änderungen der Pfade meist nur durch Betreiber möglich',
+                    type: ListItemType.MINUS,
+                    tab: 1,
+                },
+                {
+                    title: 'Nur bei bestimmter AGV-Art möglich',
+                    type: ListItemType.MINUS,
+                    tab: 1,
+                },
+            ],
+    },
+    {
+        simulationCategory: SimulationCategory.NAVIGATION,
+        header: navigationSystemsHeader,
+        footer: navigationSystemsFooter,
+        cameraConfig: navigationVariantsCameraConfig,
+        items:
+            [
+                {
+                    title: 'Fazit',
+                    type: ListItemType.NONE,
+                    tab: 0,
+                    itemProps: baseItemProps,
+                },
+                {
+                    title: 'unterschiedliche Verfahren je nach Anforderung und Budget',
+                    type: ListItemType.ITEM,
+                    tab: 1,
+                },
+                {
+                    title: 'auch Kombination von zwei oder mehr Verfahren möglich',
+                    type: ListItemType.ITEM,
+                    tab: 1,
+                },
+                {
+                    title: 'Natural Navigation & Magnetic Spot Navigation',
+                    type: ListItemType.ANSWER,
+                    tab: 2,
+                },
+                {
+                    title: 'kombiniert Vorteile',
+                    type: ListItemType.PLUS,
+                    tab: 2,
+                },
+                {
+                    title: 'Ausfallsicherheit',
+                    type: ListItemType.PLUS,
+                    tab: 2,
+                },
+                {
+                    title: 'Kosten',
+                    type: ListItemType.MINUS,
+                    tab: 2,
                 },
             ],
     },

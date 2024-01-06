@@ -5,11 +5,15 @@ import CircleIcon from '@mui/icons-material/Circle';
 import MuiBox from "../container/MuiBox";
 import {ArrowForward} from "@mui/icons-material";
 import {SimulationWorldItem} from "../../simulation/SimulationWorld";
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 
 export enum ListItemType {
     'NONE',
     'ITEM',
     'ANSWER',
+    'PLUS',
+    'MINUS',
 }
 
 export interface ListItem {
@@ -66,6 +70,12 @@ function BulletList(props: IProps) {
                         case ListItemType.ANSWER:
                             icon = <ArrowForward sx={{fontSize: bulletFontSize}}/>;
                             break;
+                        case ListItemType.PLUS:
+                            icon = <AddCircleOutlineIcon sx={{fontSize: bulletFontSize, color: 'success.main'}}/>;
+                            break;
+                        case ListItemType.MINUS:
+                            icon = <RemoveCircleOutlineIcon sx={{fontSize: bulletFontSize, color: 'error.main'}}/>;
+                            break;
                         default:
                             icon = null;
                     }
@@ -73,8 +83,13 @@ function BulletList(props: IProps) {
                     return (
                         <MuiBox key={index} display="flex" flexDirection="row" paddingLeft={paddingLeft}
                                 alignItems='center' gap='10px' {...item.itemProps}>
-                            {icon}
-                            <Typography variant={itemFontVariant}>{item.title}</Typography>
+                            {icon && (
+                                <MuiBox minWidth='20px' width='20px'>
+                                    {icon}
+                                </MuiBox>
+                            )}
+                            <Typography variant={itemFontVariant} paddingY='0.3rem'
+                                        style={{whiteSpace: 'pre-line', lineHeight: '1.2rem'}}>{item.title}</Typography>
                         </MuiBox>
                     )
                 })}

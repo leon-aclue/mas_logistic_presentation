@@ -1,11 +1,6 @@
 import {ICameraConfig} from "../simulation/store/slice/cameraSlice";
 import {SimulationWorldItem} from "../simulation/SimulationWorld";
 
-export enum SimulationCategory {
-    BASE,
-    NAVIGATION,
-}
-
 export const baseItemProps = {
     paddingTop: '20px',
 };

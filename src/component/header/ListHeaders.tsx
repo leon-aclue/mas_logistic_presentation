@@ -9,10 +9,10 @@ export const ekQuestionHeader = (
     <Typography variant='h4' paddingBottom='20px'>Kernfragen von EK-Robotics [1]</Typography>
 );
 
-export const agvTypeHeader = (
-    <Typography variant='h4' paddingBottom='20px'>Fahrzeugtypen [2]</Typography>
+export const navigationCategoryHeader = (
+    <Typography variant='h4' paddingBottom='20px'>Navigationkategorien [2]</Typography>
 );
 
-export const navigationVariantsHeader = (
-    <Typography variant='h4' paddingBottom='20px'>Navigationsvarianten [2]</Typography>
+export const navigationSystemsHeader = (
+    <Typography variant='h4' paddingBottom='20px'>Navigationssysteme [2]</Typography>
 );

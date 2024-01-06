@@ -6,12 +6,12 @@ export const ekQuestionFooter = (
         https://ek-robotics.com/de/technologie/fts-fahrerlose-transportsysteme</Typography>
 );
 
-export const agvTypeFooter = (
+export const navigationCategoryFooter = (
     <Typography variant='subtitle2' paddingTop='20px'>[1]
         https://TODO.com</Typography>
 );
 
-export const navigationVariantsFooter = (
+export const navigationSystemsFooter = (
     <Typography variant='subtitle2' paddingTop='20px'>[1]
         https://TODO.com</Typography>
 );

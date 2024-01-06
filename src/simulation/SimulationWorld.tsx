@@ -24,6 +24,11 @@ export type SimulationWorldItem =
     | 'ChargingAreas'
     ;
 
+export enum SimulationCategory {
+    NONE,
+    BASE,
+    NAVIGATION,
+}
 
 interface IProps {
     itemsToShow?: SimulationWorldItem[],

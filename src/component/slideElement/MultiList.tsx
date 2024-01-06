@@ -3,8 +3,7 @@ import BulletList, {ListItem} from "./BulletList";
 import {BoxProps, TypographyVariant} from "@mui/material";
 import {ICameraConfig} from "../../simulation/store/slice/cameraSlice";
 import CameraHandler from "../../simulation/component/control/CameraHandler";
-import {SimulationWorldItem} from "../../simulation/SimulationWorld";
-import {SimulationCategory} from "../../config/listProps";
+import {SimulationCategory, SimulationWorldItem} from "../../simulation/SimulationWorld";
 
 export const emptyStartListItem = (activateItems?: SimulationWorldItem[], deactivateItems?: SimulationWorldItem[]): ListItem => {
     return {
