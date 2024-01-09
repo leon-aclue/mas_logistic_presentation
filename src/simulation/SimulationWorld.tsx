@@ -52,7 +52,9 @@ function SimulationWorld(props: IProps) {
     }
 
     return (
-        <Canvas style={{width: '100%', height: '100%'}}
+        <Canvas
+            style={{width: '100%', height: '100%'}}
+            gl={{preserveDrawingBuffer: true}}
         >
             {/* Setup */}
             <ambientLight/>

@@ -16,6 +16,8 @@ import {
     setStep
 } from "../../store/slice/pageSlice";
 import FullWidthCenterContainer from "../container/FullWidthCenterContainer";
+import PrintIcon from "@mui/icons-material/Print";
+import {activatePrintMode} from "../../store/slice/globalSlice";
 
 function MainFooter() {
     const theme = useTheme();
@@ -45,6 +47,10 @@ function MainFooter() {
         dispatch(setStep(0));
     }
 
+    const handleClickPrint = () => {
+        dispatch(activatePrintMode());
+    }
+
     return (
         <FullWidthCenterContainer
             flexDirection='row'
@@ -69,6 +75,9 @@ function MainFooter() {
             </IconButton>
             <IconButton onClick={handleClickNext}>
                 <KeyboardDoubleArrowRightIcon/>
+            </IconButton>
+            <IconButton onClick={handleClickPrint}>
+                <PrintIcon/>
             </IconButton>
         </FullWidthCenterContainer>
     );

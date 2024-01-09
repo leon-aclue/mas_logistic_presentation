@@ -9,6 +9,7 @@ import {store} from "./store/store";
 import MainFooter from "./component/footer/MainFooter";
 import BaseSimulationPage from "./page/BaseSimulationPage";
 import {listItemsList} from "./config/listItemsList";
+import ScreenshotHandler from "./component/control/ScreenshotHandler";
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                 >
                     <BaseSimulationPage listItemsList={listItemsList}/>
                 </BaseLayout>
+                <ScreenshotHandler/>
             </Provider>
         </ThemeProvider>
     );
