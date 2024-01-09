@@ -1,15 +1,22 @@
 import {emptyStartListItem, MultiListItem} from "../component/slideElement/MultiList";
 import {
-    navigationCategoryHeader,
+    baseSetupHeader,
     ekQuestionHeader,
+    generalStepsHeader,
     introductionHeader,
+    navigationCategoryHeader,
     navigationSystemsHeader
 } from "../component/header/ListHeaders";
 import {PRODUCTION_STATIONS, SIM_BASE_LENGTH, SIM_BASE_WIDTH} from "../simulation/config";
 import {ListItemType} from "../component/slideElement/BulletList";
-import {navigationCategoryFooter, ekQuestionFooter, navigationSystemsFooter} from "../component/footer/ListFooters";
+import {
+    ekQuestionFooter,
+    generalStepsFooter,
+    navigationCategoryFooter,
+    navigationSystemsFooter
+} from "../component/footer/ListFooters";
 import {baseItemProps, navigationVariantsCameraConfig} from "./listProps";
-import { SimulationCategory } from "../simulation/SimulationWorld";
+import {SimulationCategory} from "../simulation/SimulationWorld";
 
 export const listItemsList: MultiListItem[] = [
     {
@@ -21,7 +28,7 @@ export const listItemsList: MultiListItem[] = [
         ]
     },
     {
-        simulationCategory: SimulationCategory.BASE,
+        simulationCategory: SimulationCategory.NONE,
         header: introductionHeader,
         footer: undefined,
         containerProps: {gap: '20px'},
@@ -29,6 +36,87 @@ export const listItemsList: MultiListItem[] = [
             {
                 title: 'Konkretes Beispiel anhand einer Simulation',
             },
+            {
+                title: 'Allgemeines Vorgehen',
+                type: ListItemType.ANSWER,
+            },
+            {
+                title: 'Ausgangsszenario',
+                type: ListItemType.ANSWER,
+            },
+            {
+                title: 'Kernfragen zur Realisierung',
+                type: ListItemType.ANSWER,
+            },
+            {
+                title: 'Fahrzeugtypen',
+                type: ListItemType.ANSWER,
+            },
+            {
+                title: 'Navigationskategorien & Systeme',
+                type: ListItemType.ANSWER,
+            },
+            {
+                title: 'Controlling ??',
+                type: ListItemType.ANSWER,
+            },
+            {
+                title: '...',
+                type: ListItemType.ANSWER,
+            },
+            {
+                title: 'Laufende Simulation',
+                type: ListItemType.ANSWER,
+            },
+        ]
+    },
+    {
+        simulationCategory: SimulationCategory.NONE,
+        header: generalStepsHeader,
+        footer: generalStepsFooter,
+        items: [
+            emptyStartListItem(),
+        ]
+    },
+    {
+        simulationCategory: SimulationCategory.NONE,
+        header: generalStepsHeader,
+        footer: generalStepsFooter,
+        containerProps: {gap: '20px'},
+        items: [
+            {
+                title: '1. Planning',
+                type: ListItemType.NONE,
+            },
+            {
+                title: '2. Simulation',
+                type: ListItemType.NONE,
+            },
+            {
+                title: '3. Realization',
+                type: ListItemType.NONE,
+            },
+            {
+                title: '4. Service and Support',
+                type: ListItemType.NONE,
+            },
+        ]
+    },
+    {
+        simulationCategory: SimulationCategory.NONE,
+        header: baseSetupHeader,
+        footer: undefined,
+        items:
+            [
+                emptyStartListItem(),
+            ],
+    },
+    {
+        simulationCategory: SimulationCategory.BASE,
+        header: baseSetupHeader,
+        footer: undefined,
+        containerProps: {gap: '20px'},
+        items: [
             {
                 title: `Firmengelände mit ${SIM_BASE_WIDTH}m x ${SIM_BASE_LENGTH}m Fläche`,
                 type: ListItemType.ANSWER,
