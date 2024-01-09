@@ -1,18 +1,20 @@
 import {emptyStartListItem, MultiListItem} from "../component/slideElement/MultiList";
 import {
+    agvTypeHeader,
     baseSetupHeader,
+    basicCategoryHeader,
     ekQuestionHeader,
     generalStepsHeader,
     introductionHeader,
-    navigationCategoryHeader,
     navigationSystemsHeader
 } from "../component/header/ListHeaders";
 import {PRODUCTION_STATIONS, SIM_BASE_LENGTH, SIM_BASE_WIDTH} from "../simulation/config";
 import {ListItemType} from "../component/slideElement/BulletList";
 import {
+    agvTypeFooter,
+    basicCategoryFooter,
     ekQuestionFooter,
     generalStepsFooter,
-    navigationCategoryFooter,
     navigationSystemsFooter
 } from "../component/footer/ListFooters";
 import {baseItemProps, navigationVariantsCameraConfig} from "./listProps";
@@ -49,11 +51,15 @@ export const listItemsList: MultiListItem[] = [
                 type: ListItemType.ANSWER,
             },
             {
-                title: 'Fahrzeugtypen',
+                title: 'Automated vs. Autonomous',
                 type: ListItemType.ANSWER,
             },
             {
-                title: 'Navigationskategorien & Systeme',
+                title: 'AGV Typen',
+                type: ListItemType.ANSWER,
+            },
+            {
+                title: 'Navigationssysteme',
                 type: ListItemType.ANSWER,
             },
             {
@@ -241,8 +247,8 @@ export const listItemsList: MultiListItem[] = [
     },
     {
         simulationCategory: SimulationCategory.NONE,
-        header: navigationCategoryHeader,
-        footer: navigationCategoryFooter,
+        header: basicCategoryHeader,
+        footer: basicCategoryFooter,
         cameraConfig: navigationVariantsCameraConfig,
         items:
             [
@@ -251,8 +257,8 @@ export const listItemsList: MultiListItem[] = [
     },
     {
         simulationCategory: SimulationCategory.NAVIGATION,
-        header: navigationCategoryHeader,
-        footer: navigationCategoryFooter,
+        header: basicCategoryHeader,
+        footer: basicCategoryFooter,
         cameraConfig: navigationVariantsCameraConfig,
         items:
             [
@@ -291,6 +297,206 @@ export const listItemsList: MultiListItem[] = [
                 {
                     title: 'z.B. Staubsaugroboter',
                     type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+            ],
+    },
+    {
+        simulationCategory: SimulationCategory.NONE,
+        header: agvTypeHeader,
+        footer: agvTypeFooter,
+        cameraConfig: navigationVariantsCameraConfig,
+        items:
+            [
+                emptyStartListItem(),
+            ],
+    },
+    {
+        simulationCategory: SimulationCategory.AGV_TYPE,
+        header: agvTypeHeader,
+        footer: agvTypeFooter,
+        cameraConfig: navigationVariantsCameraConfig,
+        items:
+            [
+                {
+                    title: 'AGC - Automated Guided Cart',
+                    type: ListItemType.NONE,
+                    tab: 0,
+                    itemProps: baseItemProps,
+                },
+                {
+                    title: 'kleine aber starke Roboterplatform',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'färt komplett unter die Ladung und kann sie nur wenige cm anheben',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'preiswert (bis 20.000$)',
+                    type: ListItemType.PLUS,
+                    tab: 1,
+                },
+                {
+                    title: 'hohe Tragkraft (bis zu 1t)',
+                    type: ListItemType.PLUS,
+                    tab: 1,
+                },
+                {
+                    title: 'kann Ladung nur in 2 Dimensionen bewegen',
+                    type: ListItemType.MINUS,
+                    tab: 1,
+                },
+            ],
+    },
+    {
+        simulationCategory: SimulationCategory.AGV_TYPE,
+        header: agvTypeHeader,
+        footer: agvTypeFooter,
+        cameraConfig: navigationVariantsCameraConfig,
+        items:
+            [
+                {
+                    title: 'Automated Tow Tractor',
+                    type: ListItemType.NONE,
+                    tab: 0,
+                    itemProps: baseItemProps,
+                },
+                {
+                    title: 'starke Zugmaschinen (standart bis 1t, max bis 20t)',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'können mehrere Anhänger autonom transportieren',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'sehr verschiedene Lasten möglich - je nach Anhänger',
+                    type: ListItemType.PLUS,
+                    tab: 1,
+                },
+                {
+                    title: 'kann mehrere Lasten gleichzeitig transportieren',
+                    type: ListItemType.PLUS,
+                    tab: 1,
+                },
+                {
+                    title: 'kann Ladung nur in 2 Dimensionen bewegen',
+                    type: ListItemType.MINUS,
+                    tab: 1,
+                },
+                {
+                    title: 'An - und Entkuppeln evtl manuell',
+                    type: ListItemType.MINUS,
+                    tab: 1,
+                },
+            ],
+    },
+    {
+        simulationCategory: SimulationCategory.AGV_TYPE,
+        header: agvTypeHeader,
+        footer: agvTypeFooter,
+        cameraConfig: navigationVariantsCameraConfig,
+        items:
+            [
+                {
+                    title: 'Robotic Forklift',
+                    type: ListItemType.NONE,
+                    tab: 0,
+                    itemProps: baseItemProps,
+                },
+                {
+                    title: 'auch als Autonomous Forklift',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'viele verschiedene Ausführungen',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'Pallet Jack (bis zu 3t)',
+                    type: ListItemType.ITEM,
+                    tab: 2,
+                },
+                {
+                    title: 'Forklift Truck (bis zu 4t, 8m Hub)',
+                    type: ListItemType.ITEM,
+                    tab: 2,
+                },
+                {
+                    title: 'Narrow Aisle AGV (bis zu 11m Hub bei 2m Breite)',
+                    type: ListItemType.ITEM,
+                    tab: 2,
+                },
+                {
+                    title: 'sehr flexibel',
+                    type: ListItemType.PLUS,
+                    tab: 1,
+                },
+                {
+                    title: 'schnell und präzise',
+                    type: ListItemType.PLUS,
+                    tab: 1,
+                },
+                {
+                    title: 'gute Navigationssysteme',
+                    type: ListItemType.PLUS,
+                    tab: 1,
+                },
+                {
+                    title: 'teuer (bis zu 200.000 $)',
+                    type: ListItemType.MINUS,
+                    tab: 1,
+                },
+            ],
+    },
+    {
+        simulationCategory: SimulationCategory.AGV_TYPE,
+        header: agvTypeHeader,
+        footer: agvTypeFooter,
+        cameraConfig: navigationVariantsCameraConfig,
+        items:
+            [
+                {
+                    title: 'Unit Load AGVs',
+                    type: ListItemType.NONE,
+                    tab: 0,
+                    itemProps: baseItemProps,
+                },
+                {
+                    title: 'Plattform mit bspw. Rollen',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'kann ein bis mehrere Ladungen automatisch aufnehmen',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'bspw. automatisch bei Produktionslinien Zwischentransporte',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'sehr flexibel',
+                    type: ListItemType.PLUS,
+                    tab: 1,
+                },
+                {
+                    title: 'nicht so schwere Lasten',
+                    type: ListItemType.MINUS,
+                    tab: 1,
+                },
+                {
+                    title: 'nur in 2 Dimensionen',
+                    type: ListItemType.MINUS,
                     tab: 1,
                 },
             ],

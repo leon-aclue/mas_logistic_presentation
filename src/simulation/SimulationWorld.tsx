@@ -27,6 +27,7 @@ export type SimulationWorldItem =
 export enum SimulationCategory {
     NONE,
     BASE,
+    AGV_TYPE,
     NAVIGATION,
 }
 

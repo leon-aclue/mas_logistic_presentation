@@ -6,7 +6,7 @@ export const introductionHeader = (
 );
 
 export const generalStepsHeader = (
-    <Typography variant='h4' paddingBottom='20px'>Allgemeines Vorgehen</Typography>
+    <Typography variant='h4' paddingBottom='20px'>Allgemeines Vorgehen (Jungheinrich [1])</Typography>
 );
 
 export const baseSetupHeader = (
@@ -14,13 +14,17 @@ export const baseSetupHeader = (
 );
 
 export const ekQuestionHeader = (
-    <Typography variant='h4' paddingBottom='20px'>Kernfragen von EK-Robotics [1]</Typography>
+    <Typography variant='h4' paddingBottom='20px'>Kernfragen zur Realisierung (EK-Robotics [2])</Typography>
 );
 
-export const navigationCategoryHeader = (
-    <Typography variant='h4' paddingBottom='20px'>Navigationkategorien [2]</Typography>
+export const basicCategoryHeader = (
+    <Typography variant='h4' paddingBottom='20px'>Automated vs. Autonomous (agvnetwork [3])</Typography>
+);
+
+export const agvTypeHeader = (
+    <Typography variant='h4' paddingBottom='20px'>AGV Typen (agvnetwork [3])</Typography>
 );
 
 export const navigationSystemsHeader = (
-    <Typography variant='h4' paddingBottom='20px'>Navigationssysteme [2]</Typography>
+    <Typography variant='h4' paddingBottom='20px'>Navigationssysteme (agvnetwork [3])</Typography>
 );
