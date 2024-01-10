@@ -25,6 +25,16 @@ export const listItemsList: MultiListItem[] = [
         simulationCategory: SimulationCategory.NONE,
         header: introductionHeader,
         footer: undefined,
+        backgroundImage: '/titleImages/TitleImage.png',
+        items: [
+            emptyStartListItem(),
+        ]
+    },
+    {
+        simulationCategory: SimulationCategory.NONE,
+        header: introductionHeader,
+        footer: undefined,
+        backgroundImage: '/titleImages/TitleImage2.png',
         items: [
             emptyStartListItem(),
         ]

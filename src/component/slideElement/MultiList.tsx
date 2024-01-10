@@ -5,12 +5,16 @@ import {ICameraConfig} from "../../simulation/store/slice/cameraSlice";
 import CameraHandler from "../../simulation/component/control/CameraHandler";
 import {SimulationCategory, SimulationWorldItem} from "../../simulation/SimulationWorld";
 
-export const emptyStartListItem = (activateItems?: SimulationWorldItem[], deactivateItems?: SimulationWorldItem[]): ListItem => {
+interface EmptyStartListItemProps {
+    activateItems?: SimulationWorldItem[],
+    deactivateItems?: SimulationWorldItem[],
+    backgroundImage?: string,
+}
+export const emptyStartListItem = (props?: EmptyStartListItemProps): ListItem => {
     return {
         title: '',
         itemProps: {height: 0},
-        activateSimulationItems: activateItems,
-        deactivateSimulationItems: deactivateItems,
+        ...props,
     }
 };
 
@@ -22,6 +26,7 @@ export interface MultiListItem {
     containerProps?: BoxProps;
     cameraConfig?: ICameraConfig;
     simulationCategory: SimulationCategory;
+    backgroundImage?: string;
 }
 
 interface IProps {

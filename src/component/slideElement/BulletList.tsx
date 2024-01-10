@@ -24,6 +24,7 @@ export interface ListItem {
     fontVariant?: TypographyVariant,
     activateSimulationItems?: SimulationWorldItem[],
     deactivateSimulationItems?: SimulationWorldItem[],
+    backgroundImage?: string,
 }
 
 interface IProps {
