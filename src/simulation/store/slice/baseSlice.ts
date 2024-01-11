@@ -4,12 +4,12 @@ import {ThreeArr2} from "../../component/ThreeBaseComponents";
 import {
     CHARGING_AREAS,
     DRIVING_AREA_SEGMENTS,
-    MAGNETIC_LINES,
+    VIRTUAL_ROUTES,
     PRODUCTION_STATIONS,
     REFLECTOR_STATIONS,
     SIM_BASE_LENGTH,
     SIM_BASE_WIDTH,
-    STORAGE_STATIONS
+    STORAGE_STATIONS, INDUCTIVE_WIRES
 } from "../../config";
 
 export interface IStation {
@@ -31,8 +31,9 @@ export interface ISimulationBaseState {
     productionStations: IStation[],
     storageStations: IStation[],
     drivingAreaSegments: ILineSegment[],
-    magneticLines: ILineSegment[],
+    virtualRoutes: ILineSegment[],
     reflectorStations: ThreeArr2[],
+    inductiveWire: ILineSegment[],
     chargingAreas: ThreeArr2[],
 }
 
@@ -42,8 +43,9 @@ const initialState: ISimulationBaseState = {
     productionStations: PRODUCTION_STATIONS,
     storageStations: STORAGE_STATIONS,
     drivingAreaSegments: DRIVING_AREA_SEGMENTS,
-    magneticLines: MAGNETIC_LINES,
+    virtualRoutes: VIRTUAL_ROUTES,
     reflectorStations: REFLECTOR_STATIONS,
+    inductiveWire: INDUCTIVE_WIRES,
     chargingAreas: CHARGING_AREAS,
 };
 

@@ -1,5 +1,4 @@
 import {ILineSegment, IStation} from "./store/slice/baseSlice";
-import {PerspectiveCameraProps} from "@react-three/fiber";
 import {ThreeArr2} from "./component/ThreeBaseComponents";
 
 // help functions
@@ -21,6 +20,19 @@ const createStationRow = (width: number, length: number, posX: number, startPosY
 
     return stations;
 }
+const createInductiveWireRow = (posX1: number, posX2: number, startPosY: number, steps: number, stepWidth: number) => {
+    const wires: ILineSegment[] = [];
+
+    for (let step = 0; step < steps; step++) {
+        const posY = startPosY + (step * stepWidth);
+        wires.push({
+            start: [posX1, posY],
+            end: [posX2, posY],
+        })
+    }
+
+    return wires;
+}
 
 // base
 export const SIM_BASE_WIDTH = 100;
@@ -29,8 +41,6 @@ export const SIM_BASE_HEIGHT = 0.1;
 export const SIM_BASE_POS_X = SIM_BASE_WIDTH / 2;
 export const SIM_BASE_POS_Y = SIM_BASE_LENGTH / 2;
 export const SIM_BASE_COLOR = 'gray'
-
-export const CAMERA_CONFIG: PerspectiveCameraProps = {fov: 18, position: [-150, 200, SIM_BASE_LENGTH + 120]}
 
 export const PRODUCTION_STATION_WIDTH = 9;
 export const PRODUCTION_STATION_LENGTH = 4;
@@ -107,8 +117,8 @@ export const DRIVING_AREA_SEGMENTS: ILineSegment[] = [
     {start: [51, 85], end: [81, 85]},
 ];
 
-export const MAGNETIC_LINE_COLOR = '#a33';
-export const MAGNETIC_LINES: ILineSegment[] = [
+export const VIRTUAL_ROUTE_COLOR = '#55a';
+export const VIRTUAL_ROUTES: ILineSegment[] = [
     // vertical
     {start: [20, 23], end: [20, 121]},
     {start: [50, 23], end: [50, 121]},
@@ -119,6 +129,32 @@ export const MAGNETIC_LINES: ILineSegment[] = [
     {start: [20, 27], end: [80, 27]},
     {start: [20, 84], end: [80, 84]},
     {start: [20, 121], end: [50, 121]},
+];
+
+export const INDUCTIVE_WIRE_COLOR = '#a33';
+export const INDUCTIVE_WIRES: ILineSegment[] = [
+    // Production Stations
+    ...createInductiveWireRow(16, 20, 40, 9, 10),
+    ...createInductiveWireRow(20, 24, 50, 3, 10),
+    ...createInductiveWireRow(20, 24, 90, 3, 10),
+    ...createInductiveWireRow(46, 50, 50, 3, 10),
+    ...createInductiveWireRow(46, 50, 90, 3, 10),
+    ...createInductiveWireRow(50, 54, 50, 3, 10),
+    ...createInductiveWireRow(50, 54, 90, 4, 10),
+    ...createInductiveWireRow(76, 80, 50, 3, 10),
+    ...createInductiveWireRow(80, 84, 40, 5, 10),
+    // Storage Stations
+    {start: [30, 19], end: [30, 22],},
+    {start: [35, 19], end: [35, 22],},
+    {start: [40, 19], end: [40, 22],},
+    {start: [45, 19], end: [45, 22],},
+    {start: [50, 19], end: [50, 22],},
+    //Charging Stations
+    {start: [60, 19], end: [60, 22],},
+    {start: [65, 19], end: [65, 22],},
+    {start: [70, 19], end: [70, 22],},
+    {start: [75, 19], end: [75, 22],},
+    {start: [80, 19], end: [80, 22],},
 ];
 
 export const REFLECTOR_STATION_WIDTH = 0.2;

@@ -17,7 +17,11 @@ import {
     generalStepsFooter,
     navigationSystemsFooter
 } from "../component/footer/ListFooters";
-import {baseItemProps, navigationVariantsCameraConfig} from "./listProps";
+import {
+    baseItemProps, baseTitleImagePath,
+    navigationSystemsCameraConfig,
+    simulationWorldNavigationSystemsBaseItems
+} from "./listProps";
 import {SimulationCategory} from "../simulation/SimulationWorld";
 
 export const listItemsList: MultiListItem[] = [
@@ -25,7 +29,7 @@ export const listItemsList: MultiListItem[] = [
         simulationCategory: SimulationCategory.NONE,
         header: introductionHeader,
         footer: undefined,
-        backgroundImage: '/titleImages/TitleImage.png',
+        backgroundImage: baseTitleImagePath + 'TitleImage.png',
         items: [
             emptyStartListItem(),
         ]
@@ -34,7 +38,7 @@ export const listItemsList: MultiListItem[] = [
         simulationCategory: SimulationCategory.NONE,
         header: introductionHeader,
         footer: undefined,
-        backgroundImage: '/titleImages/TitleImage2.png',
+        backgroundImage: baseTitleImagePath + 'TitleImage2.png',
         items: [
             emptyStartListItem(),
         ]
@@ -47,10 +51,12 @@ export const listItemsList: MultiListItem[] = [
         items: [
             {
                 title: 'Konkretes Beispiel anhand einer Simulation',
+                backgroundImage: baseTitleImagePath + 'SimulationBild.png',
             },
             {
                 title: 'Allgemeines Vorgehen',
                 type: ListItemType.ANSWER,
+                backgroundImage: baseTitleImagePath + 'AllgemeinesVorgehenBild.png',
             },
             {
                 title: 'Ausgangsszenario',
@@ -98,23 +104,95 @@ export const listItemsList: MultiListItem[] = [
         simulationCategory: SimulationCategory.NONE,
         header: generalStepsHeader,
         footer: generalStepsFooter,
-        containerProps: {gap: '20px'},
         items: [
             {
-                title: '1. Planning',
+                title: '1. Proposal phase',
                 type: ListItemType.NONE,
+                itemProps: baseItemProps,
             },
             {
-                title: '2. Simulation',
-                type: ListItemType.NONE,
+                title: 'Requirementanalyse',
+                type: ListItemType.ANSWER,
             },
             {
-                title: '3. Realization',
-                type: ListItemType.NONE,
+                title: 'Angebot erstellen und annehmen',
+                type: ListItemType.ANSWER,
             },
             {
-                title: '4. Service and Support',
+                title: '2. Definition phase',
                 type: ListItemType.NONE,
+                itemProps: baseItemProps,
+            },
+            {
+                title: 'Funktionale Spezifikationen',
+                type: ListItemType.ANSWER,
+            },
+            {
+                title: 'Kick-off',
+                type: ListItemType.ANSWER,
+            },
+            {
+                title: 'evtl. Simulation',
+                type: ListItemType.ANSWER,
+            },
+            {
+                title: '3. Preparation for implementation',
+                type: ListItemType.NONE,
+                itemProps: baseItemProps,
+            },
+            {
+                title: 'Fahrzeugherstellung',
+                type: ListItemType.ANSWER,
+            },
+            {
+                title: 'Installation von Software',
+                type: ListItemType.ANSWER,
+            },
+            {
+                title: 'Einrichten der Umgebung (Reflektoren, Schienen etc.)',
+                type: ListItemType.ANSWER,
+            },
+        ],
+    },
+    {
+        simulationCategory: SimulationCategory.NONE,
+        header: generalStepsHeader,
+        footer: generalStepsFooter,
+        items: [
+            {
+                title: '4. On-site system implementation',
+                type: ListItemType.NONE,
+                itemProps: baseItemProps,
+            },
+            {
+                title: 'Safety briefing & Training',
+                type: ListItemType.ANSWER,
+            },
+            {
+                title: 'Integrationstests',
+                type: ListItemType.ANSWER,
+            },
+            {
+                title: '5. Commissioning phase',
+                type: ListItemType.NONE,
+                itemProps: baseItemProps,
+            },
+            {
+                title: 'Inbetriebnahme',
+                type: ListItemType.ANSWER,
+            },
+            {
+                title: 'Qualitycheck',
+                type: ListItemType.ANSWER,
+            },
+            {
+                title: '6. Maintenance and support',
+                type: ListItemType.NONE,
+                itemProps: baseItemProps,
+            },
+            {
+                title: 'Laufender Betrieb',
+                type: ListItemType.ANSWER,
             },
         ]
     },
@@ -259,17 +337,17 @@ export const listItemsList: MultiListItem[] = [
         simulationCategory: SimulationCategory.NONE,
         header: basicCategoryHeader,
         footer: basicCategoryFooter,
-        cameraConfig: navigationVariantsCameraConfig,
+        cameraConfig: navigationSystemsCameraConfig,
         items:
             [
                 emptyStartListItem(),
             ],
     },
     {
-        simulationCategory: SimulationCategory.NAVIGATION,
+        simulationCategory: SimulationCategory.NONE,
         header: basicCategoryHeader,
         footer: basicCategoryFooter,
-        cameraConfig: navigationVariantsCameraConfig,
+        cameraConfig: navigationSystemsCameraConfig,
         items:
             [
                 {
@@ -315,7 +393,7 @@ export const listItemsList: MultiListItem[] = [
         simulationCategory: SimulationCategory.NONE,
         header: agvTypeHeader,
         footer: agvTypeFooter,
-        cameraConfig: navigationVariantsCameraConfig,
+        cameraConfig: navigationSystemsCameraConfig,
         items:
             [
                 emptyStartListItem(),
@@ -325,7 +403,7 @@ export const listItemsList: MultiListItem[] = [
         simulationCategory: SimulationCategory.AGV_TYPE,
         header: agvTypeHeader,
         footer: agvTypeFooter,
-        cameraConfig: navigationVariantsCameraConfig,
+        cameraConfig: navigationSystemsCameraConfig,
         items:
             [
                 {
@@ -365,7 +443,7 @@ export const listItemsList: MultiListItem[] = [
         simulationCategory: SimulationCategory.AGV_TYPE,
         header: agvTypeHeader,
         footer: agvTypeFooter,
-        cameraConfig: navigationVariantsCameraConfig,
+        cameraConfig: navigationSystemsCameraConfig,
         items:
             [
                 {
@@ -410,7 +488,7 @@ export const listItemsList: MultiListItem[] = [
         simulationCategory: SimulationCategory.AGV_TYPE,
         header: agvTypeHeader,
         footer: agvTypeFooter,
-        cameraConfig: navigationVariantsCameraConfig,
+        cameraConfig: navigationSystemsCameraConfig,
         items:
             [
                 {
@@ -470,7 +548,7 @@ export const listItemsList: MultiListItem[] = [
         simulationCategory: SimulationCategory.AGV_TYPE,
         header: agvTypeHeader,
         footer: agvTypeFooter,
-        cameraConfig: navigationVariantsCameraConfig,
+        cameraConfig: navigationSystemsCameraConfig,
         items:
             [
                 {
@@ -515,7 +593,7 @@ export const listItemsList: MultiListItem[] = [
         simulationCategory: SimulationCategory.NONE,
         header: navigationSystemsHeader,
         footer: navigationSystemsFooter,
-        cameraConfig: navigationVariantsCameraConfig,
+        cameraConfig: navigationSystemsCameraConfig,
         items:
             [
                 emptyStartListItem(),
@@ -525,7 +603,7 @@ export const listItemsList: MultiListItem[] = [
         simulationCategory: SimulationCategory.NAVIGATION,
         header: navigationSystemsHeader,
         footer: navigationSystemsFooter,
-        cameraConfig: navigationVariantsCameraConfig,
+        cameraConfig: navigationSystemsCameraConfig,
         items:
             [
                 {
@@ -533,6 +611,7 @@ export const listItemsList: MultiListItem[] = [
                     type: ListItemType.NONE,
                     tab: 0,
                     itemProps: baseItemProps,
+                    activateSimulationItems: simulationWorldNavigationSystemsBaseItems,
                 },
                 {
                     title: 'häufig durch SLAM Algorithmen',
@@ -590,7 +669,7 @@ export const listItemsList: MultiListItem[] = [
         simulationCategory: SimulationCategory.NAVIGATION,
         header: navigationSystemsHeader,
         footer: navigationSystemsFooter,
-        cameraConfig: navigationVariantsCameraConfig,
+        cameraConfig: navigationSystemsCameraConfig,
         items:
             [
                 {
@@ -640,7 +719,7 @@ export const listItemsList: MultiListItem[] = [
         simulationCategory: SimulationCategory.NAVIGATION,
         header: navigationSystemsHeader,
         footer: navigationSystemsFooter,
-        cameraConfig: navigationVariantsCameraConfig,
+        cameraConfig: navigationSystemsCameraConfig,
         items:
             [
                 {
@@ -695,7 +774,7 @@ export const listItemsList: MultiListItem[] = [
         simulationCategory: SimulationCategory.NAVIGATION,
         header: navigationSystemsHeader,
         footer: navigationSystemsFooter,
-        cameraConfig: navigationVariantsCameraConfig,
+        cameraConfig: navigationSystemsCameraConfig,
         items:
             [
                 {
@@ -745,7 +824,7 @@ export const listItemsList: MultiListItem[] = [
         simulationCategory: SimulationCategory.NAVIGATION,
         header: navigationSystemsHeader,
         footer: navigationSystemsFooter,
-        cameraConfig: navigationVariantsCameraConfig,
+        cameraConfig: navigationSystemsCameraConfig,
         items:
             [
                 {
@@ -800,7 +879,7 @@ export const listItemsList: MultiListItem[] = [
         simulationCategory: SimulationCategory.NAVIGATION,
         header: navigationSystemsHeader,
         footer: navigationSystemsFooter,
-        cameraConfig: navigationVariantsCameraConfig,
+        cameraConfig: navigationSystemsCameraConfig,
         items:
             [
                 {
@@ -854,39 +933,30 @@ export const listItemsList: MultiListItem[] = [
                     itemProps: baseItemProps,
                 },
                 {
-                    title: 'Magnetschienen im Boden',
+                    title: 'LaserNavigation',
                     type: ListItemType.ANSWER,
                     tab: 1,
-
-                    activateSimulationItems: ['MagneticLines'],
-                },
-                {
-                    title: 'sorgt für genaue Spureinhaltung',
-                    type: ListItemType.ITEM,
-                    tab: 2,
-
-                },
-                {
-                    title: 'liefert allerdings keine Informationen über Position in Halle',
-                    type: ListItemType.ITEM,
-                    tab: 2,
-
-                },
-                {
-                    title: 'Laser SLAM [TODO!!!]',
-                    type: ListItemType.ANSWER,
-                    tab: 1,
-
                     activateSimulationItems: ['ReflectorStations'],
                 },
                 {
-                    title: 'nicht ganz genau',
+                    title: 'zuverlässig',
                     type: ListItemType.ITEM,
                     tab: 2,
-
                 },
                 {
-                    title: 'kann aber die grobe Position bestimmen',
+                    title: 'flexible (virtuelle) Routen',
+                    type: ListItemType.ITEM,
+                    tab: 2,
+                    activateSimulationItems: ['VirtualRoutes'],
+                },
+                {
+                    title: 'InductiveWire an Stationen',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                    activateSimulationItems: ['InductiveWire'],
+                },
+                {
+                    title: 'Redundanz an kritischen Stellen',
                     type: ListItemType.ITEM,
                     tab: 2,
 

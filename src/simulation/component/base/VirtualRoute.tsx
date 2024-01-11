@@ -1,9 +1,9 @@
 import React from 'react';
 import {ThreeArr3, ThreeLine} from "../ThreeBaseComponents";
-import {LINE_POS_Y, LINE_WIDTH, MAGNETIC_LINE_COLOR} from "../../config";
+import {LINE_POS_Y, LINE_WIDTH, VIRTUAL_ROUTE_COLOR} from "../../config";
 import {ILineSegment} from "../../store/slice/baseSlice";
 
-function MagneticLine(props: ILineSegment) {
+function VirtualRoute(props: ILineSegment) {
     const {start, end} = props;
 
     const points: ThreeArr3[] = [
@@ -12,8 +12,8 @@ function MagneticLine(props: ILineSegment) {
     ]
 
     return (
-        <ThreeLine points={points} color={MAGNETIC_LINE_COLOR} width={LINE_WIDTH}/>
+        <ThreeLine points={points} color={VIRTUAL_ROUTE_COLOR} width={LINE_WIDTH}/>
     );
 }
 
-export default MagneticLine;
+export default VirtualRoute;

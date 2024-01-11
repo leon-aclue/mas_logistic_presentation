@@ -6,22 +6,36 @@ import ProductionStation from "./component/base/ProductionStation";
 import StorageStation from "./component/base/StorageStation";
 import {PerspectiveCamera} from "@react-three/drei";
 import DrivingAreaSegment from "./component/base/DrivingAreaSegment";
-import MagneticLine from "./component/base/MagneticLine";
+import VirtualRoute from "./component/base/VirtualRoute";
 import ReflectorStation from "./component/base/ReflectorStation";
 import ChargingArea from "./component/base/ChargingArea";
 import CameraControl from "./component/control/CameraControl";
 import {cameraSliceSelector} from "./store/slice/cameraSlice";
 import {Vector3} from "three";
+import InductiveWire from "./component/base/InductiveWire";
 
 export type SimulationWorldItem =
+    // Base
     'Base'
     | 'ProductionStations'
     | 'StorageStations'
     | 'StorageAreas'
     | 'DrivingArea'
-    | 'MagneticLines'
+    | 'InductiveWire'
+    | 'VirtualRoutes'
     | 'ReflectorStations'
     | 'ChargingAreas'
+
+    // NavigationSystemsExplanation
+    | 'ExampleWalls'
+    | 'ExampleAgv'
+    | 'LaserSensor'
+    | 'NaturalNavBeams'
+    | 'ExampleReflectorStations'
+    | 'LaserNavBeams'
+    | 'MagneticSpots'
+    | 'MagneticTape'
+    | 'InductionWire'
     ;
 
 export enum SimulationCategory {
@@ -82,14 +96,19 @@ function SimulationWorld(props: IProps) {
                     <DrivingAreaSegment key={index} {...segment} />
                 ))
             )}
-            {show('MagneticLines') && (
-                baseState.magneticLines.map((line, index) => (
-                    <MagneticLine key={index} {...line} />
+            {show('VirtualRoutes') && (
+                baseState.virtualRoutes.map((line, index) => (
+                    <VirtualRoute key={index} {...line} />
                 ))
             )}
             {show('ReflectorStations') && (
                 baseState.reflectorStations.map((station, index) => (
                     <ReflectorStation key={index} {...station} />
+                ))
+            )}
+            {show('InductiveWire') && (
+                baseState.inductiveWire.map((line, index) => (
+                    <InductiveWire key={index} {...line} />
                 ))
             )}
             {show('ChargingAreas') && (
