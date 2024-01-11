@@ -13,7 +13,7 @@ function StepHandler(props: IProps) {
     const dispatch = useDispatch();
     const {page, step} = useSelector(pageSliceSelector);
     const maxPages = listItemsList.length;
-    const maxSteps = listItemsList[page]?.items.length ?? 1;
+    const maxSteps = listItemsList[page]?.showAllItems ? 1 : listItemsList[page]?.items.length ?? 1;
 
     useEffect(() => {
         if (page > maxPages) {
@@ -27,7 +27,7 @@ function StepHandler(props: IProps) {
             dispatch(increasePage());
         } else if (step < 0) {
             let newStep = 0;
-            if (page >= 1) {
+            if (page >= 1 && !listItemsList[page - 1].showAllItems) {
                 newStep = listItemsList[page - 1].items.length - 1
             }
             dispatch(setStep(newStep));

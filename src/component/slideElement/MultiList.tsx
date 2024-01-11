@@ -20,6 +20,7 @@ export const emptyStartListItem = (props?: EmptyStartListItemProps): ListItem =>
 
 export interface MultiListItem {
     items: ListItem[];
+    showAllItems?: boolean;
     header?: ReactNode;
     footer?: ReactNode;
     fontVariant?: TypographyVariant;
@@ -38,7 +39,9 @@ interface IProps {
 function MultiList(props: IProps) {
     const {listItemsList, page, step} = props;
     const listItems = listItemsList[page];
-    const {items, fontVariant, header, footer, containerProps, cameraConfig} = listItems
+    const {items, showAllItems, fontVariant, header, footer, containerProps, cameraConfig} = listItems
+
+    const numberToShow = showAllItems ? items.length : step + 1;
 
     return (
         <>
@@ -49,7 +52,7 @@ function MultiList(props: IProps) {
             <BulletList
                 items={items}
                 fontVariant={fontVariant}
-                numberToShow={step + 1}
+                numberToShow={numberToShow}
                 containerProps={containerProps}
             />
             {footer && (

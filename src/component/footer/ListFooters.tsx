@@ -1,27 +1,23 @@
 import {Typography} from "@mui/material";
 import React from "react";
+import {SourceName, Sources} from "../../config/sources";
 
 export const generalStepsFooter = (
-    <Typography variant='subtitle2' paddingTop='20px'>[1]
-        https://TODO.com</Typography>
-);
-
-export const basicCategoryFooter = (
-    <Typography variant='subtitle2' paddingTop='20px'>[1]
-        https://TODO.com</Typography>
-);
-
-export const agvTypeFooter = (
-    <Typography variant='subtitle2' paddingTop='20px'>[1]
-        https://TODO.com</Typography>
+    <Typography variant='subtitle2' paddingTop='20px'>{Sources.get(SourceName.JUNG)?.text}</Typography>
 );
 
 export const ekQuestionFooter = (
-    <Typography variant='subtitle2' paddingTop='20px'>[1]
-        https://ek-robotics.com/de/technologie/fts-fahrerlose-transportsysteme</Typography>
+    <Typography variant='subtitle2' paddingTop='20px'>{Sources.get(SourceName.EKR)?.text}</Typography>
+);
+
+export const basicCategoryFooter = (
+    <Typography variant='subtitle2' paddingTop='20px'>{Sources.get(SourceName.AGN_AGV)?.text}</Typography>
+);
+
+export const agvTypeFooter = (
+    <Typography variant='subtitle2' paddingTop='20px'>{Sources.get(SourceName.AGN_AGV)?.text}</Typography>
 );
 
 export const navigationSystemsFooter = (
-    <Typography variant='subtitle2' paddingTop='20px'>[1]
-        https://TODO.com</Typography>
+    <Typography variant='subtitle2' paddingTop='20px'>{Sources.get(SourceName.AGN_NAV)?.text}</Typography>
 );

@@ -6,7 +6,8 @@ import {
     ekQuestionHeader,
     generalStepsHeader,
     introductionHeader,
-    navigationSystemsHeader
+    navigationSystemsHeader,
+    sourcesHeader
 } from "../component/header/ListHeaders";
 import {PRODUCTION_STATIONS, SIM_BASE_LENGTH, SIM_BASE_WIDTH} from "../simulation/config";
 import {ListItemType} from "../component/slideElement/BulletList";
@@ -18,11 +19,13 @@ import {
     navigationSystemsFooter
 } from "../component/footer/ListFooters";
 import {
-    baseItemProps, baseTitleImagePath,
+    baseItemProps,
+    baseTitleImagePath,
     navigationSystemsCameraConfig,
     simulationWorldNavigationSystemsBaseItems
 } from "./listProps";
 import {SimulationCategory} from "../simulation/SimulationWorld";
+import {getSourcesList} from "./sources";
 
 export const listItemsList: MultiListItem[] = [
     {
@@ -995,5 +998,12 @@ export const listItemsList: MultiListItem[] = [
 
                 },
             ],
+    },
+    {
+        simulationCategory: SimulationCategory.NONE,
+        header: sourcesHeader,
+        showAllItems: true,
+        items: getSourcesList(),
+        fontVariant: 'subtitle2',
     },
 ];
