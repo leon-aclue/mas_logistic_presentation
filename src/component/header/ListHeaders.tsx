@@ -30,6 +30,10 @@ export const navigationSystemsHeader = (
     <Typography variant='h4' paddingBottom='20px'>{`Navigationssysteme (${Sources.get(SourceName.AGN_NAV)?.title})`}</Typography>
 );
 
+export const agvSelectHeader = (
+    <Typography variant='h4' paddingBottom='20px'>{`Auswahl des AGV`}</Typography>
+);
+
 export const sourcesHeader = (
     <Typography variant='h4' paddingBottom='20px'>Quellen</Typography>
 );

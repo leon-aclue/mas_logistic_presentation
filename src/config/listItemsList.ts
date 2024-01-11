@@ -1,5 +1,6 @@
 import {emptyStartListItem, MultiListItem} from "../component/slideElement/MultiList";
 import {
+    agvSelectHeader,
     agvTypeHeader,
     baseSetupHeader,
     basicCategoryHeader,
@@ -20,7 +21,7 @@ import {
 } from "../component/footer/ListFooters";
 import {
     baseItemProps,
-    baseTitleImagePath,
+    baseTitleImagePath, gptGenerated,
     navigationSystemsCameraConfig,
     simulationWorldNavigationSystemsBaseItems
 } from "./listProps";
@@ -32,7 +33,10 @@ export const listItemsList: MultiListItem[] = [
         simulationCategory: SimulationCategory.NONE,
         header: introductionHeader,
         footer: undefined,
-        backgroundImage: baseTitleImagePath + 'TitleImage.png',
+        background: {
+            image: baseTitleImagePath + 'TitleImage.png',
+            title: gptGenerated,
+        },
         items: [
             emptyStartListItem(),
         ]
@@ -41,7 +45,10 @@ export const listItemsList: MultiListItem[] = [
         simulationCategory: SimulationCategory.NONE,
         header: introductionHeader,
         footer: undefined,
-        backgroundImage: baseTitleImagePath + 'TitleImage2.png',
+        background: {
+            image: baseTitleImagePath + 'TitleImage2.png',
+            title: gptGenerated,
+        },
         items: [
             emptyStartListItem(),
         ]
@@ -54,12 +61,18 @@ export const listItemsList: MultiListItem[] = [
         items: [
             {
                 title: 'Konkretes Beispiel anhand einer Simulation',
-                backgroundImage: baseTitleImagePath + 'SimulationBild.png',
+                background: {
+                    image: baseTitleImagePath + 'SimulationBild.png',
+                    title: gptGenerated,
+                },
             },
             {
                 title: 'Allgemeines Vorgehen',
                 type: ListItemType.ANSWER,
-                backgroundImage: baseTitleImagePath + 'AllgemeinesVorgehenBild.png',
+                background: {
+                    image: baseTitleImagePath + 'AllgemeinesVorgehenBild.png',
+                    title: gptGenerated,
+                },
             },
             {
                 title: 'Ausgangsszenario',
@@ -82,7 +95,7 @@ export const listItemsList: MultiListItem[] = [
                 type: ListItemType.ANSWER,
             },
             {
-                title: 'Controlling ??',
+                title: 'Controlling',
                 type: ListItemType.ANSWER,
             },
             {
@@ -260,7 +273,6 @@ export const listItemsList: MultiListItem[] = [
                     title: 'Produkte werden auf Paletten bereitgestellt und auf definierte Abholstationen gestellt',
                     type: ListItemType.ANSWER,
                     tab: 1,
-
                     activateSimulationItems: ['StorageAreas'],
                 },
                 {
@@ -293,7 +305,6 @@ export const listItemsList: MultiListItem[] = [
                     title: 'Fahrwege von 2m Breite',
                     type: ListItemType.ANSWER,
                     tab: 1,
-
                     activateSimulationItems: ['DrivingArea'],
                 },
                 {
@@ -614,7 +625,7 @@ export const listItemsList: MultiListItem[] = [
                     type: ListItemType.NONE,
                     tab: 0,
                     itemProps: baseItemProps,
-                    activateSimulationItems: simulationWorldNavigationSystemsBaseItems,
+                    //activateSimulationItems: simulationWorldNavigationSystemsBaseItems,
                 },
                 {
                     title: 'häufig durch SLAM Algorithmen',
@@ -982,7 +993,6 @@ export const listItemsList: MultiListItem[] = [
                     title: 'Neben dem Lager kann eine Ladestation gebaut werden, sodass die AGVs bei Leerlauf oder Bedarf schnell laden können',
                     type: ListItemType.ANSWER,
                     tab: 1,
-
                     activateSimulationItems: ['ChargingAreas'],
                 },
                 {
@@ -992,10 +1002,40 @@ export const listItemsList: MultiListItem[] = [
                     itemProps: baseItemProps,
                 },
                 {
-                    title: 'Keine Umweltaspekte, da indoor, aber müssen auf Mitarbeiter Rücksicht nehmen',
+                    title: 'Rücksichtnahme auf Mitarbeiter',
                     type: ListItemType.ANSWER,
                     tab: 1,
-
+                },
+                {
+                    title: 'da indoor, keine besonderen Umweltbedingungen',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+            ],
+    },
+    {
+        simulationCategory: SimulationCategory.BASE,
+        header: agvSelectHeader,
+        footer: undefined,
+        items:
+            [
+                emptyStartListItem(),
+                {
+                    title: 'Robotic Forklift',
+                    type: ListItemType.NONE,
+                    tab: 0,
+                    itemProps: baseItemProps,
+                    activateSimulationItems: ['AGV'],
+                },
+                {
+                    title: 'Schnell & zuverlässig',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'perfekt geeignet um Paletten von Stationen zum Lager zu transportieren',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
                 },
             ],
     },

@@ -25,11 +25,11 @@ function BaseSimulationPage(props: IProps) {
     }
 
     const simulationWorldItems = SimulationItemsHandler({listItemsList, page, step})
-    const backgroundImage = listItemsList[page].items[step]?.backgroundImage ?? listItemsList[page].backgroundImage;
+    const background = listItemsList[page].items[step]?.background ?? listItemsList[page].background;
 
     return (
         <SplitContentSlide
-            backgroundImage={backgroundImage !== 'none' ? backgroundImage : undefined}
+            background={background}
         >
             <VerticalContainer
                 flex={1}

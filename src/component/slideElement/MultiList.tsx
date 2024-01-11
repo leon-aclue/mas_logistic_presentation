@@ -1,5 +1,5 @@
 import React, {ReactNode} from 'react';
-import BulletList, {ListItem} from "./BulletList";
+import BulletList, {Background, ListItem} from "./BulletList";
 import {BoxProps, TypographyVariant} from "@mui/material";
 import {ICameraConfig} from "../../simulation/store/slice/cameraSlice";
 import CameraHandler from "../../simulation/component/control/CameraHandler";
@@ -27,7 +27,7 @@ export interface MultiListItem {
     containerProps?: BoxProps;
     cameraConfig?: ICameraConfig;
     simulationCategory: SimulationCategory;
-    backgroundImage?: string;
+    background?: Background;
 }
 
 interface IProps {

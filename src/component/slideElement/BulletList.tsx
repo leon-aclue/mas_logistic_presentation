@@ -16,6 +16,11 @@ export enum ListItemType {
     'MINUS',
 }
 
+export interface Background {
+    image: string,
+    title: string,
+}
+
 export interface ListItem {
     title: string;
     type?: ListItemType,
@@ -24,7 +29,7 @@ export interface ListItem {
     fontVariant?: TypographyVariant,
     activateSimulationItems?: SimulationWorldItem[],
     deactivateSimulationItems?: SimulationWorldItem[],
-    backgroundImage?: string,
+    background?: Background,
 }
 
 interface IProps {

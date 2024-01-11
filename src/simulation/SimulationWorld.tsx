@@ -13,6 +13,7 @@ import CameraControl from "./component/control/CameraControl";
 import {cameraSliceSelector} from "./store/slice/cameraSlice";
 import {Vector3} from "three";
 import InductiveWire from "./component/base/InductiveWire";
+import Agv from "./component/agv/Agv";
 
 export type SimulationWorldItem =
     // Base
@@ -25,6 +26,9 @@ export type SimulationWorldItem =
     | 'VirtualRoutes'
     | 'ReflectorStations'
     | 'ChargingAreas'
+
+    // AGVs
+    | 'AGV'
 
     // NavigationSystemsExplanation
     | 'ExampleWalls'
@@ -115,6 +119,16 @@ function SimulationWorld(props: IProps) {
                 baseState.chargingAreas.map((area, index) => (
                     <ChargingArea key={index} {...area} />
                 ))
+            )}
+            {/* AGVs */}
+            {show('AGV') && (
+                <>
+                    <Agv position={[60, 19]} rotation={-1.55} />
+                    <Agv position={[65, 19]} rotation={-1.55} />
+                    <Agv position={[20, 70]} rotation={-1.55} />
+                    <Agv position={[40, 84]} rotation={0} />
+                    <Agv position={[84, 40]} rotation={3.1415} />
+                </>
             )}
         </Canvas>
     );
