@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/mas-in-logistik/static/css/main.e5ec91b6.css",
-    "main.js": "/mas-in-logistik/static/js/main.a7e0ee21.js",
-    "index.html": "/mas-in-logistik/index.html",
-    "main.e5ec91b6.css.map": "/mas-in-logistik/static/css/main.e5ec91b6.css.map",
-    "main.a7e0ee21.js.map": "/mas-in-logistik/static/js/main.a7e0ee21.js.map"
+    "main.css": "/mas_logistic_presentation/static/css/main.e5ec91b6.css",
+    "main.js": "/mas_logistic_presentation/static/js/main.a7e0ee21.js",
+    "index.html": "/mas_logistic_presentation/index.html",
+    "main.e5ec91b6.css.map": "/mas_logistic_presentation/static/css/main.e5ec91b6.css.map",
+    "main.a7e0ee21.js.map": "/mas_logistic_presentation/static/js/main.a7e0ee21.js.map"
   },
   "entrypoints": [
     "static/css/main.e5ec91b6.css",
