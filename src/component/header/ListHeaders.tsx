@@ -39,7 +39,7 @@ export const agvSelectHeader = (
 );
 
 export const introductionControllingHeader = (
-    <Typography variant='h4' paddingBottom='20px'>Wie werden die AGVs gesteuert?</Typography>
+    <Typography variant='h4' paddingBottom='20px'>Controlling</Typography>
 );
 
 export const simulationHeader = (

@@ -63,18 +63,18 @@ export const listItemsList: MultiListItem[] = [
                     title: gptGenerated,
                 },
             },
-            {
-                title: 'Allgemeines Vorgehen',
-                type: ListItemType.ANSWER,
-                background: {
-                    image: baseTitleImagePath + 'AllgemeinesVorgehenBild.png',
-                    title: gptGenerated,
-                },
-            },
             // {
-            //     title: 'Ausgangsszenario',
+            //     title: 'Allgemeines Vorgehen',
             //     type: ListItemType.ANSWER,
+            //     background: {
+            //         image: baseTitleImagePath + 'AllgemeinesVorgehenBild.png',
+            //         title: gptGenerated,
+            //     },
             // },
+            {
+                title: 'Ausgangsszenario',
+                type: ListItemType.ANSWER,
+            },
             {
                 title: 'Kernfragen zur Realisierung',
                 type: ListItemType.ANSWER,

@@ -22,6 +22,10 @@ export const navigationSystemsFooter = (
     <Typography variant='subtitle2' paddingTop='20px'>{Sources.get(SourceName.AGN_NAV)?.text}</Typography>
 );
 
+export const introductionControllingFooter = (
+    <Typography variant='subtitle2' paddingTop='20px'>{Sources.get(SourceName.CONTR)?.text}</Typography>
+);
+
 export const traditionalControllingFooter = (
     <Typography variant='subtitle2' paddingTop='20px'>{Sources.get(SourceName.CONTR)?.text}</Typography>
 );

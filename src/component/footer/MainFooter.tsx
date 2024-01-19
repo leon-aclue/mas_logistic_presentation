@@ -19,7 +19,6 @@ import FullWidthCenterContainer from "../container/FullWidthCenterContainer";
 import PrintIcon from "@mui/icons-material/Print";
 import {activatePrintMode} from "../../store/slice/globalSlice";
 import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
-
 function MainFooter() {
     const theme = useTheme();
     const dispatch = useDispatch();

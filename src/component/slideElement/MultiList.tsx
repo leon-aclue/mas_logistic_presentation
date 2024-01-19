@@ -10,7 +10,6 @@ interface EmptyStartListItemProps {
     deactivateItems?: SimulationWorldItem[],
     background?: Background,
 }
-
 export const emptyStartListItem = (props?: EmptyStartListItemProps): ListItem => {
     return {
         title: '',

@@ -42,9 +42,7 @@ function SplitContentSlide(props: IProps) {
                 {restChildren}
                 {background && (
                     <MuiBox display="flex" width="100%" justifyContent="end" marginBottom="-10px">
-                        <Typography color="primary.contrastText" bgcolor="background.default" variant="subtitle2"
-                                    paddingX="5px" borderRadius="5px"
-                                    style={{whiteSpace: 'pre-line',}}>{background.title}</Typography>
+                        <Typography color="primary.contrastText" bgcolor="background.default" variant="subtitle2" paddingX="5px" borderRadius="5px" style={{whiteSpace: 'pre-line',}}>{background.title}</Typography>
                     </MuiBox>
                 )}
             </FullWidthSpaceBetweenContainer>
