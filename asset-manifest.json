@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/mas_logistic_presentation/static/css/main.e5ec91b6.css",
-    "main.js": "/mas_logistic_presentation/static/js/main.a7e0ee21.js",
+    "main.js": "/mas_logistic_presentation/static/js/main.df84b0db.js",
     "index.html": "/mas_logistic_presentation/index.html",
     "main.e5ec91b6.css.map": "/mas_logistic_presentation/static/css/main.e5ec91b6.css.map",
-    "main.a7e0ee21.js.map": "/mas_logistic_presentation/static/js/main.a7e0ee21.js.map"
+    "main.df84b0db.js.map": "/mas_logistic_presentation/static/js/main.df84b0db.js.map"
   },
   "entrypoints": [
     "static/css/main.e5ec91b6.css",
-    "static/js/main.a7e0ee21.js"
+    "static/js/main.df84b0db.js"
   ]
 }
