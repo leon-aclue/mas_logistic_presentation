@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {IconButton, Typography, useTheme} from "@mui/material";
 import HomeIcon from '@mui/icons-material/Home';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -18,11 +18,13 @@ import {
 import FullWidthCenterContainer from "../container/FullWidthCenterContainer";
 import PrintIcon from "@mui/icons-material/Print";
 import {activatePrintMode} from "../../store/slice/globalSlice";
+import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 
 function MainFooter() {
     const theme = useTheme();
     const dispatch = useDispatch();
     const {page, step} = useSelector(pageSliceSelector);
+    const [showFooter, setShowFooter] = useState(true);
 
     const handleClickHome = () => {
         dispatch(setPage(0));
@@ -51,35 +53,78 @@ function MainFooter() {
         dispatch(activatePrintMode());
     }
 
+    const handleClickClose = () => {
+        setShowFooter(false);
+    }
+
+    const handleClickOpen = () => {
+        setShowFooter(true);
+    }
+
+    useEffect(() => {
+        const handleKeyPress = (event: KeyboardEvent) => {
+            switch (event.key) {
+                case 'Escape':
+                    handleClickOpen();
+                    break;
+                case 'ArrowUp':
+                    handleClickPrevious();
+                    break;
+                case 'ArrowDown':
+                    handleClickNext();
+                    break;
+                case 'ArrowLeft':
+                    handleClickPreviousStep();
+                    break;
+                case 'ArrowRight':
+                    handleClickNextStep();
+                    break;
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyPress);
+        return () => {
+            document.removeEventListener('keydown', handleKeyPress);
+        };
+    });
+
+
     return (
-        <FullWidthCenterContainer
-            flexDirection='row'
-            gap='20px'
-            bgcolor={theme.palette.background.default}
-            color={theme.palette.primary.contrastText}
-        >
-            <IconButton onClick={handleClickHome}>
-                <HomeIcon/>
-            </IconButton>
-            <IconButton onClick={handleClickPrevious}>
-                <KeyboardDoubleArrowLeftIcon/>
-            </IconButton>
-            <IconButton onClick={handleClickPreviousStep}>
-                <ArrowBackIosNewIcon/>
-            </IconButton>
-            <Typography variant='subtitle1'>
-                {`${page}:${step}`}
-            </Typography>
-            <IconButton onClick={handleClickNextStep}>
-                <ArrowForwardIosIcon/>
-            </IconButton>
-            <IconButton onClick={handleClickNext}>
-                <KeyboardDoubleArrowRightIcon/>
-            </IconButton>
-            <IconButton onClick={handleClickPrint}>
-                <PrintIcon/>
-            </IconButton>
-        </FullWidthCenterContainer>
+        <>
+            {showFooter && (
+                <FullWidthCenterContainer
+                    flexDirection='row'
+                    gap='20px'
+                    bgcolor={theme.palette.background.default}
+                    color={theme.palette.primary.contrastText}
+                >
+                    <IconButton onClick={handleClickHome}>
+                        <HomeIcon/>
+                    </IconButton>
+                    <IconButton onClick={handleClickPrevious}>
+                        <KeyboardDoubleArrowLeftIcon/>
+                    </IconButton>
+                    <IconButton onClick={handleClickPreviousStep}>
+                        <ArrowBackIosNewIcon/>
+                    </IconButton>
+                    <Typography variant='subtitle1'>
+                        {`${page}:${step}`}
+                    </Typography>
+                    <IconButton onClick={handleClickNextStep}>
+                        <ArrowForwardIosIcon/>
+                    </IconButton>
+                    <IconButton onClick={handleClickNext}>
+                        <KeyboardDoubleArrowRightIcon/>
+                    </IconButton>
+                    <IconButton onClick={handleClickPrint}>
+                        <PrintIcon/>
+                    </IconButton>
+                    <IconButton onClick={handleClickClose}>
+                        <CloseFullscreenIcon/>
+                    </IconButton>
+                </FullWidthCenterContainer>
+            )}
+        </>
     );
 }
 

@@ -6,6 +6,7 @@ export enum SourceName {
     EKR,
     AGN_NAV,
     AGN_AGV,
+    CONTR,
     AGV_R,
 
 }
@@ -30,6 +31,11 @@ const sourcesData: SourceDataItem[] = [
         name: SourceName.AGN_AGV,
         title: 'agv-network',
         text: 'https://https://www.agvnetwork.com/types-of-automated-guided-vehicles'
+    },
+    {
+        name: SourceName.CONTR,
+        title: 'T.Le-Anh_2004',
+        text: 'Tuan, Le-Anh and de Koster, M.B.M. René. (2004).\nA Review of Design and Control of Automated Guided Vehicle Systems.\nAvailable at SSRN: https://ssrn.com/abstract=594969'
     },
     {
         name: SourceName.AGV_R,

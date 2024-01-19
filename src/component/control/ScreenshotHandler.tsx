@@ -18,7 +18,7 @@ function ScreenshotHandler() {
             // let page render first
             const currentPage = listItemsList[page];
             dispatch(setPage(page));
-            dispatch(setStep(currentPage.items.length - 1));
+            dispatch(setStep(currentPage.showAllItems ? 0 : currentPage.items.length - 1));
             // and then take screenshot
             setTimeout(
                 () => takeScreenshot(

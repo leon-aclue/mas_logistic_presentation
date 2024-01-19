@@ -8,8 +8,9 @@ import {SimulationCategory, SimulationWorldItem} from "../../simulation/Simulati
 interface EmptyStartListItemProps {
     activateItems?: SimulationWorldItem[],
     deactivateItems?: SimulationWorldItem[],
-    backgroundImage?: string,
+    background?: Background,
 }
+
 export const emptyStartListItem = (props?: EmptyStartListItemProps): ListItem => {
     return {
         title: '',

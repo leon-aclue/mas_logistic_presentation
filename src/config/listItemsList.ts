@@ -5,9 +5,10 @@ import {
     baseSetupHeader,
     basicCategoryHeader,
     ekQuestionHeader,
-    generalStepsHeader,
+    introductionControllingHeader,
     introductionHeader,
     navigationSystemsHeader,
+    simulationHeader,
     sourcesHeader
 } from "../component/header/ListHeaders";
 import {PRODUCTION_STATIONS, SIM_BASE_LENGTH, SIM_BASE_WIDTH} from "../simulation/config";
@@ -16,17 +17,13 @@ import {
     agvTypeFooter,
     basicCategoryFooter,
     ekQuestionFooter,
-    generalStepsFooter,
-    navigationSystemsFooter
+    navigationSystemsFooter,
+    rosControllingFooter,
+    traditionalControllingFooter
 } from "../component/footer/ListFooters";
-import {
-    baseItemProps,
-    baseTitleImagePath, gptGenerated,
-    navigationSystemsCameraConfig,
-    simulationWorldNavigationSystemsBaseItems
-} from "./listProps";
+import {baseItemProps, baseTitleImagePath, gptGenerated, navigationSystemsCameraConfig} from "./listProps";
 import {SimulationCategory} from "../simulation/SimulationWorld";
-import {getSourcesList} from "./sources";
+import {getSourcesList, SourceName, Sources} from "./sources";
 
 export const listItemsList: MultiListItem[] = [
     {
@@ -74,10 +71,10 @@ export const listItemsList: MultiListItem[] = [
                     title: gptGenerated,
                 },
             },
-            {
-                title: 'Ausgangsszenario',
-                type: ListItemType.ANSWER,
-            },
+            // {
+            //     title: 'Ausgangsszenario',
+            //     type: ListItemType.ANSWER,
+            // },
             {
                 title: 'Kernfragen zur Realisierung',
                 type: ListItemType.ANSWER,
@@ -99,119 +96,115 @@ export const listItemsList: MultiListItem[] = [
                 type: ListItemType.ANSWER,
             },
             {
-                title: '...',
-                type: ListItemType.ANSWER,
-            },
-            {
                 title: 'Laufende Simulation',
                 type: ListItemType.ANSWER,
             },
         ]
     },
-    {
-        simulationCategory: SimulationCategory.NONE,
-        header: generalStepsHeader,
-        footer: generalStepsFooter,
-        items: [
-            emptyStartListItem(),
-        ]
-    },
-    {
-        simulationCategory: SimulationCategory.NONE,
-        header: generalStepsHeader,
-        footer: generalStepsFooter,
-        items: [
-            {
-                title: '1. Proposal phase',
-                type: ListItemType.NONE,
-                itemProps: baseItemProps,
-            },
-            {
-                title: 'Requirementanalyse',
-                type: ListItemType.ANSWER,
-            },
-            {
-                title: 'Angebot erstellen und annehmen',
-                type: ListItemType.ANSWER,
-            },
-            {
-                title: '2. Definition phase',
-                type: ListItemType.NONE,
-                itemProps: baseItemProps,
-            },
-            {
-                title: 'Funktionale Spezifikationen',
-                type: ListItemType.ANSWER,
-            },
-            {
-                title: 'Kick-off',
-                type: ListItemType.ANSWER,
-            },
-            {
-                title: 'evtl. Simulation',
-                type: ListItemType.ANSWER,
-            },
-            {
-                title: '3. Preparation for implementation',
-                type: ListItemType.NONE,
-                itemProps: baseItemProps,
-            },
-            {
-                title: 'Fahrzeugherstellung',
-                type: ListItemType.ANSWER,
-            },
-            {
-                title: 'Installation von Software',
-                type: ListItemType.ANSWER,
-            },
-            {
-                title: 'Einrichten der Umgebung (Reflektoren, Schienen etc.)',
-                type: ListItemType.ANSWER,
-            },
-        ],
-    },
-    {
-        simulationCategory: SimulationCategory.NONE,
-        header: generalStepsHeader,
-        footer: generalStepsFooter,
-        items: [
-            {
-                title: '4. On-site system implementation',
-                type: ListItemType.NONE,
-                itemProps: baseItemProps,
-            },
-            {
-                title: 'Safety briefing & Training',
-                type: ListItemType.ANSWER,
-            },
-            {
-                title: 'Integrationstests',
-                type: ListItemType.ANSWER,
-            },
-            {
-                title: '5. Commissioning phase',
-                type: ListItemType.NONE,
-                itemProps: baseItemProps,
-            },
-            {
-                title: 'Inbetriebnahme',
-                type: ListItemType.ANSWER,
-            },
-            {
-                title: 'Qualitycheck',
-                type: ListItemType.ANSWER,
-            },
-            {
-                title: '6. Maintenance and support',
-                type: ListItemType.NONE,
-                itemProps: baseItemProps,
-            },
-            {
-                title: 'Laufender Betrieb',
-                type: ListItemType.ANSWER,
-            },
-        ]
-    },
+    // {
+    //     simulationCategory: SimulationCategory.NONE,
+    //     header: generalStepsHeader,
+    //     footer: generalStepsFooter,
+    //     items: [
+    //         emptyStartListItem(),
+    //     ]
+    // },
+    // {
+    //     simulationCategory: SimulationCategory.NONE,
+    //     header: generalStepsHeader,
+    //     footer: generalStepsFooter,
+    //     items: [
+    //         {
+    //             title: '1. Proposal phase',
+    //             type: ListItemType.NONE,
+    //             itemProps: baseItemProps,
+    //         },
+    //         {
+    //             title: 'Requirementanalyse',
+    //             type: ListItemType.ANSWER,
+    //         },
+    //         {
+    //             title: 'Angebot erstellen und annehmen',
+    //             type: ListItemType.ANSWER,
+    //         },
+    //         {
+    //             title: '2. Definition phase',
+    //             type: ListItemType.NONE,
+    //             itemProps: baseItemProps,
+    //         },
+    //         {
+    //             title: 'Funktionale Spezifikationen',
+    //             type: ListItemType.ANSWER,
+    //         },
+    //         {
+    //             title: 'Kick-off',
+    //             type: ListItemType.ANSWER,
+    //         },
+    //         {
+    //             title: 'evtl. Simulation',
+    //             type: ListItemType.ANSWER,
+    //         },
+    //         {
+    //             title: '3. Preparation for implementation',
+    //             type: ListItemType.NONE,
+    //             itemProps: baseItemProps,
+    //         },
+    //         {
+    //             title: 'Fahrzeugherstellung',
+    //             type: ListItemType.ANSWER,
+    //         },
+    //         {
+    //             title: 'Installation von Software',
+    //             type: ListItemType.ANSWER,
+    //         },
+    //         {
+    //             title: 'Einrichten der Umgebung (Reflektoren, Schienen etc.)',
+    //             type: ListItemType.ANSWER,
+    //         },
+    //     ],
+    // },
+    // {
+    //     simulationCategory: SimulationCategory.NONE,
+    //     header: generalStepsHeader,
+    //     footer: generalStepsFooter,
+    //     items: [
+    //         {
+    //             title: '4. On-site system implementation',
+    //             type: ListItemType.NONE,
+    //             itemProps: baseItemProps,
+    //         },
+    //         {
+    //             title: 'Safety briefing & Training',
+    //             type: ListItemType.ANSWER,
+    //         },
+    //         {
+    //             title: 'Integrationstests',
+    //             type: ListItemType.ANSWER,
+    //         },
+    //         {
+    //             title: '5. Commissioning phase',
+    //             type: ListItemType.NONE,
+    //             itemProps: baseItemProps,
+    //         },
+    //         {
+    //             title: 'Inbetriebnahme',
+    //             type: ListItemType.ANSWER,
+    //         },
+    //         {
+    //             title: 'Qualitycheck',
+    //             type: ListItemType.ANSWER,
+    //         },
+    //         {
+    //             title: '6. Maintenance and support',
+    //             type: ListItemType.NONE,
+    //             itemProps: baseItemProps,
+    //         },
+    //         {
+    //             title: 'Laufender Betrieb',
+    //             type: ListItemType.ANSWER,
+    //         },
+    //     ]
+    // },
     {
         simulationCategory: SimulationCategory.NONE,
         header: baseSetupHeader,
@@ -558,51 +551,51 @@ export const listItemsList: MultiListItem[] = [
                 },
             ],
     },
-    {
-        simulationCategory: SimulationCategory.AGV_TYPE,
-        header: agvTypeHeader,
-        footer: agvTypeFooter,
-        cameraConfig: navigationSystemsCameraConfig,
-        items:
-            [
-                {
-                    title: 'Unit Load AGVs',
-                    type: ListItemType.NONE,
-                    tab: 0,
-                    itemProps: baseItemProps,
-                },
-                {
-                    title: 'Plattform mit bspw. Rollen',
-                    type: ListItemType.ANSWER,
-                    tab: 1,
-                },
-                {
-                    title: 'kann ein bis mehrere Ladungen automatisch aufnehmen',
-                    type: ListItemType.ANSWER,
-                    tab: 1,
-                },
-                {
-                    title: 'bspw. automatisch bei Produktionslinien Zwischentransporte',
-                    type: ListItemType.ANSWER,
-                    tab: 1,
-                },
-                {
-                    title: 'sehr flexibel',
-                    type: ListItemType.PLUS,
-                    tab: 1,
-                },
-                {
-                    title: 'nicht so schwere Lasten',
-                    type: ListItemType.MINUS,
-                    tab: 1,
-                },
-                {
-                    title: 'nur in 2 Dimensionen',
-                    type: ListItemType.MINUS,
-                    tab: 1,
-                },
-            ],
-    },
+    // {
+    //     simulationCategory: SimulationCategory.AGV_TYPE,
+    //     header: agvTypeHeader,
+    //     footer: agvTypeFooter,
+    //     cameraConfig: navigationSystemsCameraConfig,
+    //     items:
+    //         [
+    //             {
+    //                 title: 'Unit Load AGVs',
+    //                 type: ListItemType.NONE,
+    //                 tab: 0,
+    //                 itemProps: baseItemProps,
+    //             },
+    //             {
+    //                 title: 'Plattform mit bspw. Rollen',
+    //                 type: ListItemType.ANSWER,
+    //                 tab: 1,
+    //             },
+    //             {
+    //                 title: 'kann ein bis mehrere Ladungen automatisch aufnehmen',
+    //                 type: ListItemType.ANSWER,
+    //                 tab: 1,
+    //             },
+    //             {
+    //                 title: 'bspw. automatisch bei Produktionslinien Zwischentransporte',
+    //                 type: ListItemType.ANSWER,
+    //                 tab: 1,
+    //             },
+    //             {
+    //                 title: 'sehr flexibel',
+    //                 type: ListItemType.PLUS,
+    //                 tab: 1,
+    //             },
+    //             {
+    //                 title: 'nicht so schwere Lasten',
+    //                 type: ListItemType.MINUS,
+    //                 tab: 1,
+    //             },
+    //             {
+    //                 title: 'nur in 2 Dimensionen',
+    //                 type: ListItemType.MINUS,
+    //                 tab: 1,
+    //             },
+    //         ],
+    // },
     {
         simulationCategory: SimulationCategory.NONE,
         header: navigationSystemsHeader,
@@ -1036,6 +1029,164 @@ export const listItemsList: MultiListItem[] = [
                     title: 'perfekt geeignet um Paletten von Stationen zum Lager zu transportieren',
                     type: ListItemType.ANSWER,
                     tab: 1,
+                },
+            ],
+    },
+    {
+        simulationCategory: SimulationCategory.NONE,
+        header: introductionControllingHeader,
+        footer: undefined,
+        background: {
+            image: '/controlImages/decisionFramework.png',
+            title: `The decision framework for design and implementation of AGV systems\n(${Sources.get(SourceName.CONTR)?.title})`,
+            variant: 'contain'
+        },
+        items:
+            [
+                emptyStartListItem({background: {image: 'none', title: ''}}),
+                {
+                    title: 'Decision Framework:',
+                    type: ListItemType.NONE,
+                    tab: 0,
+                    itemProps: baseItemProps,
+                },
+                {
+                    title: 'System data and requirements',
+                    type: ListItemType.CHECK,
+                    tab: 1,
+                    itemProps: baseItemProps,
+                },
+                {
+                    title: 'Guide-path design',
+                    type: ListItemType.CHECK,
+                    tab: 1,
+                    itemProps: baseItemProps,
+                },
+                {
+                    title: 'Vehicle requirement',
+                    type: ListItemType.CHECK,
+                    tab: 1,
+                    itemProps: baseItemProps,
+                },
+                {
+                    title: 'Battery management',
+                    type: ListItemType.CHECK,
+                    tab: 1,
+                    itemProps: baseItemProps,
+                },
+                {
+                    title: 'Vehicle scheduling',
+                    type: ListItemType.CLOSE,
+                    tab: 1,
+                    itemProps: baseItemProps,
+                },
+                {
+                    title: 'Vehicle parking policy',
+                    type: ListItemType.CLOSE,
+                    tab: 1,
+                    itemProps: baseItemProps,
+                },
+                {
+                    title: 'Vehicle routing',
+                    type: ListItemType.CLOSE,
+                    tab: 1,
+                    itemProps: baseItemProps,
+                },
+                {
+                    title: 'Conflict resolution',
+                    type: ListItemType.CLOSE,
+                    tab: 1,
+                    itemProps: baseItemProps,
+                },
+            ],
+    },
+    {
+        simulationCategory: SimulationCategory.BASE,
+        header: introductionControllingHeader,
+        footer: undefined,
+        items:
+            [
+                emptyStartListItem(),
+                {
+                    title: 'Aufgaben eines Leitsystems:',
+                    type: ListItemType.NONE,
+                    tab: 0,
+                    itemProps: baseItemProps,
+                },
+                {
+                    title: 'Aufträge verwalten',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'Routenplanung',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'Kollisionsverhinderung',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'möglichst Effiziente Routen, aber auch Berechnungsmethoden',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+            ],
+    },
+    {
+        simulationCategory: SimulationCategory.BASE,
+        header: introductionControllingHeader,
+        footer: traditionalControllingFooter,
+        items:
+            [
+                {
+                    title: `Herkömmliche Leitsysteme (${Sources.get(SourceName.CONTR)?.title})`,
+                    type: ListItemType.NONE,
+                    tab: 0,
+                    itemProps: baseItemProps,
+                },
+                {
+                    title: 'Verbindung aller Stationen als Graph',
+                    type: ListItemType.ANSWER,
+                    tab: 0,
+                    itemProps: baseItemProps,
+                },
+            ],
+    },
+    {
+        simulationCategory: SimulationCategory.BASE,
+        header: introductionControllingHeader,
+        footer: rosControllingFooter,
+        items:
+            [
+                {
+                    title: `Dezentrales Leitsystem mit ROS (${Sources.get(SourceName.AGV_R)?.title})`,
+                    type: ListItemType.NONE,
+                    tab: 0,
+                    itemProps: baseItemProps,
+                },
+                {
+                    title: '...',
+                    type: ListItemType.NONE,
+                    tab: 0,
+                    itemProps: baseItemProps,
+                },
+            ],
+    },
+    {
+        simulationCategory: SimulationCategory.BASE,
+        header: simulationHeader,
+        footer: undefined,
+        items:
+            [
+                emptyStartListItem(),
+                {
+                    title: '...',
+                    type: ListItemType.NONE,
+                    tab: 0,
+                    itemProps: baseItemProps,
                 },
             ],
     },

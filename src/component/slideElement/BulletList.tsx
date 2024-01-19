@@ -7,6 +7,8 @@ import {ArrowForward} from "@mui/icons-material";
 import {SimulationWorldItem} from "../../simulation/SimulationWorld";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 
 export enum ListItemType {
     'NONE',
@@ -14,11 +16,14 @@ export enum ListItemType {
     'ANSWER',
     'PLUS',
     'MINUS',
+    'CHECK',
+    'CLOSE',
 }
 
 export interface Background {
     image: string,
     title: string,
+    variant?: 'contain' | 'cover'
 }
 
 export interface ListItem {
@@ -81,6 +86,12 @@ function BulletList(props: IProps) {
                             break;
                         case ListItemType.MINUS:
                             icon = <RemoveCircleOutlineIcon sx={{fontSize: bulletFontSize, color: 'error.main'}}/>;
+                            break;
+                        case ListItemType.CHECK:
+                            icon = <CheckIcon sx={{fontSize: bulletFontSize * 1.4, color: 'success.main'}}/>;
+                            break;
+                        case ListItemType.CLOSE:
+                            icon = <CloseIcon sx={{fontSize: bulletFontSize * 1.4, color: 'error.main'}}/>;
                             break;
                         default:
                             icon = null;

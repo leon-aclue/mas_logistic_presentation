@@ -14,12 +14,12 @@ function MainHeader() {
             color={theme.palette.primary.contrastText}
         >
             <img src='/HAW_logo.svg' alt="HAW_Logo" height='20px'/>
-                <Typography variant='subtitle2'>
-                    BA Seminar: Agenten und Multiagentensysteme
-                </Typography>
-                <Typography variant='subtitle2'>
-                    Leon Schwarzenberger
-                </Typography>
+            <Typography variant='subtitle2'>
+                BA Seminar: Industrial and Intelligent Agent Systems
+            </Typography>
+            <Typography variant='subtitle2'>
+                Leon Schwarzenberger
+            </Typography>
         </FullWidthSpaceBetweenContainer>
     );
 }
