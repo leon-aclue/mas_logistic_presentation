@@ -10,8 +10,8 @@ import {
     decreasePage,
     decreaseStep,
     increasePage,
-    increaseStep,
-    pageSliceSelector,
+    increaseStep, nextFullPage,
+    pageSliceSelector, previousFullPage,
     setPage,
     setStep
 } from "../../store/slice/pageSlice";
@@ -19,6 +19,7 @@ import FullWidthCenterContainer from "../container/FullWidthCenterContainer";
 import PrintIcon from "@mui/icons-material/Print";
 import {activatePrintMode} from "../../store/slice/globalSlice";
 import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
+import MuiBox from "../container/MuiBox";
 function MainFooter() {
     const theme = useTheme();
     const dispatch = useDispatch();
@@ -35,8 +36,7 @@ function MainFooter() {
     }
 
     const handleClickNext = () => {
-        dispatch(increasePage());
-        dispatch(setStep(0));
+        dispatch(nextFullPage());
     }
 
     const handleClickPreviousStep = () => {
@@ -44,8 +44,7 @@ function MainFooter() {
     }
 
     const handleClickPrevious = () => {
-        dispatch(decreasePage());
-        dispatch(setStep(0));
+        dispatch(previousFullPage());
     }
 
     const handleClickPrint = () => {
@@ -90,6 +89,11 @@ function MainFooter() {
 
     return (
         <>
+            <MuiBox display="flex" width="100%" justifyContent="end" height={0} maxHeight={0} overflow="overflow">
+                <MuiBox marginTop="-25px" paddingRight="10px">
+                    <Typography variant="subtitle2" color="primary.main" paddingBottom="5px">{page}</Typography>
+                </MuiBox>
+            </MuiBox>
             {showFooter && (
                 <FullWidthCenterContainer
                     flexDirection='row'

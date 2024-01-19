@@ -15,7 +15,7 @@ function MainHeader() {
         >
             <img src='/HAW_logo.svg' alt="HAW_Logo" height='20px'/>
             <Typography variant='subtitle2'>
-                BA Seminar: Industrial and Intelligent Agent Systems
+                BA Seminar: Industrielle Agenten und intelligente Multiagentensysteme
             </Typography>
             <Typography variant='subtitle2'>
                 Leon Schwarzenberger

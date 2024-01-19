@@ -3,11 +3,11 @@ import {
     agvSelectHeader,
     agvTypeHeader,
     baseSetupHeader,
-    basicCategoryHeader,
+    basicCategoryHeader, conflictResolutionHeader,
     ekQuestionHeader,
     introductionControllingHeader,
     introductionHeader,
-    navigationSystemsHeader,
+    navigationSystemsHeader, routingHeader, schedulingHeader,
     simulationHeader,
     sourcesHeader
 } from "../component/header/ListHeaders";
@@ -16,10 +16,10 @@ import {ListItemType} from "../component/slideElement/BulletList";
 import {
     agvTypeFooter,
     basicCategoryFooter,
+    controllingFooter,
     ekQuestionFooter,
     navigationSystemsFooter,
-    rosControllingFooter,
-    traditionalControllingFooter
+    rosControllingFooter
 } from "../component/footer/ListFooters";
 import {baseItemProps, baseTitleImagePath, gptGenerated, navigationSystemsCameraConfig} from "./listProps";
 import {SimulationCategory} from "../simulation/SimulationWorld";
@@ -205,21 +205,22 @@ export const listItemsList: MultiListItem[] = [
     //         },
     //     ]
     // },
-    {
-        simulationCategory: SimulationCategory.NONE,
-        header: baseSetupHeader,
-        footer: undefined,
-        items:
-            [
-                emptyStartListItem(),
-            ],
-    },
+    // {
+    //     simulationCategory: SimulationCategory.NONE,
+    //     header: baseSetupHeader,
+    //     footer: undefined,
+    //     items:
+    //         [
+    //             emptyStartListItem(),
+    //         ],
+    // },
     {
         simulationCategory: SimulationCategory.BASE,
         header: baseSetupHeader,
         footer: undefined,
         containerProps: {gap: '20px'},
         items: [
+            emptyStartListItem(),
             {
                 title: `Firmengelände mit ${SIM_BASE_WIDTH}m x ${SIM_BASE_LENGTH}m Fläche`,
                 type: ListItemType.ANSWER,
@@ -241,21 +242,22 @@ export const listItemsList: MultiListItem[] = [
             },
         ]
     },
-    {
-        simulationCategory: SimulationCategory.NONE,
-        header: ekQuestionHeader,
-        footer: ekQuestionFooter,
-        items:
-            [
-                emptyStartListItem(),
-            ],
-    },
+    // {
+    //     simulationCategory: SimulationCategory.NONE,
+    //     header: ekQuestionHeader,
+    //     footer: ekQuestionFooter,
+    //     items:
+    //         [
+    //             emptyStartListItem(),
+    //         ],
+    // },
     {
         simulationCategory: SimulationCategory.BASE,
         header: ekQuestionHeader,
         footer: ekQuestionFooter,
         items:
             [
+                emptyStartListItem(),
                 {
                     title: 'Welche Last soll wie transportiert und übergeben werden?',
                     type: ListItemType.ITEM,
@@ -340,6 +342,16 @@ export const listItemsList: MultiListItem[] = [
                 },
             ],
     },
+    // {
+    //     simulationCategory: SimulationCategory.NONE,
+    //     header: basicCategoryHeader,
+    //     footer: basicCategoryFooter,
+    //     cameraConfig: navigationSystemsCameraConfig,
+    //     items:
+    //         [
+    //             emptyStartListItem(),
+    //         ],
+    // },
     {
         simulationCategory: SimulationCategory.NONE,
         header: basicCategoryHeader,
@@ -348,15 +360,6 @@ export const listItemsList: MultiListItem[] = [
         items:
             [
                 emptyStartListItem(),
-            ],
-    },
-    {
-        simulationCategory: SimulationCategory.NONE,
-        header: basicCategoryHeader,
-        footer: basicCategoryFooter,
-        cameraConfig: navigationSystemsCameraConfig,
-        items:
-            [
                 {
                     title: 'AGV - Automated guided vehicle',
                     type: ListItemType.NONE,
@@ -396,16 +399,16 @@ export const listItemsList: MultiListItem[] = [
                 },
             ],
     },
-    {
-        simulationCategory: SimulationCategory.NONE,
-        header: agvTypeHeader,
-        footer: agvTypeFooter,
-        cameraConfig: navigationSystemsCameraConfig,
-        items:
-            [
-                emptyStartListItem(),
-            ],
-    },
+    // {
+    //     simulationCategory: SimulationCategory.NONE,
+    //     header: agvTypeHeader,
+    //     footer: agvTypeFooter,
+    //     cameraConfig: navigationSystemsCameraConfig,
+    //     items:
+    //         [
+    //             emptyStartListItem(),
+    //         ],
+    // },
     {
         simulationCategory: SimulationCategory.AGV_TYPE,
         header: agvTypeHeader,
@@ -413,6 +416,7 @@ export const listItemsList: MultiListItem[] = [
         cameraConfig: navigationSystemsCameraConfig,
         items:
             [
+                emptyStartListItem(),
                 {
                     title: 'AGC - Automated Guided Cart',
                     type: ListItemType.NONE,
@@ -596,16 +600,16 @@ export const listItemsList: MultiListItem[] = [
     //             },
     //         ],
     // },
-    {
-        simulationCategory: SimulationCategory.NONE,
-        header: navigationSystemsHeader,
-        footer: navigationSystemsFooter,
-        cameraConfig: navigationSystemsCameraConfig,
-        items:
-            [
-                emptyStartListItem(),
-            ],
-    },
+    // {
+    //     simulationCategory: SimulationCategory.NONE,
+    //     header: navigationSystemsHeader,
+    //     footer: navigationSystemsFooter,
+    //     cameraConfig: navigationSystemsCameraConfig,
+    //     items:
+    //         [
+    //             emptyStartListItem(),
+    //         ],
+    // },
     {
         simulationCategory: SimulationCategory.NAVIGATION,
         header: navigationSystemsHeader,
@@ -613,6 +617,7 @@ export const listItemsList: MultiListItem[] = [
         cameraConfig: navigationSystemsCameraConfig,
         items:
             [
+                emptyStartListItem(),
                 {
                     title: 'Natural Navigation',
                     type: ListItemType.NONE,
@@ -1038,7 +1043,7 @@ export const listItemsList: MultiListItem[] = [
         footer: undefined,
         background: {
             image: '/controlImages/decisionFramework.png',
-            title: `The decision framework for design and implementation of AGV systems\n(${Sources.get(SourceName.CONTR)?.title})`,
+            title: `The decision framework for design and implementation of AGV systems ${Sources.get(SourceName.CONTR)?.title}`,
             variant: 'contain'
         },
         items:
@@ -1082,7 +1087,7 @@ export const listItemsList: MultiListItem[] = [
                 },
                 {
                     title: 'Vehicle parking policy',
-                    type: ListItemType.CLOSE,
+                    type: ListItemType.CHECK,
                     tab: 1,
                     itemProps: baseItemProps,
                 },
@@ -1102,57 +1107,29 @@ export const listItemsList: MultiListItem[] = [
     },
     {
         simulationCategory: SimulationCategory.BASE,
-        header: introductionControllingHeader,
-        footer: undefined,
+        header: schedulingHeader,
+        footer: controllingFooter,
         items:
             [
                 emptyStartListItem(),
-                {
-                    title: 'Aufgaben eines Leitsystems:',
-                    type: ListItemType.NONE,
-                    tab: 0,
-                    itemProps: baseItemProps,
-                },
-                {
-                    title: 'Aufträge verwalten',
-                    type: ListItemType.ANSWER,
-                    tab: 1,
-                },
-                {
-                    title: 'Routenplanung',
-                    type: ListItemType.ANSWER,
-                    tab: 1,
-                },
-                {
-                    title: 'Kollisionsverhinderung',
-                    type: ListItemType.ANSWER,
-                    tab: 1,
-                },
-                {
-                    title: 'möglichst Effiziente Routen, aber auch Berechnungsmethoden',
-                    type: ListItemType.ANSWER,
-                    tab: 1,
-                },
             ],
     },
     {
         simulationCategory: SimulationCategory.BASE,
-        header: introductionControllingHeader,
-        footer: traditionalControllingFooter,
+        header: routingHeader,
+        footer: controllingFooter,
         items:
             [
-                {
-                    title: `Herkömmliche Leitsysteme (${Sources.get(SourceName.CONTR)?.title})`,
-                    type: ListItemType.NONE,
-                    tab: 0,
-                    itemProps: baseItemProps,
-                },
-                {
-                    title: 'Verbindung aller Stationen als Graph',
-                    type: ListItemType.ANSWER,
-                    tab: 0,
-                    itemProps: baseItemProps,
-                },
+                emptyStartListItem(),
+            ],
+    },
+    {
+        simulationCategory: SimulationCategory.BASE,
+        header: conflictResolutionHeader,
+        footer: controllingFooter,
+        items:
+            [
+                emptyStartListItem(),
             ],
     },
     {
@@ -1162,7 +1139,7 @@ export const listItemsList: MultiListItem[] = [
         items:
             [
                 {
-                    title: `Dezentrales Leitsystem mit ROS (${Sources.get(SourceName.AGV_R)?.title})`,
+                    title: `Dezentrales Leitsystem mit ROS ${Sources.get(SourceName.AGV_R)?.title}`,
                     type: ListItemType.NONE,
                     tab: 0,
                     itemProps: baseItemProps,

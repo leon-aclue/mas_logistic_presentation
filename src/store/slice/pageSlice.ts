@@ -1,5 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {IRootState} from "../store";
+import {listItemsList} from "../../config/listItemsList";
 
 interface IPageState {
     page: number;
@@ -57,6 +58,28 @@ const handleStepSet = (state: IPageState, action: PayloadAction<number>): IPageS
     };
 }
 
+const handlePreviousFullPage = (state: IPageState): IPageState => {
+    const page = Math.max(state.page - 1, 0);
+    const step = (page < listItemsList.length && !listItemsList[page].showAllItems)
+        ? listItemsList[page].items.length - 1 : 0;
+    return {
+        ...state,
+        step,
+        page,
+    };
+}
+
+const handleNextFullPage = (state: IPageState): IPageState => {
+    const page = state.page + 1;
+    const step = (page < listItemsList.length && !listItemsList[page].showAllItems)
+        ? listItemsList[page].items.length - 1 : 0;
+    return {
+        ...state,
+        step,
+        page,
+    };
+}
+
 export const pageSlice = createSlice({
     name: 'pageStateSlice',
     initialState,
@@ -67,6 +90,8 @@ export const pageSlice = createSlice({
         increaseStep: handleStepIncrease,
         decreaseStep: handleStepDecrease,
         setStep: handleStepSet,
+        previousFullPage: handlePreviousFullPage,
+        nextFullPage: handleNextFullPage,
     },
 });
 
@@ -77,6 +102,8 @@ export const {
     increaseStep,
     decreaseStep,
     setStep,
+    previousFullPage,
+    nextFullPage,
 } = pageSlice.actions;
 
 export const pageSliceSelector = (state: IRootState) => state.pageReducer;

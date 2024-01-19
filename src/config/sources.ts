@@ -2,7 +2,7 @@ import {ListItem, ListItemType} from "../component/slideElement/BulletList";
 import {baseItemProps} from "./listProps";
 
 export enum SourceName {
-    JUNG,
+    //JUNG,
     EKR,
     AGN_NAV,
     AGN_AGV,
@@ -12,25 +12,25 @@ export enum SourceName {
 }
 
 const sourcesData: SourceDataItem[] = [
-    {
-        name: SourceName.JUNG,
-        title: 'Jungheinrich',
-        text: 'https://www.jungheinrich.com.sg/systems/driverless-transport-systems/automated-guided-vehicles'
-    },
+    // {
+    //     name: SourceName.JUNG,
+    //     title: 'Jungheinrich',
+    //     text: 'https://www.jungheinrich.com.sg/systems/driverless-transport-systems/automated-guided-vehicles'
+    // },
     {
         name: SourceName.EKR,
         title: 'Ek-Robotics',
         text: 'https://ek-robotics.com/de/technologie/fts-fahrerlose-transportsysteme'
     },
     {
-        name: SourceName.AGN_NAV,
-        title: 'agv-network',
-        text: 'https://https://www.agvnetwork.com/types-of-navigation-systems-automated-guided-vehicles'
-    },
-    {
         name: SourceName.AGN_AGV,
         title: 'agv-network',
         text: 'https://https://www.agvnetwork.com/types-of-automated-guided-vehicles'
+    },
+    {
+        name: SourceName.AGN_NAV,
+        title: 'agv-network',
+        text: 'https://https://www.agvnetwork.com/types-of-navigation-systems-automated-guided-vehicles'
     },
     {
         name: SourceName.CONTR,
@@ -64,7 +64,7 @@ export const Sources = (() => {
         const newSource: Source = {
             id: index,
             text: `[${index}] ${text}`,
-            title: `${title} [${index}]`,
+            title: `[${index}]`,
         }
         sources.set(name, newSource);
         index += 1;
