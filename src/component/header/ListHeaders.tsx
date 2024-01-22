@@ -6,10 +6,10 @@ export const introductionHeader = (
     <Typography variant='h3' paddingBottom='20px'>Multiagentensysteme in der Logistik</Typography>
 );
 
-// export const generalStepsHeader = (
-//     <Typography variant='h4'
-//                 paddingBottom='20px'>{`Allgemeines Vorgehen (${Sources.get(SourceName.JUNG)?.title})`}</Typography>
-// );
+export const generalStepsHeader = (
+    <Typography variant='h4'
+                paddingBottom='20px'>{`Allgemeines Vorgehen (${Sources.get(SourceName.JUNG)?.title})`}</Typography>
+);
 
 export const baseSetupHeader = (
     <Typography variant='h4' paddingBottom='20px'>Ausgangsszenario</Typography>
@@ -43,15 +43,13 @@ export const introductionControllingHeader = (
 );
 
 export const schedulingHeader = (
-    <Typography variant='h4' paddingBottom='20px'>{`Vehicle scheduling ${Sources.get(SourceName.CONTR)?.title}`}</Typography>
+    <Typography variant='h4'
+                paddingBottom='20px'>{`Vehicle scheduling ${Sources.get(SourceName.CONTR)?.title}`}</Typography>
 );
 
-export const routingHeader = (
-    <Typography variant='h4' paddingBottom='20px'>{`Vehicle routing ${Sources.get(SourceName.CONTR)?.title}`}</Typography>
-);
-
-export const conflictResolutionHeader = (
-    <Typography variant='h4' paddingBottom='20px'>{`Conflict resolution ${Sources.get(SourceName.CONTR)?.title}`}</Typography>
+export const routingConflictHeader = (
+    <Typography variant='h4'
+                paddingBottom='20px'>{`Vehicle routing & Conflict Resolution ${Sources.get(SourceName.CONTR)?.title}`}</Typography>
 );
 
 export const simulationHeader = (

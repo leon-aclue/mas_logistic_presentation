@@ -3,11 +3,14 @@ import {
     agvSelectHeader,
     agvTypeHeader,
     baseSetupHeader,
-    basicCategoryHeader, conflictResolutionHeader,
+    basicCategoryHeader,
     ekQuestionHeader,
+    generalStepsHeader,
     introductionControllingHeader,
     introductionHeader,
-    navigationSystemsHeader, routingHeader, schedulingHeader,
+    navigationSystemsHeader,
+    routingConflictHeader,
+    schedulingHeader,
     simulationHeader,
     sourcesHeader
 } from "../component/header/ListHeaders";
@@ -18,10 +21,17 @@ import {
     basicCategoryFooter,
     controllingFooter,
     ekQuestionFooter,
+    generalStepsFooter,
     navigationSystemsFooter,
     rosControllingFooter
 } from "../component/footer/ListFooters";
-import {baseItemProps, baseTitleImagePath, gptGenerated, navigationSystemsCameraConfig} from "./listProps";
+import {
+    baseImagePath,
+    baseItemProps,
+    baseTitleImagePath,
+    gptGenerated,
+    navigationSystemsCameraConfig
+} from "./listProps";
 import {SimulationCategory} from "../simulation/SimulationWorld";
 import {getSourcesList, SourceName, Sources} from "./sources";
 
@@ -1042,7 +1052,7 @@ export const listItemsList: MultiListItem[] = [
         header: introductionControllingHeader,
         footer: undefined,
         background: {
-            image: '/controlImages/decisionFramework.png',
+            image: baseImagePath + 'controlImages/decisionFramework.png',
             title: `The decision framework for design and implementation of AGV systems ${Sources.get(SourceName.CONTR)?.title}`,
             variant: 'contain'
         },
@@ -1112,24 +1122,156 @@ export const listItemsList: MultiListItem[] = [
         items:
             [
                 emptyStartListItem(),
+                {
+                    title: 'Entscheidet Wann, Wo und Wie ein Fahrzeug Aufgaben ausfürhren soll',
+                    type: ListItemType.ANSWER,
+                    tab: 0,
+                },
+                {
+                    title: 'Plant die zu fahrende Route',
+                    type: ListItemType.ANSWER,
+                    tab: 0,
+                },
+                {
+                    title: 'Zwei Varianten',
+                    type: ListItemType.ANSWER,
+                    tab: 0,
+                },
             ],
     },
     {
         simulationCategory: SimulationCategory.BASE,
-        header: routingHeader,
+        header: schedulingHeader,
         footer: controllingFooter,
         items:
             [
-                emptyStartListItem(),
+                {
+                    title: 'Offline',
+                    type: ListItemType.ITEM,
+                    tab: 0,
+                },
+                {
+                    title: 'Routen werden vorher berechnet und optimiert',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'ähnlich zu pick-up and delivery problem with time windows (PDPTW)',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'NP-hard, deshalb werden häufig nur Heuristiken verwendet',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'Muss nur einmal am Anfang berechnet werden und nicht ständig neu',
+                    type: ListItemType.PLUS,
+                    tab: 1,
+                },
+                {
+                    title: 'durch kleine Verzögerungen kann evtl. der ganze Plan zerstört werden',
+                    type: ListItemType.MINUS,
+                    tab: 1,
+                },
             ],
     },
     {
         simulationCategory: SimulationCategory.BASE,
-        header: conflictResolutionHeader,
+        header: schedulingHeader,
+        footer: controllingFooter,
+        items:
+            [
+                {
+                    title: 'Online',
+                    type: ListItemType.ITEM,
+                    tab: 0,
+                },
+                {
+                    title: 'Routen werden erst dynamisch zur Laufzeit berechnet',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'Verschiedene Modelle um minimale Kosten und verzögerungen zu berechnen',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'z.T wesentlich bessere Ergebnisse, als einfache Scheduler',
+                    type: ListItemType.PLUS,
+                    tab: 1,
+                },
+                {
+                    title: 'durch hohen Rechenaufwand immer nur geringe Anzahl an Aufträgen verarbeitbar',
+                    type: ListItemType.MINUS,
+                    tab: 1,
+                },
+            ],
+    },
+    {
+        simulationCategory: SimulationCategory.BASE,
+        header: routingConflictHeader,
         footer: controllingFooter,
         items:
             [
                 emptyStartListItem(),
+                {
+                    title: 'hängt eng mit Scheduling zusammen',
+                    type: ListItemType.ANSWER,
+                    tab: 0,
+                },
+                {
+                    title: 'Verschiedene Methoden um Schrittweise zu planen',
+                    type: ListItemType.ANSWER,
+                    tab: 0,
+                },
+                {
+                    title: 'Methoden zum Vorbeugen von Konflikten:',
+                    type: ListItemType.ANSWER,
+                    tab: 0,
+                },
+                {
+                    title: 'Arbeitslast verteilen',
+                    type: ListItemType.ITEM,
+                    tab: 1,
+                },
+                {
+                    title: 'Puffer oder Verzögerung bei Dispatch',
+                    type: ListItemType.ANSWER,
+                    tab: 2,
+                },
+                {
+                    title: 'Forward sensing',
+                    type: ListItemType.ITEM,
+                    tab: 1,
+                },
+                {
+                    title: 'Bei zu geringem Abstand zu vorherigem Fahrzeug anhalten',
+                    type: ListItemType.ANSWER,
+                    tab: 2,
+                },
+                {
+                    title: 'Verkehrskontrolle an Kreuzungen',
+                    type: ListItemType.ITEM,
+                    tab: 1,
+                },
+                {
+                    title: 'nur Ein Fahrzeug darf Kreuzungsbereich befaahren (wie Semaphoren)',
+                    type: ListItemType.ANSWER,
+                    tab: 2,
+                },
+                {
+                    title: 'Zonenplanung',
+                    type: ListItemType.ITEM,
+                    tab: 1,
+                },
+                {
+                    title: 'gesamte Fläche in Zonen unterteilt, die nur einzeln befahren werden dürfen',
+                    type: ListItemType.ANSWER,
+                    tab: 2,
+                },
             ],
     },
     {
@@ -1173,5 +1315,128 @@ export const listItemsList: MultiListItem[] = [
         showAllItems: true,
         items: getSourcesList(),
         fontVariant: 'subtitle2',
+    },
+    {
+        simulationCategory: SimulationCategory.NONE,
+        header: undefined,
+        footer: undefined,
+        showAllItems: true,
+        items:
+            [
+                {
+                    title: 'Nachtrag auf den nächsten Seiten',
+                    type: ListItemType.NONE,
+                    tab: 0,
+                    itemProps: baseItemProps,
+                },
+                {
+                    title: 'Eigentlich als Einleitung gedacht',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                    itemProps: baseItemProps,
+                },
+                {
+                    title: 'Insgesamt aber zu lang, deshalb gestrichen',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                    itemProps: baseItemProps,
+                },
+            ],
+    },
+    {
+        simulationCategory: SimulationCategory.NONE,
+        header: generalStepsHeader,
+        footer: generalStepsFooter,
+        items: [
+            {
+                title: '1. Proposal phase',
+                type: ListItemType.NONE,
+                itemProps: baseItemProps,
+            },
+            {
+                title: 'Requirementanalyse',
+                type: ListItemType.ANSWER,
+            },
+            {
+                title: 'Angebot erstellen und annehmen',
+                type: ListItemType.ANSWER,
+            },
+            {
+                title: '2. Definition phase',
+                type: ListItemType.NONE,
+                itemProps: baseItemProps,
+            },
+            {
+                title: 'Funktionale Spezifikationen',
+                type: ListItemType.ANSWER,
+            },
+            {
+                title: 'Kick-off',
+                type: ListItemType.ANSWER,
+            },
+            {
+                title: 'evtl. Simulation',
+                type: ListItemType.ANSWER,
+            },
+            {
+                title: '3. Preparation for implementation',
+                type: ListItemType.NONE,
+                itemProps: baseItemProps,
+            },
+            {
+                title: 'Fahrzeugherstellung',
+                type: ListItemType.ANSWER,
+            },
+            {
+                title: 'Installation von Software',
+                type: ListItemType.ANSWER,
+            },
+            {
+                title: 'Einrichten der Umgebung (Reflektoren, Schienen etc.)',
+                type: ListItemType.ANSWER,
+            },
+        ],
+    },
+    {
+        simulationCategory: SimulationCategory.NONE,
+        header: generalStepsHeader,
+        footer: generalStepsFooter,
+        items: [
+            {
+                title: '4. On-site system implementation',
+                type: ListItemType.NONE,
+                itemProps: baseItemProps,
+            },
+            {
+                title: 'Safety briefing & Training',
+                type: ListItemType.ANSWER,
+            },
+            {
+                title: 'Integrationstests',
+                type: ListItemType.ANSWER,
+            },
+            {
+                title: '5. Commissioning phase',
+                type: ListItemType.NONE,
+                itemProps: baseItemProps,
+            },
+            {
+                title: 'Inbetriebnahme',
+                type: ListItemType.ANSWER,
+            },
+            {
+                title: 'Qualitycheck',
+                type: ListItemType.ANSWER,
+            },
+            {
+                title: '6. Maintenance and support',
+                type: ListItemType.NONE,
+                itemProps: baseItemProps,
+            },
+            {
+                title: 'Laufender Betrieb',
+                type: ListItemType.ANSWER,
+            },
+        ]
     },
 ];

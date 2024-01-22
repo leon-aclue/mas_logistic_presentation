@@ -2,7 +2,7 @@ import {ListItem, ListItemType} from "../component/slideElement/BulletList";
 import {baseItemProps} from "./listProps";
 
 export enum SourceName {
-    //JUNG,
+    JUNG,
     EKR,
     AGN_NAV,
     AGN_AGV,
@@ -12,11 +12,6 @@ export enum SourceName {
 }
 
 const sourcesData: SourceDataItem[] = [
-    // {
-    //     name: SourceName.JUNG,
-    //     title: 'Jungheinrich',
-    //     text: 'https://www.jungheinrich.com.sg/systems/driverless-transport-systems/automated-guided-vehicles'
-    // },
     {
         name: SourceName.EKR,
         title: 'Ek-Robotics',
@@ -41,6 +36,11 @@ const sourcesData: SourceDataItem[] = [
         name: SourceName.AGV_R,
         title: 'Walenta_2017',
         text: 'Walenta, Robert & Schellekens, Twan & Ferrein, Alexander & Schiffer, Stefan. (2017).\nA decentralised system approach for controlling AGVs with ROS.\nAFRCON.2017.8095693 pages: 1436-1441. '
+    },
+    {
+        name: SourceName.JUNG,
+        title: 'Jungheinrich',
+        text: 'https://www.jungheinrich.com.sg/systems/driverless-transport-systems/automated-guided-vehicles'
     },
 ]
 

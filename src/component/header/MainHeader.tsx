@@ -1,6 +1,7 @@
 import React from 'react';
 import {Typography, useTheme} from "@mui/material";
 import FullWidthSpaceBetweenContainer from "../container/FullWidthSpaceBetweenContainer";
+import {baseImagePath} from "../../config/listProps";
 
 function MainHeader() {
     const theme = useTheme();
@@ -13,7 +14,7 @@ function MainHeader() {
             bgcolor={theme.palette.primary.main}
             color={theme.palette.primary.contrastText}
         >
-            <img src='/HAW_logo.svg' alt="HAW_Logo" height='20px'/>
+            <img src={`${baseImagePath}HAW_logo.svg`} alt="HAW_Logo" height='20px'/>
             <Typography variant='subtitle2'>
                 BA Seminar: Industrielle Agenten und intelligente Multiagentensysteme
             </Typography>
