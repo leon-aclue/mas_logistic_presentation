@@ -6,10 +6,10 @@ import theme from "./config/theme";
 import MainHeader from "./component/header/MainHeader";
 import {Provider} from "react-redux";
 import {store} from "./store/store";
-import MainFooter from "./component/footer/MainFooter";
 import BaseSimulationPage from "./page/BaseSimulationPage";
 import {listItemsList} from "./config/listItemsList";
 import ScreenshotHandler from "./component/control/ScreenshotHandler";
+import KeyHandler from "./component/control/KeyHandler";
 
 function App() {
     return (
@@ -17,10 +17,10 @@ function App() {
             <Provider store={store}>
                 <BaseLayout
                     header={<MainHeader/>}
-                    bottom={<MainFooter/>}
                 >
                     <BaseSimulationPage listItemsList={listItemsList}/>
                 </BaseLayout>
+                <KeyHandler/>
                 <ScreenshotHandler/>
             </Provider>
         </ThemeProvider>
