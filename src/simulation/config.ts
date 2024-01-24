@@ -1,5 +1,6 @@
 import {ILineSegment, IStation} from "./store/slice/baseSlice";
 import {ThreeArr2} from "./component/ThreeBaseComponents";
+import {IAgv} from "./component/agv/Agv";
 
 // help functions
 const createStationRow = (width: number, length: number, posX: number, startPosY: number, steps: number, stepWidth: number, storageAreaPosX: number) => {
@@ -41,6 +42,7 @@ export const SIM_BASE_HEIGHT = 0.1;
 export const SIM_BASE_POS_X = SIM_BASE_WIDTH / 2;
 export const SIM_BASE_POS_Y = SIM_BASE_LENGTH / 2;
 export const SIM_BASE_COLOR = 'gray'
+export const SIM_DEFAULT_DELAY = 1;
 
 export const PRODUCTION_STATION_WIDTH = 9;
 export const PRODUCTION_STATION_LENGTH = 4;
@@ -224,6 +226,59 @@ export const AGV_LASER_SENSOR_OFFSET_X = 1.40;
 export const AGV_LASER_SENSOR_OFFSET_Y = 0;
 export const AGV_LASER_SENSOR_OFFSET_Z = AGV_LASER_SENSOR_HEIGHT / 2 + AGV_BASE_HEIGHT;
 export const AGV_LASER_SENSOR_COLOR = '#333'
+
+export const ROT_N = 0;
+export const ROT_E = Math.PI * 1.5;
+export const ROT_S = Math.PI;
+export const ROT_W = Math.PI * 0.5;
+
+export const AGV_STEP_SIZE = 0.5;
+export const AGV_STEP_TURN = 0.157;
+
+export const EXAMPLE_AGVS: IAgv[] = [
+    {
+        position: [60, 19],
+        rotation: -1.55,
+    },
+    {
+        position: [65, 19],
+        rotation: -1.55,
+    },
+    {
+        position: [20, 70],
+        rotation: -1.55,
+    },
+    {
+        position: [40, 84],
+        rotation: 0,
+    },
+    {
+        position: [84, 40],
+        rotation: -3.1415,
+    },
+];
+export const INITIAL_AGVS: IAgv[] = [
+    {
+        position: [60, 19],
+        rotation: -1.55,
+    },
+    // {
+    //     position: [65, 19],
+    //     rotation: -1.55,
+    // },
+    // {
+    //     position: [70, 19],
+    //     rotation: -1.55,
+    // },
+    // {
+    //     position: [75, 19],
+    //     rotation: -1.55,
+    // },
+    // {
+    //     position: [80, 19],
+    //     rotation: -1.55,
+    // },
+];
 
 
 

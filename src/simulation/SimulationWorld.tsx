@@ -14,9 +14,12 @@ import {cameraSliceSelector} from "./store/slice/cameraSlice";
 import {Vector3} from "three";
 import InductiveWire from "./component/base/InductiveWire";
 import Agv from "./component/agv/Agv";
+import {EXAMPLE_AGVS} from "./config";
+import {agvSliceSelector} from "./store/slice/agvSlice";
+import AgvControl from "./component/control/AgvControl";
 
 export type SimulationWorldItem =
-    // Base
+// Base
     'Base'
     | 'ProductionStations'
     | 'StorageStations'
@@ -29,6 +32,7 @@ export type SimulationWorldItem =
 
     // AGVs
     | 'AGV'
+    | 'ExampleAgvs'
 
     // NavigationSystemsExplanation
     | 'ExampleWalls'
@@ -60,6 +64,7 @@ function SimulationWorld(props: IProps) {
     } = props;
 
     const baseState = useSelector(baseSliceSelector);
+    const agvState = useSelector(agvSliceSelector);
     const {
         position: cameraPosition,
         fov: cameraFov,
@@ -80,6 +85,8 @@ function SimulationWorld(props: IProps) {
             <pointLight position={[-400, 1000, -100]}/>
             <PerspectiveCamera makeDefault position={new Vector3(...cameraPosition)} fov={cameraFov}/>
             <CameraControl lookAt={new Vector3(...cameraLookAt)}/>
+
+            <AgvControl/>
 
             {/* Base */}
             {show('Base') && (
@@ -121,14 +128,15 @@ function SimulationWorld(props: IProps) {
                 ))
             )}
             {/* AGVs */}
+            {show('ExampleAgvs') && (
+                EXAMPLE_AGVS.map((agv, index) => (
+                    <Agv key={index} {...agv} />
+                ))
+            )}
             {show('AGV') && (
-                <>
-                    <Agv position={[60, 19]} rotation={-1.55} />
-                    <Agv position={[65, 19]} rotation={-1.55} />
-                    <Agv position={[20, 70]} rotation={-1.55} />
-                    <Agv position={[40, 84]} rotation={0} />
-                    <Agv position={[84, 40]} rotation={3.1415} />
-                </>
+                agvState.agvs.map((agvS, index) => (
+                    <Agv key={index} {...agvS.agv} />
+                ))
             )}
         </Canvas>
     );

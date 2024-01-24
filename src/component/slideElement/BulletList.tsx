@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React from 'react';
 import VerticalContainer from "../container/VerticalContainer";
 import {BoxProps, Typography, TypographyVariant, useTheme} from "@mui/material";
 import CircleIcon from '@mui/icons-material/Circle';
@@ -48,21 +48,10 @@ function BulletList(props: IProps) {
     const {items, fontVariant, numberToShow, containerProps} = props;
     const listFontVariant = fontVariant ?? 'subtitle1';
     const theme = useTheme();
-    const boxRef = useRef();
 
-    // on next step scroll to bottom
-    useEffect(() => {
-        if (boxRef.current) {
-            // @ts-ignore
-            boxRef.current.scrollTop = boxRef.current.scrollHeight;
-        }
-    }, [numberToShow])
 
     return (
         <VerticalContainer
-            ref={boxRef}
-            flex={1}
-            overflow='auto'
             {...containerProps}
         >
             {items

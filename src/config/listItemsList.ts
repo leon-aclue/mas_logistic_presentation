@@ -34,6 +34,7 @@ import {
 } from "./listProps";
 import {SimulationCategory} from "../simulation/SimulationWorld";
 import {getSourcesList, SourceName, Sources} from "./sources";
+import {simulationControlsElem} from "../simulation/component/control/SimulationControls";
 
 export const listItemsList: MultiListItem[] = [
     {
@@ -1033,7 +1034,7 @@ export const listItemsList: MultiListItem[] = [
                     type: ListItemType.NONE,
                     tab: 0,
                     itemProps: baseItemProps,
-                    activateSimulationItems: ['AGV'],
+                    activateSimulationItems: ['ExampleAgvs'],
                 },
                 {
                     title: 'Schnell & zuverlässig',
@@ -1298,15 +1299,13 @@ export const listItemsList: MultiListItem[] = [
         simulationCategory: SimulationCategory.BASE,
         header: simulationHeader,
         footer: undefined,
+        children: simulationControlsElem,
         items:
             [
-                emptyStartListItem(),
-                {
-                    title: '...',
-                    type: ListItemType.NONE,
-                    tab: 0,
-                    itemProps: baseItemProps,
-                },
+                emptyStartListItem({
+                    activateSimulationItems: ['AGV'],
+                    deactivateSimulationItems: ['ExampleAgvs'],
+                }),
             ],
     },
     {

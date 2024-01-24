@@ -1,15 +1,17 @@
-import React, {ReactNode} from 'react';
+import React, {ReactNode, useEffect, useRef} from 'react';
 import BulletList, {Background, ListItem} from "./BulletList";
 import {BoxProps, TypographyVariant} from "@mui/material";
 import {ICameraConfig} from "../../simulation/store/slice/cameraSlice";
 import CameraHandler from "../../simulation/component/control/CameraHandler";
 import {SimulationCategory, SimulationWorldItem} from "../../simulation/SimulationWorld";
+import VerticalContainer from "../container/VerticalContainer";
 
 interface EmptyStartListItemProps {
-    activateItems?: SimulationWorldItem[],
-    deactivateItems?: SimulationWorldItem[],
+    activateSimulationItems?: SimulationWorldItem[],
+    deactivateSimulationItems?: SimulationWorldItem[],
     background?: Background,
 }
+
 export const emptyStartListItem = (props?: EmptyStartListItemProps): ListItem => {
     return {
         title: '',
@@ -28,6 +30,7 @@ export interface MultiListItem {
     cameraConfig?: ICameraConfig;
     simulationCategory: SimulationCategory;
     background?: Background;
+    children?: ReactNode;
 }
 
 interface IProps {
@@ -39,9 +42,18 @@ interface IProps {
 function MultiList(props: IProps) {
     const {listItemsList, page, step} = props;
     const listItems = listItemsList[page];
-    const {items, showAllItems, fontVariant, header, footer, containerProps, cameraConfig} = listItems
+    const {items, showAllItems, fontVariant, header, footer, containerProps, cameraConfig, children} = listItems
 
+    const boxRef = useRef();
     const numberToShow = showAllItems ? items.length : step + 1;
+
+    // on next step scroll to bottom
+    useEffect(() => {
+        if (boxRef.current) {
+            // @ts-ignore
+            boxRef.current.scrollTop = boxRef.current.scrollHeight;
+        }
+    }, [numberToShow])
 
     return (
         <>
@@ -49,12 +61,22 @@ function MultiList(props: IProps) {
             {header && (
                 header
             )}
-            <BulletList
-                items={items}
-                fontVariant={fontVariant}
-                numberToShow={numberToShow}
-                containerProps={containerProps}
-            />
+            <VerticalContainer
+                flex={1}
+                ref={boxRef}
+                width="100%"
+                overflow='auto'
+            >
+                <BulletList
+                    items={items}
+                    fontVariant={fontVariant}
+                    numberToShow={numberToShow}
+                    containerProps={containerProps}
+                />
+                {children && (
+                    children
+                )}
+            </VerticalContainer>
             {footer && (
                 footer
             )}

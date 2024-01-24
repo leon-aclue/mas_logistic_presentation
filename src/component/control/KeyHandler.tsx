@@ -75,7 +75,6 @@ function KeyHandler() {
 
     useEffect(() => {
         const handleKeyPress = (event: KeyboardEvent) => {
-            console.log(event.key)
             switch (event.key) {
                 case 'ArrowUp':
                     handleClickPrevious();
@@ -110,7 +109,7 @@ function KeyHandler() {
     return (
         <Dialog open={open}>
             <DialogTitle width={300} display="flex" justifyContent="center">
-                <Typography variant="subtitle1">Steuerung</Typography>
+                Steuerung
             </DialogTitle>
             <DialogContent>
                 <Entry text="nächster Schritt" icon={<KeyboardArrowRightIcon/>}/>

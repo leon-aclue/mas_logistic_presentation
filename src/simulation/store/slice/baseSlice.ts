@@ -4,12 +4,13 @@ import {ThreeArr2} from "../../component/ThreeBaseComponents";
 import {
     CHARGING_AREAS,
     DRIVING_AREA_SEGMENTS,
-    VIRTUAL_ROUTES,
+    INDUCTIVE_WIRES,
     PRODUCTION_STATIONS,
     REFLECTOR_STATIONS,
     SIM_BASE_LENGTH,
-    SIM_BASE_WIDTH,
-    STORAGE_STATIONS, INDUCTIVE_WIRES
+    SIM_BASE_WIDTH, SIM_DEFAULT_DELAY,
+    STORAGE_STATIONS,
+    VIRTUAL_ROUTES
 } from "../../config";
 
 export interface IStation {
@@ -35,6 +36,9 @@ export interface ISimulationBaseState {
     reflectorStations: ThreeArr2[],
     inductiveWire: ILineSegment[],
     chargingAreas: ThreeArr2[],
+    runSimulation: boolean,
+    runDelay: number,
+    currentStep: number,
 }
 
 const initialState: ISimulationBaseState = {
@@ -47,6 +51,9 @@ const initialState: ISimulationBaseState = {
     reflectorStations: REFLECTOR_STATIONS,
     inductiveWire: INDUCTIVE_WIRES,
     chargingAreas: CHARGING_AREAS,
+    runSimulation: false,
+    runDelay: SIM_DEFAULT_DELAY,
+    currentStep: 0,
 };
 
 const handleSetupBase = (state: ISimulationBaseState, action: PayloadAction<ISimulationBaseState>): ISimulationBaseState => {
@@ -56,16 +63,53 @@ const handleSetupBase = (state: ISimulationBaseState, action: PayloadAction<ISim
     }
 }
 
+const handleStartSimulation = (state: ISimulationBaseState): ISimulationBaseState => {
+    return {
+        ...state,
+        runSimulation: true,
+    }
+}
+
+const handleStopSimulation = (state: ISimulationBaseState): ISimulationBaseState => {
+    return {
+        ...state,
+        runSimulation: false,
+    }
+}
+
+const handleSimuStep = (state: ISimulationBaseState): ISimulationBaseState => {
+    const currentStep = state.currentStep + 1;
+    return {
+        ...state,
+        currentStep: currentStep >= state.runDelay ? 0 : currentStep,
+    }
+}
+
+const handelSetSimuDelay = (state: ISimulationBaseState, action: PayloadAction<number>): ISimulationBaseState => {
+    return {
+        ...state,
+        runDelay: action.payload,
+    }
+}
+
 export const baseSlice = createSlice({
     name: 'baseStateSlice',
     initialState,
     reducers: {
         setupSimulationBase: handleSetupBase,
+        startSimulation: handleStartSimulation,
+        stopSimulation: handleStopSimulation,
+        simuStep: handleSimuStep,
+        setSimuDelay: handelSetSimuDelay,
     },
 });
 
 export const {
     setupSimulationBase,
+    startSimulation,
+    stopSimulation,
+    simuStep,
+    setSimuDelay,
 } = baseSlice.actions;
 
 export const baseSliceSelector = (state: IRootState) => state.simuBaseReducer;
