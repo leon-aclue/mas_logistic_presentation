@@ -66,13 +66,13 @@ export const listItemsList: MultiListItem[] = [
         header: introductionHeader,
         footer: undefined,
         containerProps: {gap: '20px'},
+        background: {
+            image: baseTitleImagePath + 'SimulationBild.png',
+            title: gptGenerated,
+        },
         items: [
             {
                 title: 'Konkretes Beispiel anhand einer Simulation',
-                background: {
-                    image: baseTitleImagePath + 'SimulationBild.png',
-                    title: gptGenerated,
-                },
             },
             // {
             //     title: 'Allgemeines Vorgehen',
@@ -230,22 +230,20 @@ export const listItemsList: MultiListItem[] = [
         header: baseSetupHeader,
         footer: undefined,
         containerProps: {gap: '20px'},
+        showAllItems: true,
         items: [
-            emptyStartListItem(),
             {
                 title: `Firmengelände mit ${SIM_BASE_WIDTH}m x ${SIM_BASE_LENGTH}m Fläche`,
                 type: ListItemType.ANSWER,
-                activateSimulationItems: ['Base'],
+                activateSimulationItems: ['Base', 'ProductionStations', 'StorageStations'],
             },
             {
                 title: `${PRODUCTION_STATIONS.length} Produktionsstellen`,
                 type: ListItemType.ANSWER,
-                activateSimulationItems: ['ProductionStations'],
             },
             {
                 title: 'Ein Lagerhaus',
                 type: ListItemType.ANSWER,
-                activateSimulationItems: ['StorageStations'],
             },
             {
                 title: 'Produkte sollen bei den Produktionsstellen abgeholt und zum Lager gebracht werden.',
@@ -368,9 +366,13 @@ export const listItemsList: MultiListItem[] = [
         header: basicCategoryHeader,
         footer: basicCategoryFooter,
         cameraConfig: navigationSystemsCameraConfig,
+        background: {
+            image: baseImagePath + 'navImages/agv-vs-amr.jpg',
+            title: 'https://milvusrobotics.com/blog/amr-vs-agv',
+            variant: 'contain',
+        },
         items:
             [
-                emptyStartListItem(),
                 {
                     title: 'AGV - Automated guided vehicle',
                     type: ListItemType.NONE,
@@ -379,6 +381,11 @@ export const listItemsList: MultiListItem[] = [
                 },
                 {
                     title: 'folgt definiertem (virtuellen) Pfad',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
+                    title: 'stoppt falls ein Hinderniss im Weg ist',
                     type: ListItemType.ANSWER,
                     tab: 1,
                 },
@@ -404,6 +411,11 @@ export const listItemsList: MultiListItem[] = [
                     tab: 1,
                 },
                 {
+                    title: 'umfährt Hindernisse',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
+                },
+                {
                     title: 'z.B. Staubsaugroboter',
                     type: ListItemType.ANSWER,
                     tab: 1,
@@ -425,9 +437,13 @@ export const listItemsList: MultiListItem[] = [
         header: agvTypeHeader,
         footer: agvTypeFooter,
         cameraConfig: navigationSystemsCameraConfig,
+        background: {
+            image: baseImagePath + 'agvImages/cart.webp',
+            title: 'https://ek-robotics.com/fileadmin/_processed_/7/3/csm_ek_robotics-AGV-AMR-X_MOVE_1200_6225eaefa3.webp',
+            variant: 'contain',
+        },
         items:
             [
-                emptyStartListItem(),
                 {
                     title: 'AGC - Automated Guided Cart',
                     type: ListItemType.NONE,
@@ -466,6 +482,11 @@ export const listItemsList: MultiListItem[] = [
         header: agvTypeHeader,
         footer: agvTypeFooter,
         cameraConfig: navigationSystemsCameraConfig,
+        background: {
+            image: baseImagePath + 'agvImages/tow-tractors.jpg',
+            title: 'https://www.jungheinrich.com.sg/products/new-trucks/tow-tractors',
+            variant: 'contain',
+        },
         items:
             [
                 {
@@ -511,6 +532,11 @@ export const listItemsList: MultiListItem[] = [
         header: agvTypeHeader,
         footer: agvTypeFooter,
         cameraConfig: navigationSystemsCameraConfig,
+        background: {
+            image: baseImagePath + 'agvImages/forklift.jpg',
+            title: 'https://www.jungheinrich.com.sg/systems/driverless-transport-systems/automated-guided-vehicles',
+            variant: 'contain',
+        },
         items:
             [
                 {
@@ -622,10 +648,14 @@ export const listItemsList: MultiListItem[] = [
     //         ],
     // },
     {
-        simulationCategory: SimulationCategory.NAVIGATION,
+        simulationCategory: SimulationCategory.NONE,
         header: navigationSystemsHeader,
         footer: navigationSystemsFooter,
-        cameraConfig: navigationSystemsCameraConfig,
+        background: {
+            image: baseImagePath + 'navImages/natural.jpg',
+            title: 'https://www.irobagv.com/en/irob-agv-en/agv-navigation-systems/',
+            variant: 'contain',
+        },
         items:
             [
                 emptyStartListItem(),
@@ -689,10 +719,14 @@ export const listItemsList: MultiListItem[] = [
             ],
     },
     {
-        simulationCategory: SimulationCategory.NAVIGATION,
+        simulationCategory: SimulationCategory.NONE,
         header: navigationSystemsHeader,
         footer: navigationSystemsFooter,
-        cameraConfig: navigationSystemsCameraConfig,
+        background: {
+            image: baseImagePath + 'navImages/spots.jpg',
+            title: 'https://www.irobagv.com/en/irob-agv-en/agv-navigation-systems/',
+            variant: 'contain',
+        },
         items:
             [
                 {
@@ -739,10 +773,14 @@ export const listItemsList: MultiListItem[] = [
             ],
     },
     {
-        simulationCategory: SimulationCategory.NAVIGATION,
+        simulationCategory: SimulationCategory.NONE,
         header: navigationSystemsHeader,
         footer: navigationSystemsFooter,
-        cameraConfig: navigationSystemsCameraConfig,
+        background: {
+            image: baseImagePath + 'navImages/tape.jpg',
+            title: 'https://www.irobagv.com/en/irob-agv-en/agv-navigation-systems/',
+            variant: 'contain',
+        },
         items:
             [
                 {
@@ -794,10 +832,14 @@ export const listItemsList: MultiListItem[] = [
             ],
     },
     {
-        simulationCategory: SimulationCategory.NAVIGATION,
+        simulationCategory: SimulationCategory.NONE,
         header: navigationSystemsHeader,
         footer: navigationSystemsFooter,
-        cameraConfig: navigationSystemsCameraConfig,
+        background: {
+            image: baseImagePath + 'navImages/inductive.jpg',
+            title: 'https://www.irobagv.com/en/irob-agv-en/agv-navigation-systems/',
+            variant: 'contain',
+        },
         items:
             [
                 {
@@ -844,10 +886,14 @@ export const listItemsList: MultiListItem[] = [
             ],
     },
     {
-        simulationCategory: SimulationCategory.NAVIGATION,
+        simulationCategory: SimulationCategory.NONE,
         header: navigationSystemsHeader,
         footer: navigationSystemsFooter,
-        cameraConfig: navigationSystemsCameraConfig,
+        background: {
+            image: baseImagePath + 'navImages/laser.jpg',
+            title: 'https://www.irobagv.com/en/irob-agv-en/agv-navigation-systems/',
+            variant: 'contain',
+        },
         items:
             [
                 {
@@ -899,51 +945,6 @@ export const listItemsList: MultiListItem[] = [
             ],
     },
     {
-        simulationCategory: SimulationCategory.NAVIGATION,
-        header: navigationSystemsHeader,
-        footer: navigationSystemsFooter,
-        cameraConfig: navigationSystemsCameraConfig,
-        items:
-            [
-                {
-                    title: 'Fazit',
-                    type: ListItemType.NONE,
-                    tab: 0,
-                    itemProps: baseItemProps,
-                },
-                {
-                    title: 'unterschiedliche Verfahren je nach Anforderung und Budget',
-                    type: ListItemType.ITEM,
-                    tab: 1,
-                },
-                {
-                    title: 'auch Kombination von zwei oder mehr Verfahren möglich',
-                    type: ListItemType.ITEM,
-                    tab: 1,
-                },
-                {
-                    title: 'Natural Navigation & Magnetic Spot Navigation',
-                    type: ListItemType.ANSWER,
-                    tab: 2,
-                },
-                {
-                    title: 'kombiniert Vorteile',
-                    type: ListItemType.PLUS,
-                    tab: 2,
-                },
-                {
-                    title: 'Ausfallsicherheit',
-                    type: ListItemType.PLUS,
-                    tab: 2,
-                },
-                {
-                    title: 'Kosten',
-                    type: ListItemType.MINUS,
-                    tab: 2,
-                },
-            ],
-    },
-    {
         simulationCategory: SimulationCategory.BASE,
         header: ekQuestionHeader,
         footer: ekQuestionFooter,
@@ -956,33 +957,42 @@ export const listItemsList: MultiListItem[] = [
                     itemProps: baseItemProps,
                 },
                 {
-                    title: 'LaserNavigation',
+                    title: 'unterschiedliche Verfahren je nach Anforderung und Budget',
                     type: ListItemType.ANSWER,
                     tab: 1,
-                    activateSimulationItems: ['ReflectorStations'],
                 },
                 {
-                    title: 'zuverlässig',
-                    type: ListItemType.ITEM,
-                    tab: 2,
+                    title: 'auch Kombination von zwei oder mehr Verfahren möglich',
+                    type: ListItemType.ANSWER,
+                    tab: 1,
                 },
                 {
-                    title: 'flexible (virtuelle) Routen',
+                    title: 'LaserNavigation',
                     type: ListItemType.ITEM,
                     tab: 2,
-                    activateSimulationItems: ['VirtualRoutes'],
+                    activateSimulationItems: ['ReflectorStations', 'VirtualRoutes'],
                 },
                 {
                     title: 'InductiveWire an Stationen',
-                    type: ListItemType.ANSWER,
-                    tab: 1,
+                    type: ListItemType.ITEM,
+                    tab: 2,
                     activateSimulationItems: ['InductiveWire'],
                 },
                 {
+                    title: 'kombiniert Vorteile',
+                    type: ListItemType.PLUS,
+                    tab: 1,
+                },
+                {
                     title: 'Redundanz an kritischen Stellen',
-                    type: ListItemType.ITEM,
-                    tab: 2,
+                    type: ListItemType.PLUS,
+                    tab: 1,
 
+                },
+                {
+                    title: 'Kosten',
+                    type: ListItemType.MINUS,
+                    tab: 1,
                 },
             ],
     },
@@ -1277,26 +1287,6 @@ export const listItemsList: MultiListItem[] = [
     },
     {
         simulationCategory: SimulationCategory.BASE,
-        header: introductionControllingHeader,
-        footer: rosControllingFooter,
-        items:
-            [
-                {
-                    title: `Dezentrales Leitsystem mit ROS ${Sources.get(SourceName.AGV_R)?.title}`,
-                    type: ListItemType.NONE,
-                    tab: 0,
-                    itemProps: baseItemProps,
-                },
-                {
-                    title: '...',
-                    type: ListItemType.NONE,
-                    tab: 0,
-                    itemProps: baseItemProps,
-                },
-            ],
-    },
-    {
-        simulationCategory: SimulationCategory.BASE,
         header: simulationHeader,
         footer: undefined,
         children: simulationControlsElem,
@@ -1323,21 +1313,9 @@ export const listItemsList: MultiListItem[] = [
         items:
             [
                 {
-                    title: 'Nachtrag auf den nächsten Seiten',
+                    title: 'Anhang',
                     type: ListItemType.NONE,
                     tab: 0,
-                    itemProps: baseItemProps,
-                },
-                {
-                    title: 'Eigentlich als Einleitung gedacht',
-                    type: ListItemType.ANSWER,
-                    tab: 1,
-                    itemProps: baseItemProps,
-                },
-                {
-                    title: 'Insgesamt aber zu lang, deshalb gestrichen',
-                    type: ListItemType.ANSWER,
-                    tab: 1,
                     itemProps: baseItemProps,
                 },
             ],
@@ -1437,5 +1415,25 @@ export const listItemsList: MultiListItem[] = [
                 type: ListItemType.ANSWER,
             },
         ]
+    },
+    {
+        simulationCategory: SimulationCategory.NONE,
+        header: introductionControllingHeader,
+        footer: rosControllingFooter,
+        items:
+            [
+                {
+                    title: `Dezentrales Leitsystem mit ROS ${Sources.get(SourceName.AGV_R)?.title}`,
+                    type: ListItemType.NONE,
+                    tab: 0,
+                    itemProps: baseItemProps,
+                },
+                {
+                    title: '...',
+                    type: ListItemType.NONE,
+                    tab: 0,
+                    itemProps: baseItemProps,
+                },
+            ],
     },
 ];

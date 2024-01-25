@@ -102,8 +102,10 @@ function SimulationControls() {
                     <Typography>generate Tasks</Typography>
                 </MuiBox>
                 <VerticalContainer>
-                    <Typography>Zoom Verfolgung</Typography>
+                    <Typography>AGV Verfolgung</Typography>
                     <Select
+                        fullWidth
+                        sx={{height: '1.5rem'}}
                         value={zoomAgvId}
                         onChange={handleSetZoomAgv}
                     >
@@ -118,7 +120,7 @@ function SimulationControls() {
                     </Select>
                 </VerticalContainer>
             </FullWidthSpaceBetweenContainer>
-            <FullWidthSpaceBetweenContainer flex={1} gap="5px">
+            <FullWidthSpaceBetweenContainer flex={1} gap="5px" border='1px solid black' padding="5px" borderRadius="5px" overflow="auto">
                 <VerticalContainer>
                     <Typography variant="subtitle2">Neue Aufträge</Typography>
                     {readyForPickup.map((task, index) => (
