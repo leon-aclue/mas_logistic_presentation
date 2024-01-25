@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {useFrame} from "@react-three/fiber";
 import {useDispatch, useSelector} from "react-redux";
-import {agvSliceSelector, updateAGVs} from "../../store/slice/agvSlice";
+import {AgvCommand, agvSliceSelector, updateAGVs} from "../../store/slice/agvSlice";
 import {AGV_STEP_SIZE, AGV_STEP_TURN} from "../../config";
 import {dif2D} from "../../utils/util";
 import {baseSliceSelector, simuStep} from "../../store/slice/baseSlice";
 import {allNodes as allNodesImport, INodes, positionFromNode} from "../../nodes";
+import {addTask} from "../../store/slice/taskSlice";
 
 function AgvControl() {
-    const {runSimulation, currentStep} = useSelector(baseSliceSelector);
+    const {runSimulation, currentStep, productionRate, generateTasks} = useSelector(baseSliceSelector);
     const {agvs} = useSelector(agvSliceSelector);
     const dispatch = useDispatch();
     const [allNodes, setAllNodes] = useState<INodes | undefined>(undefined);
@@ -23,27 +24,48 @@ function AgvControl() {
     useFrame(() => {
         if (runSimulation && !!allNodes) {
             if (currentStep === 0) {
+
+                // task gen
+                if (generateTasks) {
+                    if (Math.random() < productionRate / 1000) {
+                        const stationIndex = Math.floor(Math.random() * allNodes.productionNodes.size)
+                        const station = Array.from(allNodes.productionNodes.values())[stationIndex];
+                        if (!station.hasProduct) {
+                            dispatch(addTask({pickUpNodeId: station.id}));
+                        }
+                    }
+                }
+
                 // agv drive
                 dispatch(updateAGVs(
                     agvs.map((agvState) => {
-                        const destinationNodes = [...agvState.destinationNodes];
-                        if (destinationNodes.length === 0) {
+                        const destinations = [...agvState.destinations];
+                        if (destinations.length === 0) {
                             return agvState;
                         }
 
                         const agv = {...agvState.agv};
 
-                        const destination = destinationNodes[0]!;
-                        const [destDifX, destDifY] = dif2D(agv.position, positionFromNode(destination));
+                        const destination = destinations[0]!;
+                        const [destDifX, destDifY] = dif2D(agv.position, positionFromNode(destination.node));
                         if (Math.abs(destDifX) < AGV_STEP_SIZE && Math.abs(destDifY) < AGV_STEP_SIZE) {
                             // reached destination
-                            // ... ?
+
                             // do task at destination
+                            switch (destination.command) {
+                                case AgvCommand.LOAD:
+                                    agv.hasProduct = true;
+                                    break;
+                                case AgvCommand.UNLOAD:
+                                    agv.hasProduct = false;
+                                    break;
+                            }
+
                             return {
                                 id: agvState.id,
                                 agv,
-                                destinationNodes: destinationNodes.slice(1),
-                                currentNode: destinationNodes[0],
+                                destinations: destinations.slice(1),
+                                currentNode: destinations[0].node,
                                 nextNode: undefined,
                                 nextRotation: undefined,
                             }
@@ -54,13 +76,13 @@ function AgvControl() {
                         let rotation = agvState.nextRotation;
 
                         if (!nextNode || rotation === undefined) {
-                            let neighbour = currentNode.neighbours.find((neighbour) => neighbour.nodeId === destination.id);
+                            let neighbour = currentNode.neighbours.find((neighbour) => neighbour.nodeId === destination.node.id);
                             let nextNodeId = neighbour?.nodeId;
                             rotation = neighbour?.rotation;
 
                             if (!nextNodeId || rotation === undefined) {
                                 if (allNodes.decisionsMap.has(currentNode.id)) {
-                                    nextNodeId = allNodes.decisionsMap.get(currentNode.id)!.get(destination.id);
+                                    nextNodeId = allNodes.decisionsMap.get(currentNode.id)!.get(destination.node.id);
                                     rotation = currentNode.neighbours.find((neigbour) => neigbour.nodeId === nextNodeId)?.rotation;
                                 }
                                 if (!nextNodeId || rotation === undefined) {
@@ -86,7 +108,7 @@ function AgvControl() {
                                 return {
                                     id: agvState.id,
                                     agv,
-                                    destinationNodes: destinationNodes,
+                                    destinations: destinations,
                                     currentNode: nextNode,
                                     nextNode: undefined,
                                     nextRotation: undefined,
@@ -106,15 +128,13 @@ function AgvControl() {
                         return {
                             id: agvState.id,
                             agv,
-                            destinationNodes,
+                            destinations,
                             currentNode,
                             nextNode,
                             nextRotation: rotation,
                         };
                     })
                 ));
-
-                // task gen
             }
             dispatch(simuStep());
         }

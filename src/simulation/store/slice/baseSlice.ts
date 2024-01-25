@@ -10,6 +10,7 @@ import {
     SIM_BASE_LENGTH,
     SIM_BASE_WIDTH,
     SIM_DEFAULT_DELAY,
+    SIM_DEFAULT_PRODUCTION_RATE,
     STORAGE_STATIONS,
     VIRTUAL_ROUTES
 } from "../../config";
@@ -42,6 +43,7 @@ export interface ISimulationBaseState {
     runDelay: number,
     currentStep: number,
     productionRate: number,
+    generateTasks: boolean,
 }
 
 const initialState: ISimulationBaseState = {
@@ -57,7 +59,8 @@ const initialState: ISimulationBaseState = {
     runSimulation: false,
     runDelay: SIM_DEFAULT_DELAY,
     currentStep: 0,
-    productionRate: 0.01,
+    productionRate: SIM_DEFAULT_PRODUCTION_RATE,
+    generateTasks: false,
 };
 
 const handleSetupBase = (state: ISimulationBaseState, action: PayloadAction<ISimulationBaseState>): ISimulationBaseState => {
@@ -96,6 +99,28 @@ const handelSetSimuDelay = (state: ISimulationBaseState, action: PayloadAction<n
     }
 }
 
+const handelSetSimuProdRate = (state: ISimulationBaseState, action: PayloadAction<number>): ISimulationBaseState => {
+    return {
+        ...state,
+        productionRate: action.payload,
+    }
+}
+
+
+const handleStartTaskGen = (state: ISimulationBaseState): ISimulationBaseState => {
+    return {
+        ...state,
+        generateTasks: true,
+    }
+}
+
+const handleStopTaskGen = (state: ISimulationBaseState): ISimulationBaseState => {
+    return {
+        ...state,
+        generateTasks: false,
+    }
+}
+
 export const baseSlice = createSlice({
     name: 'baseStateSlice',
     initialState,
@@ -105,6 +130,9 @@ export const baseSlice = createSlice({
         stopSimulation: handleStopSimulation,
         simuStep: handleSimuStep,
         setSimuDelay: handelSetSimuDelay,
+        setSimuProductionRate: handelSetSimuProdRate,
+        startAutoTaskGen: handleStartTaskGen,
+        stopAutoTaskGen: handleStopTaskGen,
     },
 });
 
@@ -114,6 +142,9 @@ export const {
     stopSimulation,
     simuStep,
     setSimuDelay,
+    setSimuProductionRate,
+    startAutoTaskGen,
+    stopAutoTaskGen,
 } = baseSlice.actions;
 
 export const baseSliceSelector = (state: IRootState) => state.simuBaseReducer;

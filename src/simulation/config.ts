@@ -1,6 +1,7 @@
 import {ILineSegment, IStation} from "./store/slice/baseSlice";
 import {ThreeArr2} from "./component/ThreeBaseComponents";
 import {IAgv} from "./component/agv/Agv";
+import {ICameraConfig} from "./store/slice/cameraSlice";
 
 // help functions
 const createStationRow = (width: number, length: number, posX: number, startPosY: number, steps: number, stepWidth: number, storageAreaPosX: number) => {
@@ -35,6 +36,13 @@ const createInductiveWireRow = (posX1: number, posX2: number, startPosY: number,
     return wires;
 }
 
+export const getZoomCameraConfig = (position: ThreeArr2): ICameraConfig => {
+    return {
+        fov: 5,
+        lookAt: [position[0], 0, position[1]]
+    }
+}
+
 // base
 export const SIM_BASE_WIDTH = 100;
 export const SIM_BASE_LENGTH = 130;
@@ -44,7 +52,7 @@ export const SIM_BASE_POS_Y = SIM_BASE_LENGTH / 2;
 export const SIM_BASE_COLOR = 'gray'
 export const SIM_DEFAULT_DELAY = 1;
 
-export const SIM_DEFAULT_PRODUCTION_RATE = 0.01;
+export const SIM_DEFAULT_PRODUCTION_RATE = 10;
 
 export const PRODUCTION_STATION_WIDTH = 9;
 export const PRODUCTION_STATION_LENGTH = 4;
@@ -228,6 +236,14 @@ export const AGV_LASER_SENSOR_OFFSET_X = 1.40;
 export const AGV_LASER_SENSOR_OFFSET_Y = 0;
 export const AGV_LASER_SENSOR_OFFSET_Z = AGV_LASER_SENSOR_HEIGHT / 2 + AGV_BASE_HEIGHT;
 export const AGV_LASER_SENSOR_COLOR = '#333'
+
+export const AGV_PRODUCT_WIDTH = 0.8;
+export const AGV_PRODUCT_LENGTH = 1.2;
+export const AGV_PRODUCT_HEIGHT = 1;
+export const AGV_PRODUCT_OFFSET_X = 0.55;
+export const AGV_PRODUCT_OFFSET_Y = 0;
+export const AGV_PRODUCT_OFFSET_Z = AGV_PRODUCT_HEIGHT / 2 + 0.05;
+export const AGV_PRODUCT_COLOR = '#433'
 
 export const ROT_N = 0;
 export const ROT_E = Math.PI * 1.5;

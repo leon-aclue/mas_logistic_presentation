@@ -10,13 +10,19 @@ export enum AgvCommand {
     UNLOAD,
 }
 
+export interface Destination {
+    node: TNode,
+    command: AgvCommand,
+}
+
 export interface IAgvState {
     id: number,
     agv: IAgv,
-    destinationNodes: TNode[],
+    destinations: Destination[],
     currentNode: TNode,
     nextNode?: TNode,
     nextRotation?: number,
+    taskId?: number,
 }
 
 export interface IAGVsState {
@@ -27,7 +33,7 @@ const initialState: IAGVsState = {
     agvs: INITIAL_AGVS.map((agv, index): IAgvState => ({
         id: index,
         agv,
-        destinationNodes: [],
+        destinations: [],
         currentNode: positionToNode(agv.position, allNodes.nodes)!,
     })),
 };
@@ -38,7 +44,7 @@ const handleInitAGVs = (state: IAGVsState): IAGVsState => {
         agvs: INITIAL_AGVS.map((agv, index): IAgvState => ({
             id: index,
             agv,
-            destinationNodes: [],
+            destinations: [],
             currentNode: positionToNode(agv.position, allNodes.chargingNodes)!,
         })),
     }
