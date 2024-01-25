@@ -8,6 +8,7 @@ export enum AgvCommand {
     NONE,
     LOAD,
     UNLOAD,
+    CHECK_DROP_OFF,
 }
 
 export interface Destination {

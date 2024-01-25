@@ -118,10 +118,28 @@ function SimulationControls() {
                     </Select>
                 </VerticalContainer>
             </FullWidthSpaceBetweenContainer>
-            <FullWidthSpaceBetweenContainer flex={1}>
+            <FullWidthSpaceBetweenContainer flex={1} gap="5px">
                 <VerticalContainer>
                     <Typography variant="subtitle2">Neue Aufträge</Typography>
                     {readyForPickup.map((task, index) => (
+                        <Typography key={index} variant="subtitle2">{task.pickUpNodeId}</Typography>
+                    ))}
+                </VerticalContainer>
+                <VerticalContainer>
+                    <Typography variant="subtitle2">Warte auf Abholung</Typography>
+                    {waitingForPickup.map((task, index) => (
+                        <Typography key={index} variant="subtitle2">{task.pickUpNodeId}</Typography>
+                    ))}
+                </VerticalContainer>
+                <VerticalContainer>
+                    <Typography variant="subtitle2">In Transport</Typography>
+                    {inTransport.map((task, index) => (
+                        <Typography key={index} variant="subtitle2">{task.pickUpNodeId}</Typography>
+                    ))}
+                </VerticalContainer>
+                <VerticalContainer>
+                    <Typography variant="subtitle2">Geliefert</Typography>
+                    {delivered.map((task, index) => (
                         <Typography key={index} variant="subtitle2">{task.pickUpNodeId}</Typography>
                     ))}
                 </VerticalContainer>

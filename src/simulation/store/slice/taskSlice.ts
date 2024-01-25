@@ -1,12 +1,11 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IRootState} from "../../../store/store";
 
-const MAX_TASKS_IN_LIST = 20;
+const MAX_TASKS_IN_LIST = 10;
 
 export interface ITask {
     id: number,
     pickUpNodeId: string,
-    waitingTime: number,
 }
 
 export interface INewTask {
@@ -33,7 +32,6 @@ const handleAddTask = (state: ITaskState, action: PayloadAction<INewTask>): ITas
     const task: ITask = {
         ...action.payload,
         id: state.nextTaskId,
-        waitingTime: 0,
     }
     return {
         ...state,
@@ -43,6 +41,7 @@ const handleAddTask = (state: ITaskState, action: PayloadAction<INewTask>): ITas
 }
 
 const handleAcceptTask = (state: ITaskState, action: PayloadAction<number>): ITaskState => {
+    console.log("accept", action.payload);
     const task = state.readyForPickup.find((task) => task.id === action.payload);
     if (!task) {
         return state;
@@ -56,6 +55,7 @@ const handleAcceptTask = (state: ITaskState, action: PayloadAction<number>): ITa
 }
 
 const handlePickupTask = (state: ITaskState, action: PayloadAction<number>): ITaskState => {
+    console.log("pickup", action.payload);
     const task = state.waitingForPickup.find((task) => task.id === action.payload);
     if (!task) {
         return state;

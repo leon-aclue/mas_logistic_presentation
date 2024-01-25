@@ -19,6 +19,7 @@ export interface INodes {
     storageNodes: Map<string, TNode>;
     chargingNodes: Map<string, TNode>;
     decisionsMap: Map<string, Map<string, string>>;
+    dropOffWaitingNode: TNode;
 }
 
 export const allNodes: INodes = (() => {
@@ -130,14 +131,16 @@ export const allNodes: INodes = (() => {
     const n_20_023: TNode = {id: '20-023', neighbours: [], isStation: false, hasProduct: false};
     const n_20_027: TNode = {id: '20-027', neighbours: [], isStation: false, hasProduct: false};
     const n_20_084: TNode = {id: '20-084', neighbours: [], isStation: false, hasProduct: false};
-    const n_20_122: TNode = {id: '20-122', neighbours: [], isStation: false, hasProduct: false};
+    const n_20_121: TNode = {id: '20-121', neighbours: [], isStation: false, hasProduct: false};
 
     const n_50_027: TNode = {id: '50-027', neighbours: [], isStation: false, hasProduct: false};
     const n_50_084: TNode = {id: '50-084', neighbours: [], isStation: false, hasProduct: false};
-    const n_50_122: TNode = {id: '50-122', neighbours: [], isStation: false, hasProduct: false};
+    const n_50_121: TNode = {id: '50-121', neighbours: [], isStation: false, hasProduct: false};
 
     const n_80_027: TNode = {id: '80-027', neighbours: [], isStation: false, hasProduct: false};
     const n_80_084: TNode = {id: '80-084', neighbours: [], isStation: false, hasProduct: false};
+
+    const DROP_OFF_NODE = n_20_023;
 
 // init neighbours
 // -> storage
@@ -232,12 +235,12 @@ export const allNodes: INodes = (() => {
     });
     pn_54_110.neighbours.push({nodeId: n_50_110.id, rotation: ROT_S});
     pn_46_110.neighbours.push({nodeId: n_50_110.id, rotation: ROT_N});
-    n_50_120.neighbours.push({nodeId: n_50_122.id, rotation: ROT_E}, {nodeId: pn_54_120.id, rotation: ROT_S});
+    n_50_120.neighbours.push({nodeId: n_50_121.id, rotation: ROT_E}, {nodeId: pn_54_120.id, rotation: ROT_S});
     pn_54_120.neighbours.push({nodeId: n_50_120.id, rotation: ROT_S});
-    n_50_122.neighbours.push({nodeId: n_20_122.id, rotation: ROT_S});
+    n_50_121.neighbours.push({nodeId: n_20_121.id, rotation: ROT_S});
 
 // -> final return
-    n_20_122.neighbours.push({nodeId: n_20_120.id, rotation: ROT_W});
+    n_20_121.neighbours.push({nodeId: n_20_120.id, rotation: ROT_W});
     n_20_120.neighbours.push({nodeId: n_20_110.id, rotation: ROT_W}, {nodeId: pn_16_120.id, rotation: ROT_N});
     pn_16_120.neighbours.push({nodeId: n_20_120.id, rotation: ROT_N});
     n_20_110.neighbours.push({nodeId: n_20_100.id, rotation: ROT_W}, {nodeId: pn_16_110.id, rotation: ROT_N}, {
@@ -385,11 +388,11 @@ export const allNodes: INodes = (() => {
     nodes.set(n_20_023.id, n_20_023);
     nodes.set(n_20_027.id, n_20_027);
     nodes.set(n_20_084.id, n_20_084);
-    nodes.set(n_20_122.id, n_20_122);
+    nodes.set(n_20_121.id, n_20_121);
 
     nodes.set(n_50_027.id, n_50_027);
     nodes.set(n_50_084.id, n_50_084);
-    nodes.set(n_50_122.id, n_50_122);
+    nodes.set(n_50_121.id, n_50_121);
 
     nodes.set(n_80_027.id, n_80_027);
     nodes.set(n_80_084.id, n_80_084);
@@ -407,6 +410,8 @@ export const allNodes: INodes = (() => {
 
     // decisions
     const n_50_023_map = new Map<string, string>();
+    n_50_023_map.set(DROP_OFF_NODE.id, n_50_027.id);
+
     n_50_023_map.set(pn_16_040.id, n_50_027.id);
     n_50_023_map.set(pn_16_050.id, n_50_027.id);
     n_50_023_map.set(pn_16_060.id, n_50_027.id);
@@ -458,6 +463,8 @@ export const allNodes: INodes = (() => {
 
 
     const n_80_027_map = new Map<string, string>();
+    n_80_027_map.set(DROP_OFF_NODE.id, n_50_027.id);
+
     n_80_027_map.set(pn_16_040.id, n_50_027.id);
     n_80_027_map.set(pn_16_050.id, n_50_027.id);
     n_80_027_map.set(pn_16_060.id, n_50_027.id);
@@ -509,6 +516,8 @@ export const allNodes: INodes = (() => {
 
 
     const n_50_084_map = new Map<string, string>();
+    n_50_084_map.set(DROP_OFF_NODE.id, n_20_084.id);
+
     n_50_084_map.set(pn_16_040.id, n_20_084.id);
     n_50_084_map.set(pn_16_050.id, n_20_084.id);
     n_50_084_map.set(pn_16_060.id, n_20_084.id);
@@ -565,6 +574,7 @@ export const allNodes: INodes = (() => {
         storageNodes,
         chargingNodes,
         decisionsMap,
+        dropOffWaitingNode: DROP_OFF_NODE,
     }
 })();
 
