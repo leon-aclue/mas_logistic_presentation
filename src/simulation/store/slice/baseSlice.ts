@@ -8,7 +8,8 @@ import {
     PRODUCTION_STATIONS,
     REFLECTOR_STATIONS,
     SIM_BASE_LENGTH,
-    SIM_BASE_WIDTH, SIM_DEFAULT_DELAY,
+    SIM_BASE_WIDTH,
+    SIM_DEFAULT_DELAY,
     STORAGE_STATIONS,
     VIRTUAL_ROUTES
 } from "../../config";
@@ -19,6 +20,7 @@ export interface IStation {
     width: number,
     length: number,
     storageAreas: ThreeArr2[],
+    hasProduct?: boolean,
 }
 
 export interface ILineSegment {
@@ -39,6 +41,7 @@ export interface ISimulationBaseState {
     runSimulation: boolean,
     runDelay: number,
     currentStep: number,
+    productionRate: number,
 }
 
 const initialState: ISimulationBaseState = {
@@ -54,6 +57,7 @@ const initialState: ISimulationBaseState = {
     runSimulation: false,
     runDelay: SIM_DEFAULT_DELAY,
     currentStep: 0,
+    productionRate: 0.01,
 };
 
 const handleSetupBase = (state: ISimulationBaseState, action: PayloadAction<ISimulationBaseState>): ISimulationBaseState => {

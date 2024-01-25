@@ -44,6 +44,8 @@ export const SIM_BASE_POS_Y = SIM_BASE_LENGTH / 2;
 export const SIM_BASE_COLOR = 'gray'
 export const SIM_DEFAULT_DELAY = 1;
 
+export const SIM_DEFAULT_PRODUCTION_RATE = 0.01;
+
 export const PRODUCTION_STATION_WIDTH = 9;
 export const PRODUCTION_STATION_LENGTH = 4;
 export const PRODUCTION_STATION_HEIGHT = 3;
@@ -128,7 +130,7 @@ export const VIRTUAL_ROUTES: ILineSegment[] = [
 
     // horizontal
     {start: [20, 23], end: [80, 23]},
-    {start: [20, 27], end: [80, 27]},
+    {start: [50, 27], end: [80, 27]},
     {start: [20, 84], end: [80, 84]},
     {start: [20, 121], end: [50, 121]},
 ];
@@ -146,17 +148,17 @@ export const INDUCTIVE_WIRES: ILineSegment[] = [
     ...createInductiveWireRow(76, 80, 50, 3, 10),
     ...createInductiveWireRow(80, 84, 40, 5, 10),
     // Storage Stations
-    {start: [30, 19], end: [30, 22],},
-    {start: [35, 19], end: [35, 22],},
-    {start: [40, 19], end: [40, 22],},
-    {start: [45, 19], end: [45, 22],},
-    {start: [50, 19], end: [50, 22],},
+    {start: [30, 19], end: [30, 23],},
+    {start: [35, 19], end: [35, 23],},
+    {start: [40, 19], end: [40, 23],},
+    {start: [45, 19], end: [45, 23],},
+    {start: [50, 19], end: [50, 23],},
     //Charging Stations
-    {start: [60, 19], end: [60, 22],},
-    {start: [65, 19], end: [65, 22],},
-    {start: [70, 19], end: [70, 22],},
-    {start: [75, 19], end: [75, 22],},
-    {start: [80, 19], end: [80, 22],},
+    {start: [60, 19], end: [60, 23],},
+    {start: [65, 19], end: [65, 23],},
+    {start: [70, 19], end: [70, 23],},
+    {start: [75, 19], end: [75, 23],},
+    {start: [80, 19], end: [80, 23],},
 ];
 
 export const REFLECTOR_STATION_WIDTH = 0.2;
@@ -262,22 +264,22 @@ export const INITIAL_AGVS: IAgv[] = [
         position: [60, 19],
         rotation: -1.55,
     },
-    // {
-    //     position: [65, 19],
-    //     rotation: -1.55,
-    // },
-    // {
-    //     position: [70, 19],
-    //     rotation: -1.55,
-    // },
-    // {
-    //     position: [75, 19],
-    //     rotation: -1.55,
-    // },
-    // {
-    //     position: [80, 19],
-    //     rotation: -1.55,
-    // },
+    {
+        position: [65, 19],
+        rotation: -1.55,
+    },
+    {
+        position: [70, 19],
+        rotation: -1.55,
+    },
+    {
+        position: [75, 19],
+        rotation: -1.55,
+    },
+    {
+        position: [80, 19],
+        rotation: -1.55,
+    },
 ];
 
 

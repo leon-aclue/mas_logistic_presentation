@@ -2,14 +2,15 @@ import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {baseSliceSelector, setSimuDelay, startSimulation, stopSimulation} from "../../store/slice/baseSlice";
 import {Button, TextField, Typography} from "@mui/material";
-import {AgvCommand, IAGVPlanUpdate, IAgvState, updateAgvPlan, updateAGVs} from "../../store/slice/agvSlice";
-import {ROT_E, ROT_N, ROT_S} from "../../config";
 import VerticalContainer from "../../../component/container/VerticalContainer";
 import MuiBox from "../../../component/container/MuiBox";
+import {allNodes} from "../../nodes";
+import {agvSliceSelector, IAgvState, updateAgv} from "../../store/slice/agvSlice";
 
 function SimulationControls() {
     const dispatch = useDispatch();
     const {runSimulation, runDelay} = useSelector(baseSliceSelector);
+    const {agvs} = useSelector(agvSliceSelector);
 
     const handleRunToggle = () => {
         if (runSimulation) {
@@ -20,99 +21,24 @@ function SimulationControls() {
     }
 
     const handleCreateDefaultPlan = () => {
-        const newStates: IAgvState[] = [
-            {
-                id: 0,
-                agv: {
-                    position: [60, 19],
-                    rotation: ROT_E,
-                },
-                plans: []
-            },
-            {
-                id: 1,
-                agv: {
-                    position: [65, 19],
-                    rotation: ROT_E,
-                },
-                plans: []
-            },
-        ];
-        dispatch(updateAGVs(newStates));
+        const newDest1 = allNodes.productionNodes.get("16-080");
+        const newDest2 = allNodes.storageNodes.get("50-019");
+        if (newDest1 && newDest2) {
+            console.log(newDest1, newDest2);
+            let agvState: IAgvState = {...agvs[0]}
+            agvState.destinationNodes = [...agvState.destinationNodes, newDest1, newDest2];
+            dispatch(updateAgv(agvState));
 
-        const agv1PlanUpdate: IAGVPlanUpdate = {
-            agvId: 0,
-            plans: [
-                {
-                    location: [60, 22],
-                    rotation: ROT_E,
-                    command: AgvCommand.DRIVE,
-                },
-                {
-                    location: [60, 22],
-                    rotation: ROT_S,
-                    command: AgvCommand.DRIVE,
-                },
-                {
-                    location: [50, 22],
-                    rotation: ROT_S,
-                    command: AgvCommand.DRIVE,
-                },
-                {
-                    location: [50, 22],
-                    rotation: ROT_E,
-                    command: AgvCommand.DRIVE,
-                },
-                {
-                    location: [50, 80],
-                    rotation: ROT_E,
-                    command: AgvCommand.DRIVE,
-                },
-            ],
-        };
-        dispatch(updateAgvPlan(agv1PlanUpdate));
 
-        const agv2PlanUpdate: IAGVPlanUpdate = {
-            agvId: 1,
-            plans: [
-                {
-                    location: [65, 22],
-                    rotation: ROT_E,
-                    command: AgvCommand.DRIVE,
-                },
-                {
-                    location: [65, 22],
-                    rotation: ROT_N,
-                    command: AgvCommand.DRIVE,
-                },
-                {
-                    location: [80, 22],
-                    rotation: ROT_N,
-                    command: AgvCommand.DRIVE,
-                },
-                {
-                    location: [80, 22],
-                    rotation: ROT_E,
-                    command: AgvCommand.DRIVE,
-                },
-                {
-                    location: [80, 80],
-                    rotation: ROT_E,
-                    command: AgvCommand.DRIVE,
-                },
-                {
-                    location: [80, 80],
-                    rotation: ROT_S,
-                    command: AgvCommand.DRIVE,
-                },
-                {
-                    location: [84, 80],
-                    rotation: ROT_S,
-                    command: AgvCommand.DRIVE,
-                },
-            ],
-        };
-        dispatch(updateAgvPlan(agv2PlanUpdate));
+            agvState = {...agvs[1]}
+            agvState.destinationNodes = [...agvState.destinationNodes, newDest1, newDest2];
+            dispatch(updateAgv(agvState));
+
+
+            agvState = {...agvs[2]}
+            agvState.destinationNodes = [...agvState.destinationNodes, newDest1, newDest2];
+            dispatch(updateAgv(agvState));
+        }
     }
 
     return (

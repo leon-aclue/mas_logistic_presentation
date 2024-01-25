@@ -2,26 +2,21 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IRootState} from "../../../store/store";
 import {INITIAL_AGVS} from "../../config";
 import {IAgv} from "../../component/agv/Agv";
-import {ThreeArr2} from "../../component/ThreeBaseComponents";
+import {allNodes, positionToNode, TNode} from "../../nodes";
 
 export enum AgvCommand {
     NONE,
     LOAD,
     UNLOAD,
-    DRIVE,
-    TURN,
-}
-
-export interface IAgvPlan {
-    location: ThreeArr2,
-    rotation: number,
-    command: AgvCommand,
 }
 
 export interface IAgvState {
     id: number,
     agv: IAgv,
-    plans: IAgvPlan[],
+    destinationNodes: TNode[],
+    currentNode: TNode,
+    nextNode?: TNode,
+    nextRotation?: number,
 }
 
 export interface IAGVsState {
@@ -32,7 +27,8 @@ const initialState: IAGVsState = {
     agvs: INITIAL_AGVS.map((agv, index): IAgvState => ({
         id: index,
         agv,
-        plans: [],
+        destinationNodes: [],
+        currentNode: positionToNode(agv.position, allNodes.nodes)!,
     })),
 };
 
@@ -42,7 +38,8 @@ const handleInitAGVs = (state: IAGVsState): IAGVsState => {
         agvs: INITIAL_AGVS.map((agv, index): IAgvState => ({
             id: index,
             agv,
-            plans: [],
+            destinationNodes: [],
+            currentNode: positionToNode(agv.position, allNodes.chargingNodes)!,
         })),
     }
 }
@@ -54,25 +51,16 @@ const handleUpdateAGVs = (state: IAGVsState, action: PayloadAction<IAgvState[]>)
     }
 }
 
-export interface IAGVPlanUpdate {
-    agvId: number,
-    plans: IAgvPlan[],
-}
-const handleUpdateAGVPlan = (state: IAGVsState, action: PayloadAction<IAGVPlanUpdate>): IAGVsState => {
-    const planUpdate: IAGVPlanUpdate = action.payload;
+const handleUpdateAGV = (state: IAGVsState, action: PayloadAction<IAgvState>): IAGVsState => {
+    const agvState: IAgvState = action.payload;
 
-    const agvs = [...state.agvs.filter((agv) => agv.id !== planUpdate.agvId)];
+    const agvs = [...state.agvs.filter((agv) => agv.id !== agvState.id)];
 
-    let agvState: IAgvState | undefined = state.agvs.find((agv) => agv.id === planUpdate.agvId);
-    if(agvState) {
-        agvState = {...agvState};
-        agvState.plans = planUpdate.plans;
-        agvs.push(agvState);
-    }
+    agvs.push(agvState);
 
     return {
         ...state,
-        agvs
+        agvs,
     };
 }
 
@@ -83,14 +71,14 @@ export const agvSlice = createSlice({
     reducers: {
         initAGVs: handleInitAGVs,
         updateAGVs: handleUpdateAGVs,
-        updateAgvPlan: handleUpdateAGVPlan,
+        updateAgv: handleUpdateAGV,
     },
 });
 
 export const {
     initAGVs,
     updateAGVs,
-    updateAgvPlan,
+    updateAgv,
 } = agvSlice.actions;
 
 export const agvSliceSelector = (state: IRootState) => state.agvReducer;
