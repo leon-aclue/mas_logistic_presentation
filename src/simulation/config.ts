@@ -278,23 +278,23 @@ export const EXAMPLE_AGVS: IAgv[] = [
 export const INITIAL_AGVS: IAgv[] = [
     {
         position: [60, 19],
-        rotation: -1.55,
+        rotation: ROT_E,
     },
     {
         position: [65, 19],
-        rotation: -1.55,
+        rotation: ROT_E,
     },
     {
         position: [70, 19],
-        rotation: -1.55,
+        rotation: ROT_E,
     },
     {
         position: [75, 19],
-        rotation: -1.55,
+        rotation: ROT_E,
     },
     {
         position: [80, 19],
-        rotation: -1.55,
+        rotation: ROT_E,
     },
 ];
 

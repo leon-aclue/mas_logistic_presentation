@@ -5,6 +5,7 @@ import {cameraSliceReducer} from "../simulation/store/slice/cameraSlice";
 import {globalSliceReducer} from "./slice/globalSlice";
 import {agvSliceReducer} from "../simulation/store/slice/agvSlice";
 import {taskSliceReducer} from "../simulation/store/slice/taskSlice";
+import {trafficSliceReducer} from "../simulation/store/slice/trafficSlice";
 
 export const store = configureStore({
     reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
         cameraReducer: cameraSliceReducer,
         agvReducer: agvSliceReducer,
         taskReducer: taskSliceReducer,
+        trafficReducer: trafficSliceReducer,
     },
 });
 

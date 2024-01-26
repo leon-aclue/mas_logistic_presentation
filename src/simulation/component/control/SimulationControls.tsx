@@ -13,11 +13,12 @@ import {Button, MenuItem, Select, SelectChangeEvent, Switch, TextField, Typograp
 import VerticalContainer from "../../../component/container/VerticalContainer";
 import MuiBox from "../../../component/container/MuiBox";
 import {allNodes} from "../../nodes";
-import {AgvCommand, agvSliceSelector, IAgvState, updateAgv} from "../../store/slice/agvSlice";
+import {AgvCommand, agvSliceSelector, IAgvState, initAGVs, updateAgv} from "../../store/slice/agvSlice";
 import FullWidthSpaceBetweenContainer from "../../../component/container/FullWidthSpaceBetweenContainer";
-import {taskSliceSelector} from "../../store/slice/taskSlice";
+import {resetTasks, taskSliceSelector} from "../../store/slice/taskSlice";
 import {setCameraConfig} from "../../store/slice/cameraSlice";
 import {getZoomCameraConfig} from "../../config";
+import {resetTraffic} from "../../store/slice/trafficSlice";
 
 function SimulationControls() {
     const dispatch = useDispatch();
@@ -82,6 +83,12 @@ function SimulationControls() {
         setZoomAgvId(event.target.value);
     }
 
+    const handleReset = () => {
+        dispatch(initAGVs());
+        dispatch(resetTasks());
+        dispatch(resetTraffic());
+    }
+
     useEffect(() => {
         if (zoomAgvId !== "") {
             const position = agvs.find((agvState) => agvState.id === parseInt(zoomAgvId))?.agv.position;
@@ -119,8 +126,12 @@ function SimulationControls() {
                         ))}
                     </Select>
                 </VerticalContainer>
+                <Button variant="outlined" onClick={handleReset} color="error">
+                    <Typography>Reset</Typography>
+                </Button>
             </FullWidthSpaceBetweenContainer>
-            <FullWidthSpaceBetweenContainer flex={1} gap="5px" border='1px solid black' padding="5px" borderRadius="5px" overflow="auto">
+            <FullWidthSpaceBetweenContainer flex={1} gap="5px" border='1px solid black' padding="5px" borderRadius="5px"
+                                            overflow="auto">
                 <VerticalContainer>
                     <Typography variant="subtitle2">Neue Aufträge</Typography>
                     {readyForPickup.map((task, index) => (

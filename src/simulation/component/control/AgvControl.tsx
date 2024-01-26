@@ -7,11 +7,13 @@ import {dif2D} from "../../utils/util";
 import {baseSliceSelector, simuStep} from "../../store/slice/baseSlice";
 import {allNodes as allNodesImport, INodes, positionFromNode} from "../../nodes";
 import {acceptTask, addTask, deliverTask, pickupTask, taskSliceSelector} from "../../store/slice/taskSlice";
+import {trafficSliceSelector, updateTraffic} from "../../store/slice/trafficSlice";
 
 function AgvControl() {
     const {runSimulation, currentStep, productionRate, generateTasks} = useSelector(baseSliceSelector);
     const {agvs} = useSelector(agvSliceSelector);
     const taskState = useSelector(taskSliceSelector);
+    const {blocked, drop_planned} = useSelector(trafficSliceSelector);
     const dispatch = useDispatch();
     const [allNodes, setAllNodes] = useState<INodes | undefined>(undefined);
 
@@ -25,6 +27,8 @@ function AgvControl() {
     useFrame(() => {
         if (runSimulation && !!allNodes) {
             if (currentStep === 0) {
+                let updatedBlocked = [...blocked];
+                let updatedDropPlanned = [...drop_planned];
 
                 // task gen
                 if (generateTasks) {
@@ -50,24 +54,38 @@ function AgvControl() {
                     const [destDifX, destDifY] = dif2D(agv.position, positionFromNode(destination.node));
                     if (Math.abs(destDifX) < AGV_STEP_SIZE && Math.abs(destDifY) < AGV_STEP_SIZE) {
                         // reached destination
+                        updatedBlocked = updatedBlocked.filter((entry) => entry !== agvState.currentNode.id);
 
                         // do task at destination
                         switch (destination.command) {
                             case AgvCommand.LOAD:
                                 agv.hasProduct = true;
-                                console.log("load", agvState);
                                 dispatch(pickupTask(agvState.taskId!))
+                                break;
+                            case AgvCommand.CHECK_DROP_OFF:
+                                const options = Array.from(allNodes.storageNodes.values()).reverse();
+                                const selectedOption = options.find((option) => !drop_planned.includes(option.id));
+                                if (selectedOption) {
+                                    newState.dropId = selectedOption.id;
+                                    updatedDropPlanned.push(selectedOption.id);
+                                    destinations.push({
+                                        node: selectedOption,
+                                        command: AgvCommand.UNLOAD,
+                                    })
+                                }
                                 break;
                             case AgvCommand.UNLOAD:
                                 agv.hasProduct = false;
-                                newState.taskId = undefined;
+                                destinations.push({
+                                    node: allNodes.dropOffExitNode,
+                                    command: AgvCommand.EXIT_DROP_OFF,
+                                })
                                 dispatch(deliverTask(agvState.taskId!))
                                 break;
-                            case AgvCommand.CHECK_DROP_OFF:
-                                destinations.push({
-                                    node: Array.from(allNodes.storageNodes.values())[0],
-                                    command: AgvCommand.UNLOAD,
-                                })
+                            case AgvCommand.EXIT_DROP_OFF:
+                                newState.taskId = undefined;
+                                newState.dropId = undefined;
+                                updatedDropPlanned = updatedDropPlanned.filter((entry) => entry !== agvState.dropId);
                                 break;
                         }
 
@@ -100,39 +118,44 @@ function AgvControl() {
                                 rotation = currentNode.neighbours[0].rotation;
                             }
                         }
-                        nextNode = allNodes.nodes.get(nextNodeId)!;
+                        if (!updatedBlocked.find((entry) => entry === nextNodeId)) {
+                            nextNode = allNodes.nodes.get(nextNodeId)!;
+                            updatedBlocked.push(nextNodeId);
+                        }
                     }
 
+                    if (nextNode) {
+                        const difRot = (agv.rotation + (Math.PI * 2) - rotation) % (Math.PI * 2);
+                        // first check rotation
+                        if (difRot < AGV_STEP_TURN) {
+                            const [difX, difY] = dif2D(agv.position, positionFromNode(nextNode));
+                            agv.position = [
+                                agv.position[0] + (Math.min(Math.abs(difX), AGV_STEP_SIZE) * (difX > 0 ? 1 : -1)),
+                                agv.position[1] + (Math.min(Math.abs(difY), AGV_STEP_SIZE) * (difY > 0 ? 1 : -1)),
+                            ];
 
-                    const difRot = (agv.rotation + (Math.PI * 2) - rotation) % (Math.PI * 2);
-                    // first check rotation
-                    if (difRot < AGV_STEP_TURN) {
-                        const [difX, difY] = dif2D(agv.position, positionFromNode(nextNode));
-                        agv.position = [
-                            agv.position[0] + (Math.min(Math.abs(difX), AGV_STEP_SIZE) * (difX > 0 ? 1 : -1)),
-                            agv.position[1] + (Math.min(Math.abs(difY), AGV_STEP_SIZE) * (difY > 0 ? 1 : -1)),
-                        ];
-
-                        if (Math.abs(difX) < AGV_STEP_SIZE && Math.abs(difY) < AGV_STEP_SIZE) {
-                            // reached nextNode
-                            return {
-                                ...agvState,
-                                agv,
-                                destinations: destinations,
-                                currentNode: nextNode,
-                                nextNode: undefined,
-                                nextRotation: undefined,
+                            if (Math.abs(difX) < AGV_STEP_SIZE && Math.abs(difY) < AGV_STEP_SIZE) {
+                                // reached nextNode
+                                updatedBlocked = updatedBlocked.filter((entry) => entry !== agvState.currentNode.id);
+                                return {
+                                    ...agvState,
+                                    agv,
+                                    destinations: destinations,
+                                    currentNode: nextNode,
+                                    nextNode: undefined,
+                                    nextRotation: undefined,
+                                }
                             }
+                            // only if rotation is good go in x / y
+                        } else {
+                            const rotDir = difRot <= Math.PI ? 1 : -1;
+                            const rotationStep = Math.min(difRot, AGV_STEP_TURN) * rotDir;
+
+
+                            let newRotation = agv.rotation - rotationStep;
+                            newRotation = (newRotation + (Math.PI * 2)) % (Math.PI * 2)
+                            agv.rotation = newRotation;
                         }
-                        // only if rotation is good go in x / y
-                    } else {
-                        const rotDir = difRot <= Math.PI ? 1 : -1;
-                        const rotationStep = Math.min(difRot, AGV_STEP_TURN) * rotDir;
-
-
-                        let newRotation = agv.rotation - rotationStep;
-                        newRotation = (newRotation + (Math.PI * 2)) % (Math.PI * 2)
-                        agv.rotation = newRotation;
                     }
 
                     return {
@@ -147,14 +170,14 @@ function AgvControl() {
 
                 // agv drive
                 dispatch(updateAGVs(updatedAgvs));
-
+                dispatch(updateTraffic({blocked: updatedBlocked, drop_planned: updatedDropPlanned}))
 
                 // check if new task needed
-                agvs.filter((agvState) => !agvState.taskId)
+                updatedAgvs.filter((agvState) => !agvState.taskId)
                     .forEach((agvState, index) => {
-                        if(taskState.readyForPickup.length > index) {
+                        const newState = {...agvState}
+                        if (taskState.readyForPickup.length > index) {
                             const task = taskState.readyForPickup[index];
-                            const newState = {...agvState};
                             newState.taskId = task.id;
                             newState.destinations = [
                                 {
@@ -166,11 +189,18 @@ function AgvControl() {
                                     command: AgvCommand.CHECK_DROP_OFF,
                                 },
                             ]
-                            console.log("new", newState);
-                            dispatch(updateAgv(newState));
                             dispatch(acceptTask(task.id));
+                        } else {
+                            newState.destinations = [
+                                {
+                                    node: allNodes.chargeWaitingNode,
+                                    command: AgvCommand.ENTRY_CHARGE,
+                                },
+                            ]
                         }
+                        dispatch(updateAgv(newState));
                     });
+
             }
             dispatch(simuStep());
         }

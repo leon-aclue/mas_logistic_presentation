@@ -9,6 +9,9 @@ export enum AgvCommand {
     LOAD,
     UNLOAD,
     CHECK_DROP_OFF,
+    EXIT_DROP_OFF,
+    ENTRY_CHARGE,
+    EXIT_CHARGE,
 }
 
 export interface Destination {
@@ -24,6 +27,8 @@ export interface IAgvState {
     nextNode?: TNode,
     nextRotation?: number,
     taskId?: number,
+    dropId?: string,
+    chargeId?: string,
 }
 
 export interface IAGVsState {

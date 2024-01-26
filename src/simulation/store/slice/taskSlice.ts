@@ -41,7 +41,6 @@ const handleAddTask = (state: ITaskState, action: PayloadAction<INewTask>): ITas
 }
 
 const handleAcceptTask = (state: ITaskState, action: PayloadAction<number>): ITaskState => {
-    console.log("accept", action.payload);
     const task = state.readyForPickup.find((task) => task.id === action.payload);
     if (!task) {
         return state;
@@ -55,7 +54,6 @@ const handleAcceptTask = (state: ITaskState, action: PayloadAction<number>): ITa
 }
 
 const handlePickupTask = (state: ITaskState, action: PayloadAction<number>): ITaskState => {
-    console.log("pickup", action.payload);
     const task = state.waitingForPickup.find((task) => task.id === action.payload);
     if (!task) {
         return state;
@@ -82,6 +80,12 @@ const handleDeliverTask = (state: ITaskState, action: PayloadAction<number>): IT
 }
 
 
+const handleReset = (state: ITaskState): ITaskState => {
+    return {
+        ...initialState,
+    }
+}
+
 export const taskSlice = createSlice({
     name: 'taskStateSlice',
     initialState,
@@ -90,6 +94,7 @@ export const taskSlice = createSlice({
         acceptTask: handleAcceptTask,
         pickupTask: handlePickupTask,
         deliverTask: handleDeliverTask,
+        resetTasks: handleReset,
     },
 });
 
@@ -98,6 +103,7 @@ export const {
     acceptTask,
     pickupTask,
     deliverTask,
+    resetTasks,
 } = taskSlice.actions;
 
 export const taskSliceSelector = (state: IRootState) => state.taskReducer;

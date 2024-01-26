@@ -20,6 +20,9 @@ export interface INodes {
     chargingNodes: Map<string, TNode>;
     decisionsMap: Map<string, Map<string, string>>;
     dropOffWaitingNode: TNode;
+    dropOffExitNode: TNode;
+    chargeWaitingNode: TNode;
+    chargeExitNode: TNode;
 }
 
 export const allNodes: INodes = (() => {
@@ -575,6 +578,9 @@ export const allNodes: INodes = (() => {
         chargingNodes,
         decisionsMap,
         dropOffWaitingNode: DROP_OFF_NODE,
+        dropOffExitNode: n_50_023,
+        chargeWaitingNode: n_60_023,
+        chargeExitNode: n_80_023,
     }
 })();
 
