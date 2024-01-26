@@ -27,6 +27,7 @@ function SimulationControls() {
     const {readyForPickup, waitingForPickup, inTransport, delivered} = useSelector(taskSliceSelector);
 
     const [zoomAgvId, setZoomAgvId] = useState("");
+    const selectedAgv = agvs.find((agvState) => agvState.id === (zoomAgvId!=="" ? parseInt(zoomAgvId) : undefined));
 
     const zoomOptions = [...agvs].sort((a1, a2) => a2.id - a1.id)
         .map((agvState) => ({
@@ -90,13 +91,10 @@ function SimulationControls() {
     }
 
     useEffect(() => {
-        if (zoomAgvId !== "") {
-            const position = agvs.find((agvState) => agvState.id === parseInt(zoomAgvId))?.agv.position;
-            if (position) {
-                dispatch(setCameraConfig(getZoomCameraConfig(position)));
-            }
+        if (selectedAgv) {
+            dispatch(setCameraConfig(getZoomCameraConfig(selectedAgv.agv.position)));
         }
-    }, [agvs, zoomAgvId])
+    }, [selectedAgv])
 
     return (
         <VerticalContainer width="100%" flex={1} gap="10px">
@@ -108,24 +106,6 @@ function SimulationControls() {
                     <Switch value={generateTasks} onChange={handleTaskGenToggle}/>
                     <Typography>generate Tasks</Typography>
                 </MuiBox>
-                <VerticalContainer>
-                    <Typography>AGV Verfolgung</Typography>
-                    <Select
-                        fullWidth
-                        sx={{height: '1.5rem'}}
-                        value={zoomAgvId}
-                        onChange={handleSetZoomAgv}
-                    >
-                        {zoomOptions.map((option, index) => (
-                            <MenuItem
-                                value={option.id}
-                                key={index}
-                            >
-                                {option.label}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </VerticalContainer>
                 <Button variant="outlined" onClick={handleReset} color="error">
                     <Typography>Reset</Typography>
                 </Button>
@@ -157,10 +137,33 @@ function SimulationControls() {
                     ))}
                 </VerticalContainer>
             </FullWidthSpaceBetweenContainer>
-            <FullWidthSpaceBetweenContainer>
-                <Button variant="outlined" onClick={handleCreateDefaultPlan}>
-                    <Typography>create default plan</Typography>
-                </Button>
+            <FullWidthSpaceBetweenContainer gap="5px" border='1px solid black' padding="5px" borderRadius="5px">
+                <VerticalContainer>
+                    <Typography>AGV Verfolgung</Typography>
+                    <Select
+                        fullWidth
+                        sx={{height: '1.5rem'}}
+                        value={zoomAgvId}
+                        onChange={handleSetZoomAgv}
+                    >
+                        {zoomOptions.map((option, index) => (
+                            <MenuItem
+                                value={option.id}
+                                key={index}
+                            >
+                                {option.label}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </VerticalContainer>
+                <VerticalContainer>
+                    <Typography>Range</Typography>
+                    <Typography>{Math.round(selectedAgv?.range ?? 0)}</Typography>
+                </VerticalContainer>
+                <VerticalContainer>
+                    <Typography>Ziel</Typography>
+                    <Typography>{selectedAgv?.destinations[0]?.node.id}</Typography>
+                </VerticalContainer>
             </FullWidthSpaceBetweenContainer>
             <FullWidthSpaceBetweenContainer>
                 <VerticalContainer>

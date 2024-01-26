@@ -22,6 +22,7 @@ export interface Destination {
 export interface IAgvState {
     id: number,
     agv: IAgv,
+    range: number,
     destinations: Destination[],
     currentNode: TNode,
     nextNode?: TNode,
@@ -39,21 +40,15 @@ const initialState: IAGVsState = {
     agvs: INITIAL_AGVS.map((agv, index): IAgvState => ({
         id: index,
         agv,
+        range: 1000,
         destinations: [],
         currentNode: positionToNode(agv.position, allNodes.nodes)!,
+        chargeId: positionToNode(agv.position, allNodes.chargingNodes)!.id,
     })),
 };
 
 const handleInitAGVs = (state: IAGVsState): IAGVsState => {
-    return {
-        ...state,
-        agvs: INITIAL_AGVS.map((agv, index): IAgvState => ({
-            id: index,
-            agv,
-            destinations: [],
-            currentNode: positionToNode(agv.position, allNodes.chargingNodes)!,
-        })),
-    }
+    return initialState;
 }
 
 const handleUpdateAGVs = (state: IAGVsState, action: PayloadAction<IAgvState[]>): IAGVsState => {

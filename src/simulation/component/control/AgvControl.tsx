@@ -2,7 +2,14 @@ import React, {useEffect, useState} from 'react';
 import {useFrame} from "@react-three/fiber";
 import {useDispatch, useSelector} from "react-redux";
 import {AgvCommand, agvSliceSelector, updateAgv, updateAGVs} from "../../store/slice/agvSlice";
-import {AGV_STEP_SIZE, AGV_STEP_TURN} from "../../config";
+import {
+    AGV_MAX_RANGE, AGV_MIN_CHARGE,
+    AGV_MIN_RANGE,
+    AGV_STEP_DECREASE,
+    AGV_STEP_INCREASE,
+    AGV_STEP_SIZE,
+    AGV_STEP_TURN
+} from "../../config";
 import {dif2D} from "../../utils/util";
 import {baseSliceSelector, simuStep} from "../../store/slice/baseSlice";
 import {allNodes as allNodesImport, INodes, positionFromNode} from "../../nodes";
@@ -13,7 +20,7 @@ function AgvControl() {
     const {runSimulation, currentStep, productionRate, generateTasks} = useSelector(baseSliceSelector);
     const {agvs} = useSelector(agvSliceSelector);
     const taskState = useSelector(taskSliceSelector);
-    const {blocked, drop_planned} = useSelector(trafficSliceSelector);
+    const {blocked, drop_planned,charge_planned } = useSelector(trafficSliceSelector);
     const dispatch = useDispatch();
     const [allNodes, setAllNodes] = useState<INodes | undefined>(undefined);
 
@@ -29,6 +36,7 @@ function AgvControl() {
             if (currentStep === 0) {
                 let updatedBlocked = [...blocked];
                 let updatedDropPlanned = [...drop_planned];
+                let updatedChargePlanned = [...charge_planned];
 
                 // task gen
                 if (generateTasks) {
@@ -86,6 +94,22 @@ function AgvControl() {
                                 newState.taskId = undefined;
                                 newState.dropId = undefined;
                                 updatedDropPlanned = updatedDropPlanned.filter((entry) => entry !== agvState.dropId);
+                                break;
+                            case AgvCommand.ENTRY_CHARGE:
+                                const chargeOptions = Array.from(allNodes.chargingNodes.values()).reverse();
+                                const selectedChargeOption = chargeOptions.find((option) => !charge_planned.includes(option.id));
+                                if (selectedChargeOption) {
+                                    newState.chargeId = selectedChargeOption.id;
+                                    updatedChargePlanned.push(selectedChargeOption.id);
+                                    destinations.push({
+                                        node: selectedChargeOption,
+                                        command: AgvCommand.NONE,
+                                    })
+                                }
+                                break;
+                            case AgvCommand.EXIT_CHARGE:
+                                newState.chargeId = undefined;
+                                updatedChargePlanned = updatedChargePlanned.filter((entry) => entry !== agvState.chargeId);
                                 break;
                         }
 
@@ -165,18 +189,25 @@ function AgvControl() {
                         currentNode,
                         nextNode,
                         nextRotation: rotation,
+                        range: agvState.range - (nextNode ? AGV_STEP_DECREASE : 0),
                     };
+                }).map((agvState) => {
+                    const range = Math.min(AGV_MAX_RANGE, agvState.range + (allNodes.chargingNodes.has(agvState.currentNode.id) ? AGV_STEP_INCREASE : 0));
+                    return {
+                        ...agvState,
+                        range
+                    }
                 })
 
                 // agv drive
                 dispatch(updateAGVs(updatedAgvs));
-                dispatch(updateTraffic({blocked: updatedBlocked, drop_planned: updatedDropPlanned}))
+                dispatch(updateTraffic({blocked: updatedBlocked, drop_planned: updatedDropPlanned, charge_planned: updatedChargePlanned}))
 
                 // check if new task needed
                 updatedAgvs.filter((agvState) => !agvState.taskId)
                     .forEach((agvState, index) => {
                         const newState = {...agvState}
-                        if (taskState.readyForPickup.length > index) {
+                        if (taskState.readyForPickup.length > index && (agvState.range >= AGV_MIN_CHARGE || (!agvState.chargeId && agvState.range >= AGV_MIN_RANGE))) {
                             const task = taskState.readyForPickup[index];
                             newState.taskId = task.id;
                             newState.destinations = [
@@ -189,8 +220,11 @@ function AgvControl() {
                                     command: AgvCommand.CHECK_DROP_OFF,
                                 },
                             ]
+                            if(newState.chargeId) {
+                                newState.destinations = [{node: allNodes.chargeExitNode, command: AgvCommand.EXIT_CHARGE}, ...newState.destinations];
+                            }
                             dispatch(acceptTask(task.id));
-                        } else {
+                        } else if(!agvState.chargeId) {
                             newState.destinations = [
                                 {
                                     node: allNodes.chargeWaitingNode,

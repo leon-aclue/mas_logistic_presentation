@@ -252,6 +252,11 @@ export const ROT_W = Math.PI * 0.5;
 
 export const AGV_STEP_SIZE = 0.5;
 export const AGV_STEP_TURN = 0.157;
+export const AGV_MIN_RANGE = 200;
+export const AGV_MIN_CHARGE = 800;
+export const AGV_MAX_RANGE = 1000;
+export const AGV_STEP_DECREASE = 0.2;
+export const AGV_STEP_INCREASE = 1;
 
 export const EXAMPLE_AGVS: IAgv[] = [
     {

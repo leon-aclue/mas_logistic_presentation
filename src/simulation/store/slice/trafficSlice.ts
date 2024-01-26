@@ -4,11 +4,13 @@ import {IRootState} from "../../../store/store";
 export interface ITrafficState {
     blocked: string[];
     drop_planned: string[];
+    charge_planned: string[];
 }
 
 const initialState: ITrafficState = {
     blocked: [],
     drop_planned: [],
+    charge_planned: [],
 };
 
 const handleUpdateTraffic = (state: ITrafficState, action: PayloadAction<ITrafficState>): ITrafficState => {
